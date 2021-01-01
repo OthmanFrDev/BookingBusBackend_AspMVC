@@ -7,7 +7,6 @@
 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
     <fieldset>
-        <legend>Mvc Simple Login Application Demo</legend>
 
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -17,31 +16,28 @@
                 @ViewBag.Message
             </div>
         }
-        <table>
-            <tr>
-                <td>@Html.LabelFor(a => a.mail)</td>
-                <td>@Html.TextBoxFor(a => a.mail)</td>
-                <td>@Html.ValidationMessageFor(a => a.mail)</td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(a => a.mdp)
-                </td>
-                <td>
-                    @Html.PasswordFor(a => a.mdp)
-                </td>
-                <td>
-                    @Html.ValidationMessageFor(a => a.mdp)
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="Login" />
-                </td>
-                <td></td>
-            </tr>
-        </table>
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <!-- Tabs Titles -->
+                <!-- Icon -->
+                <div class="fadeIn first">
+                    <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+                </div>
+
+                <!-- Login Form -->
+                <form>
+                    <input type="text" id="login" class="fadeIn second" name="mail" placeholder="login">
+                    <input type="password" id="password" class="fadeIn third" name="mdp" placeholder="password">
+                    <input type="submit" class="fadeIn fourth" value="Log In">
+                </form>
+
+                <!-- Remind Passowrd -->
+                <div id="formFooter">
+                    <a class="underlineHover" href="#">Forgot Password?</a>
+                </div>
+
+            </div>
+        </div>
     </fieldset>
 }
 
