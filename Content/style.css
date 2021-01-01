@@ -1,0 +1,46 @@
+﻿nav{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+footer {
+    background-color: #DBE5E7;
+    font-family: American Typewriter, serif;
+}
+
+.box {
+    margin: 0 auto;
+    text-align: center;
+}
+
+    .box span {
+        display: inline-flex;
+        margin-top: 4px;
+    }
+
+    .box ul {
+        margin: 0;
+        padding: 0;
+    }
+
+        .box ul li {
+            list-style: none;
+            float: left;
+        }
+
+            .box ul li a {
+                display: block;
+                color: #aaa;
+                margin: 0 10px;
+                font-size: 20px;
+                transition: 0.5s;
+                text-align: center;
+            }
+
+            .box ul li:hover a {
+                color: #04596A;
+                transform: rotateY(360deg);
+            }
+
+#ftext {
+    margin-top: 4px;
+    margin-left: 5px;
+}
