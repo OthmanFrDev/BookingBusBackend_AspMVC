@@ -51,6 +51,8 @@
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -95,19 +97,154 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>model.edmx</DependentUpon>
+      <LastGenOutput>model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>model.edmx</DependentUpon>
+      <LastGenOutput>model.cs</LastGenOutput>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AbonnementsController.cs" />
+    <Compile Include="Controllers\AdminsController.cs" />
+    <Compile Include="Controllers\BusesController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\DemandesController.cs" />
+    <Compile Include="Controllers\NavettesController.cs" />
+    <Compile Include="Controllers\SocietesController.cs" />
+    <Compile Include="Controllers\UtilisateursController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abonnement.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Bus.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Client.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Demande.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Navette.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Societe.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Utilisateur.cs">
+      <DependentUpon>model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <EntityDeploy Include="Models\model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\model.edmx.diagram">
+      <DependentUpon>model.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Utilisateurs\Create.cshtml" />
+    <Content Include="Views\Utilisateurs\Delete.cshtml" />
+    <Content Include="Views\Utilisateurs\Details.cshtml" />
+    <Content Include="Views\Utilisateurs\Edit.cshtml" />
+    <Content Include="Views\Utilisateurs\Index.cshtml" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Admins\Create.cshtml" />
+    <Content Include="Views\Admins\Delete.cshtml" />
+    <Content Include="Views\Admins\Details.cshtml" />
+    <Content Include="Views\Admins\Edit.cshtml" />
+    <Content Include="Views\Admins\Index.cshtml" />
+    <Content Include="Views\Abonnements\Create.cshtml" />
+    <Content Include="Views\Abonnements\Delete.cshtml" />
+    <Content Include="Views\Abonnements\Details.cshtml" />
+    <Content Include="Views\Abonnements\Edit.cshtml" />
+    <Content Include="Views\Abonnements\Index.cshtml" />
+    <Content Include="Views\Buses\Create.cshtml" />
+    <Content Include="Views\Buses\Delete.cshtml" />
+    <Content Include="Views\Buses\Details.cshtml" />
+    <Content Include="Views\Buses\Edit.cshtml" />
+    <Content Include="Views\Buses\Index.cshtml" />
+    <Content Include="Views\Clients\Create.cshtml" />
+    <Content Include="Views\Clients\Delete.cshtml" />
+    <Content Include="Views\Clients\Details.cshtml" />
+    <Content Include="Views\Clients\Edit.cshtml" />
+    <Content Include="Views\Clients\Index.cshtml" />
+    <Content Include="Views\Demandes\Create.cshtml" />
+    <Content Include="Views\Demandes\Delete.cshtml" />
+    <Content Include="Views\Demandes\Details.cshtml" />
+    <Content Include="Views\Demandes\Edit.cshtml" />
+    <Content Include="Views\Demandes\Index.cshtml" />
+    <Content Include="Views\Navettes\Create.cshtml" />
+    <Content Include="Views\Navettes\Delete.cshtml" />
+    <Content Include="Views\Navettes\Details.cshtml" />
+    <Content Include="Views\Navettes\Edit.cshtml" />
+    <Content Include="Views\Navettes\Index.cshtml" />
+    <Content Include="Views\Societes\Create.cshtml" />
+    <Content Include="Views\Societes\Delete.cshtml" />
+    <Content Include="Views\Societes\Details.cshtml" />
+    <Content Include="Views\Societes\Edit.cshtml" />
+    <Content Include="Views\Societes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -117,8 +254,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

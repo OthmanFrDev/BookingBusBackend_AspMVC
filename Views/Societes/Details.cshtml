@@ -1,0 +1,42 @@
+﻿@model BookingBus.Models.Societe
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Societe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.lieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Abonnement.id_abonnement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Abonnement.id_abonnement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Utilisateur.nom_complet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Utilisateur.nom_complet)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_utilisateur }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

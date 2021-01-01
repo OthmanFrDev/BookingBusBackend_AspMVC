@@ -1,0 +1,626 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BookingBusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Abonnement">
+          <Key>
+            <PropertyRef Name="id_abonnement" />
+          </Key>
+          <Property Name="id_abonnement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date_debut" Type="date" Nullable="false" />
+          <Property Name="date_fin" Type="date" Nullable="false" />
+          <Property Name="id_navette" Type="int" Nullable="false" />
+          <Property Name="id_societe" Type="int" Nullable="false" />
+          <Property Name="prix" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id_utilisateur" />
+          </Key>
+          <Property Name="id_utilisateur" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="id_bus" />
+          </Key>
+          <Property Name="id_bus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nbr_place" Type="int" Nullable="false" />
+          <Property Name="climatiseur" Type="bit" Nullable="false" />
+          <Property Name="tv" Type="bit" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_societe" Type="int" Nullable="false" />
+          <Property Name="id_navette" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id_utilisateur" />
+          </Key>
+          <Property Name="id_utilisateur" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="id_demande" />
+          </Key>
+          <Property Name="id_demande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="depart" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="arriver" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_depart" Type="date" Nullable="false" />
+          <Property Name="date_arriver" Type="date" Nullable="false" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Effectuer">
+          <Key>
+            <PropertyRef Name="id_client" />
+            <PropertyRef Name="id_abonnement" />
+          </Key>
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="id_abonnement" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Navette">
+          <Key>
+            <PropertyRef Name="id_navette" />
+          </Key>
+          <Property Name="id_navette" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lieu_depart" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lieu_arriver" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_depart" Type="date" Nullable="false" />
+          <Property Name="date_arriver" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Societe">
+          <Key>
+            <PropertyRef Name="id_utilisateur" />
+          </Key>
+          <Property Name="id_utilisateur" Type="int" Nullable="false" />
+          <Property Name="lieu" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="id_utilisateur" />
+          </Key>
+          <Property Name="id_utilisateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_complet" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="mdp" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Abonnement_Navette">
+          <End Role="Navette" Type="Self.Navette" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Navette">
+              <PropertyRef Name="id_navette" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="id_navette" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Abonnement_Societe">
+          <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Societe">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="id_abonnement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admin_Utilisateur">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bus_Navette">
+          <End Role="Navette" Type="Self.Navette" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Navette">
+              <PropertyRef Name="id_navette" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="id_navette" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bus_Societe">
+          <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Societe">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="id_societe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Utilisateur">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Demande_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Effectuer_Abonnement">
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="1" />
+          <End Role="Effectuer" Type="Self.Effectuer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Abonnement">
+              <PropertyRef Name="id_abonnement" />
+            </Principal>
+            <Dependent Role="Effectuer">
+              <PropertyRef Name="id_abonnement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Effectuer_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Effectuer" Type="Self.Effectuer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Effectuer">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Societe_Utilisateur">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Societe" Type="Self.Societe" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Societe">
+              <PropertyRef Name="id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BookingBusModelStoreContainer">
+          <EntitySet Name="Abonnement" EntityType="Self.Abonnement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Demande" EntityType="Self.Demande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Effectuer" EntityType="Self.Effectuer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Navette" EntityType="Self.Navette" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Societe" EntityType="Self.Societe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Abonnement_Navette" Association="Self.FK_Abonnement_Navette">
+            <End Role="Navette" EntitySet="Navette" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Abonnement_Societe" Association="Self.FK_Abonnement_Societe">
+            <End Role="Societe" EntitySet="Societe" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admin_Utilisateur" Association="Self.FK_Admin_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bus_Navette" Association="Self.FK_Bus_Navette">
+            <End Role="Navette" EntitySet="Navette" />
+            <End Role="Bus" EntitySet="Bus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bus_Societe" Association="Self.FK_Bus_Societe">
+            <End Role="Societe" EntitySet="Societe" />
+            <End Role="Bus" EntitySet="Bus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Utilisateur" Association="Self.FK_Client_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Demande_Client" Association="Self.FK_Demande_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Effectuer_Abonnement" Association="Self.FK_Effectuer_Abonnement">
+            <End Role="Abonnement" EntitySet="Abonnement" />
+            <End Role="Effectuer" EntitySet="Effectuer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Effectuer_Client" Association="Self.FK_Effectuer_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Effectuer" EntitySet="Effectuer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Societe_Utilisateur" Association="Self.FK_Societe_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Societe" EntitySet="Societe" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BookingBusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Abonnement">
+          <Key>
+            <PropertyRef Name="id_abonnement" />
+          </Key>
+          <Property Name="id_abonnement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_debut" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date_fin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_navette" Type="Int32" Nullable="false" />
+          <Property Name="id_societe" Type="Int32" Nullable="false" />
+          <Property Name="prix" Type="Single" Nullable="false" />
+          <NavigationProperty Name="Navette" Relationship="Self.FK_Abonnement_Navette" FromRole="Abonnement" ToRole="Navette" />
+          <NavigationProperty Name="Societe" Relationship="Self.FK_Abonnement_Societe" FromRole="Abonnement" ToRole="Societe" />
+          <NavigationProperty Name="Clients" Relationship="Self.Effectuer" FromRole="Abonnement" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id_utilisateur" />
+          </Key>
+          <Property Name="id_utilisateur" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Admin_Utilisateur" FromRole="Admin" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="id_bus" />
+          </Key>
+          <Property Name="id_bus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nbr_place" Type="Int32" Nullable="false" />
+          <Property Name="climatiseur" Type="Boolean" Nullable="false" />
+          <Property Name="tv" Type="Boolean" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_societe" Type="Int32" Nullable="false" />
+          <Property Name="id_navette" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Navette" Relationship="Self.FK_Bus_Navette" FromRole="Bus" ToRole="Navette" />
+          <NavigationProperty Name="Societe" Relationship="Self.FK_Bus_Societe" FromRole="Bus" ToRole="Societe" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id_utilisateur" />
+          </Key>
+          <Property Name="id_utilisateur" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Client_Utilisateur" FromRole="Client" ToRole="Utilisateur" />
+          <NavigationProperty Name="Demandes" Relationship="Self.FK_Demande_Client" FromRole="Client" ToRole="Demande" />
+          <NavigationProperty Name="Abonnements" Relationship="Self.Effectuer" FromRole="Client" ToRole="Abonnement" />
+        </EntityType>
+        <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="id_demande" />
+          </Key>
+          <Property Name="id_demande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="depart" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="arriver" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_depart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date_arriver" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Demande_Client" FromRole="Demande" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Navette">
+          <Key>
+            <PropertyRef Name="id_navette" />
+          </Key>
+          <Property Name="id_navette" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lieu_depart" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lieu_arriver" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_depart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date_arriver" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Abonnements" Relationship="Self.FK_Abonnement_Navette" FromRole="Navette" ToRole="Abonnement" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK_Bus_Navette" FromRole="Navette" ToRole="Bus" />
+        </EntityType>
+        <EntityType Name="Societe">
+          <Key>
+            <PropertyRef Name="id_utilisateur" />
+          </Key>
+          <Property Name="id_utilisateur" Type="Int32" Nullable="false" />
+          <Property Name="lieu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Abonnement" Relationship="Self.FK_Abonnement_Societe" FromRole="Societe" ToRole="Abonnement" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK_Bus_Societe" FromRole="Societe" ToRole="Bus" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Societe_Utilisateur" FromRole="Societe" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="id_utilisateur" />
+          </Key>
+          <Property Name="id_utilisateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_complet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mdp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Admin_Utilisateur" FromRole="Utilisateur" ToRole="Admin" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Utilisateur" FromRole="Utilisateur" ToRole="Client" />
+          <NavigationProperty Name="Societe" Relationship="Self.FK_Societe_Utilisateur" FromRole="Utilisateur" ToRole="Societe" />
+        </EntityType>
+        <Association Name="FK_Abonnement_Navette">
+          <End Role="Navette" Type="Self.Navette" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Navette">
+              <PropertyRef Name="id_navette" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="id_navette" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Abonnement_Societe">
+          <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Societe">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="id_abonnement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admin_Utilisateur">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bus_Navette">
+          <End Role="Navette" Type="Self.Navette" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Navette">
+              <PropertyRef Name="id_navette" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="id_navette" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bus_Societe">
+          <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Societe">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="id_societe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Utilisateur">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Demande_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Societe_Utilisateur">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Societe" Type="Self.Societe" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Societe">
+              <PropertyRef Name="id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Effectuer">
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="BookingBusEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Abonnements" EntityType="Self.Abonnement" />
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Buses" EntityType="Self.Bus" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Demandes" EntityType="Self.Demande" />
+          <EntitySet Name="Navettes" EntityType="Self.Navette" />
+          <EntitySet Name="Societes" EntityType="Self.Societe" />
+          <EntitySet Name="Utilisateurs" EntityType="Self.Utilisateur" />
+          <AssociationSet Name="FK_Abonnement_Navette" Association="Self.FK_Abonnement_Navette">
+            <End Role="Navette" EntitySet="Navettes" />
+            <End Role="Abonnement" EntitySet="Abonnements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Abonnement_Societe" Association="Self.FK_Abonnement_Societe">
+            <End Role="Societe" EntitySet="Societes" />
+            <End Role="Abonnement" EntitySet="Abonnements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admin_Utilisateur" Association="Self.FK_Admin_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bus_Navette" Association="Self.FK_Bus_Navette">
+            <End Role="Navette" EntitySet="Navettes" />
+            <End Role="Bus" EntitySet="Buses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bus_Societe" Association="Self.FK_Bus_Societe">
+            <End Role="Societe" EntitySet="Societes" />
+            <End Role="Bus" EntitySet="Buses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Utilisateur" Association="Self.FK_Client_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Demande_Client" Association="Self.FK_Demande_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Demande" EntitySet="Demandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Societe_Utilisateur" Association="Self.FK_Societe_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+            <End Role="Societe" EntitySet="Societes" />
+          </AssociationSet>
+          <AssociationSet Name="Effectuer" Association="Self.Effectuer">
+            <End Role="Abonnement" EntitySet="Abonnements" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BookingBusModelStoreContainer" CdmEntityContainer="BookingBusEntities">
+          <EntitySetMapping Name="Abonnements">
+            <EntityTypeMapping TypeName="BookingBusModel.Abonnement">
+              <MappingFragment StoreEntitySet="Abonnement">
+                <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
+                <ScalarProperty Name="date_debut" ColumnName="date_debut" />
+                <ScalarProperty Name="date_fin" ColumnName="date_fin" />
+                <ScalarProperty Name="id_navette" ColumnName="id_navette" />
+                <ScalarProperty Name="id_societe" ColumnName="id_societe" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="BookingBusModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buses">
+            <EntityTypeMapping TypeName="BookingBusModel.Bus">
+              <MappingFragment StoreEntitySet="Bus">
+                <ScalarProperty Name="id_bus" ColumnName="id_bus" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="nbr_place" ColumnName="nbr_place" />
+                <ScalarProperty Name="climatiseur" ColumnName="climatiseur" />
+                <ScalarProperty Name="tv" ColumnName="tv" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id_societe" ColumnName="id_societe" />
+                <ScalarProperty Name="id_navette" ColumnName="id_navette" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="BookingBusModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Demandes">
+            <EntityTypeMapping TypeName="BookingBusModel.Demande">
+              <MappingFragment StoreEntitySet="Demande">
+                <ScalarProperty Name="id_demande" ColumnName="id_demande" />
+                <ScalarProperty Name="depart" ColumnName="depart" />
+                <ScalarProperty Name="arriver" ColumnName="arriver" />
+                <ScalarProperty Name="date_depart" ColumnName="date_depart" />
+                <ScalarProperty Name="date_arriver" ColumnName="date_arriver" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Navettes">
+            <EntityTypeMapping TypeName="BookingBusModel.Navette">
+              <MappingFragment StoreEntitySet="Navette">
+                <ScalarProperty Name="id_navette" ColumnName="id_navette" />
+                <ScalarProperty Name="lieu_depart" ColumnName="lieu_depart" />
+                <ScalarProperty Name="lieu_arriver" ColumnName="lieu_arriver" />
+                <ScalarProperty Name="date_depart" ColumnName="date_depart" />
+                <ScalarProperty Name="date_arriver" ColumnName="date_arriver" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Societes">
+            <EntityTypeMapping TypeName="BookingBusModel.Societe">
+              <MappingFragment StoreEntitySet="Societe">
+                <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
+                <ScalarProperty Name="lieu" ColumnName="lieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilisateurs">
+            <EntityTypeMapping TypeName="BookingBusModel.Utilisateur">
+              <MappingFragment StoreEntitySet="Utilisateur">
+                <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
+                <ScalarProperty Name="nom_complet" ColumnName="nom_complet" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="mdp" ColumnName="mdp" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Effectuer" TypeName="BookingBusModel.Effectuer" StoreEntitySet="Effectuer">
+            <EndProperty Name="Abonnement">
+              <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
+            </EndProperty>
+            <EndProperty Name="Client">
+              <ScalarProperty Name="id_utilisateur" ColumnName="id_client" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

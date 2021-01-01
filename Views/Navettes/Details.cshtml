@@ -1,0 +1,50 @@
+﻿@model BookingBus.Models.Navette
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Navette</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.lieu_depart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lieu_depart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lieu_arriver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lieu_arriver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_depart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_depart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_arriver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_arriver)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_navette }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
