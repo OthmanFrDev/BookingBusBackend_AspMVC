@@ -202,7 +202,6 @@
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Utilisateurs\Create.cshtml" />
     <Content Include="Views\Utilisateurs\Delete.cshtml" />
     <Content Include="Views\Utilisateurs\Details.cshtml" />
@@ -245,6 +244,7 @@
     <Content Include="Views\Societes\Details.cshtml" />
     <Content Include="Views\Societes\Edit.cshtml" />
     <Content Include="Views\Societes\Index.cshtml" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
