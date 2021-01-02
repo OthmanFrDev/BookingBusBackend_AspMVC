@@ -20,7 +20,22 @@ namespace BookingBus.Controllers
             var clients = db.Clients.Include(c => c.Utilisateur);
             return View(clients.ToList());
         }
-
+        public ActionResult Demander()
+        {
+            return RedirectToAction("Create","Demandes");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Demander(Demande dm)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Demandes.Add(dm);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
         // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {

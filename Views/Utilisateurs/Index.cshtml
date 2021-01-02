@@ -9,67 +9,70 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nom_complet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mdp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telephone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.role)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Admin.id_utilisateur)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Client.id_utilisateur)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Societe.lieu)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nom_complet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mdp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Admin.id_utilisateur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client.id_utilisateur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Societe.lieu)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom_complet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mdp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telephone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Admin.id_utilisateur)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Client.id_utilisateur)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Societe.lieu)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_utilisateur }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_utilisateur }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_utilisateur })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nom_complet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mdp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telephone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Admin.id_utilisateur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.id_utilisateur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Societe.lieu)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id_utilisateur }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id_utilisateur }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id_utilisateur })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

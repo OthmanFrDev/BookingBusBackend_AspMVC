@@ -9,61 +9,64 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nbr_place)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.climatiseur)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tv)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Navette.lieu_depart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Societe.lieu)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nbr_place)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.climatiseur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Navette.lieu_depart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Societe.lieu)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nbr_place)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.climatiseur)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tv)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Navette.lieu_depart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Societe.lieu)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_bus }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_bus }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_bus })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nbr_place)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.climatiseur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Navette.lieu_depart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Societe.lieu)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id_bus }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id_bus }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id_bus })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
