@@ -151,7 +151,6 @@ C:\Users\othman\source\repos\BookingBusBackend\bin\fr\System.Web.Webpages.Deploy
 C:\Users\othman\source\repos\BookingBusBackend\bin\fr\System.Web.Webpages.Razor.resources.dll
 C:\Users\othman\source\repos\BookingBusBackend\bin\fr\System.Web.Helpers.resources.dll
 C:\Users\othman\source\repos\BookingBusBackend\bin\fr\System.Web.Mvc.resources.dll
-C:\Users\othman\source\repos\BookingBusBackend\obj\Debug\BookingBus.csprojAssemblyReference.cache
 C:\Users\othman\source\repos\BookingBusBackend\obj\Debug\BookingBus.csproj.CoreCompileInputs.cache
 C:\Users\othman\source\repos\BookingBusBackend\obj\Debug\BookingBus.csproj.CopyComplete
 C:\Users\othman\source\repos\BookingBusBackend\obj\Debug\BookingBus.dll

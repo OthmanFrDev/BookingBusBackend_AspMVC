@@ -36,6 +36,17 @@ namespace BookingBus.Controllers
             }
             return View();
         }
+        public ActionResult Reserver() 
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Reserver(Abonnement abonnement)
+        {
+
+
+            return View();
+        }
         // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {

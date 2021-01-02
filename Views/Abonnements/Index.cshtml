@@ -9,6 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<<<<<<< HEAD
 <div class="container">
     <table class="table table-bordered table-hover">
         <tr>
@@ -61,6 +62,58 @@
                 </td>
             </tr>
         }
+=======
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.date_debut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_fin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Societe.Utilisateur.nom_complet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Navette.lieu_depart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Navette.lieu_arriver)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_debut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_fin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Societe.Utilisateur.nom_complet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prix)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Navette.lieu_depart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Navette.lieu_arriver)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_abonnement }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_abonnement }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_abonnement })
+        </td>
+    </tr>
+}
+>>>>>>> 742a0809ed202fcd43ea15f9d20250420e18480b
 
     </table>
 </div>
