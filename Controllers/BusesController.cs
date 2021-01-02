@@ -19,6 +19,7 @@ namespace BookingBus.Controllers
         {
             var buses = db.Buses.Include(b => b.Navette).Include(b => b.Societe);
             return View(buses.ToList());
+            
         }
 
         // GET: Buses/Details/5

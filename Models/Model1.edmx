@@ -102,13 +102,13 @@
         </Association>
         <Association Name="FK_Abonnement_Societe">
           <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
-          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="0..1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Societe">
               <PropertyRef Name="id_utilisateur" />
             </Principal>
             <Dependent Role="Abonnement">
-              <PropertyRef Name="id_abonnement" />
+              <PropertyRef Name="id_societe" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -339,7 +339,7 @@
           </Key>
           <Property Name="id_utilisateur" Type="Int32" Nullable="false" />
           <Property Name="lieu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Abonnement" Relationship="Self.FK_Abonnement_Societe" FromRole="Societe" ToRole="Abonnement" />
+          <NavigationProperty Name="Abonnements" Relationship="Self.FK_Abonnement_Societe" FromRole="Societe" ToRole="Abonnement" />
           <NavigationProperty Name="Buses" Relationship="Self.FK_Bus_Societe" FromRole="Societe" ToRole="Bus" />
           <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Societe_Utilisateur" FromRole="Societe" ToRole="Utilisateur" />
         </EntityType>
@@ -371,13 +371,13 @@
         </Association>
         <Association Name="FK_Abonnement_Societe">
           <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
-          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="0..1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Societe">
               <PropertyRef Name="id_utilisateur" />
             </Principal>
             <Dependent Role="Abonnement">
-              <PropertyRef Name="id_abonnement" />
+              <PropertyRef Name="id_societe" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.date_fin)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.id_societe)
+            @Html.DisplayNameFor(model => model.Societe.Utilisateur.nom_complet)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.prix)
@@ -27,7 +27,7 @@
             @Html.DisplayNameFor(model => model.Navette.lieu_depart)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Societe.lieu)
+            @Html.DisplayNameFor(model => model.Navette.lieu_arriver)
         </th>
         <th></th>
     </tr>
@@ -41,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.date_fin)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.id_societe)
+            @Html.DisplayFor(modelItem => item.Societe.Utilisateur.nom_complet)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.prix)
@@ -50,7 +50,7 @@
             @Html.DisplayFor(modelItem => item.Navette.lieu_depart)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Societe.lieu)
+            @Html.DisplayFor(modelItem => item.Navette.lieu_arriver)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id_abonnement }) |

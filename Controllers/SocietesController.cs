@@ -17,10 +17,22 @@ namespace BookingBus.Controllers
         // GET: Societes
         public ActionResult Index()
         {
-            var societes = db.Societes.Include(s => s.Abonnement).Include(s => s.Utilisateur);
-            return View(societes.ToList());
+            int id = int.Parse((Session["UserID"].ToString()));
+
+             var societes = db.Abonnements.Where(s=>s.id_societe==id);
+            return View(societes.ToList()); 
         }
 
+        public ActionResult creatabonnement()
+        {
+            return RedirectToAction("create","Abonnements");
+        }
+        [HttpPost]
+        public ActionResult Creatabonnement(Abonnement abonnement)
+        {
+            new AbonnementsController().Create(abonnement);
+            return  RedirectToAction("Index", "Abonnements");
+        }
         // GET: Societes/Details/5
         public ActionResult Details(int? id)
         {

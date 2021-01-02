@@ -40,7 +40,7 @@ namespace BookingBus.Controllers
         public ActionResult Create()
         {
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart");
-            ViewBag.id_abonnement = new SelectList(db.Societes, "id_utilisateur", "lieu");
+            ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace BookingBus.Controllers
             }
 
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", abonnement.id_navette);
-            ViewBag.id_abonnement = new SelectList(db.Societes, "id_utilisateur", "lieu", abonnement.id_abonnement);
+            ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", abonnement.id_societe);
             return View(abonnement);
         }
 
@@ -76,7 +76,7 @@ namespace BookingBus.Controllers
                 return HttpNotFound();
             }
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", abonnement.id_navette);
-            ViewBag.id_abonnement = new SelectList(db.Societes, "id_utilisateur", "lieu", abonnement.id_abonnement);
+            ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", abonnement.id_societe);
             return View(abonnement);
         }
 
@@ -94,7 +94,7 @@ namespace BookingBus.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", abonnement.id_navette);
-            ViewBag.id_abonnement = new SelectList(db.Societes, "id_utilisateur", "lieu", abonnement.id_abonnement);
+            ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", abonnement.id_societe);
             return View(abonnement);
         }
 
