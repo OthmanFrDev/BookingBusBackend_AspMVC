@@ -38,6 +38,13 @@ namespace BookingBus.Controllers
             }
             return View(objUser);
         }
+        
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
 
         public ActionResult UserDashBoard()
         {
