@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BookingBus.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BookingBus.Models;
 
 namespace BookingBus.Controllers
 {
@@ -19,7 +16,7 @@ namespace BookingBus.Controllers
         
         public ActionResult Index()
         {
-           
+
            // new url().Urlsup(role);
             int id = int.Parse((Session["UserID"].ToString()));
             ViewBag.id = id;
@@ -33,13 +30,14 @@ namespace BookingBus.Controllers
 
         public ActionResult creatabonnement(int id)
         {
+
             return RedirectToAction("create","Abonnements",new { id=id});
         }
         [HttpPost]
         public ActionResult Creatabonnement(Abonnement abonnement)
         {
             new AbonnementsController().Create(abonnement);
-            return  RedirectToAction("Index", "Abonnements");
+            return RedirectToAction("Index", "Abonnements");
         }
         // GET: Societes/Details/5
         public ActionResult Details(int? id)

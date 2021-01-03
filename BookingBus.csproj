@@ -99,14 +99,37 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\2M.png" />
+    <Content Include="Content\Aloula.png" />
+    <Content Include="Content\bablah.jpg" />
+    <Content Include="Content\babsalama.jpg" />
+    <Content Include="Content\bachiri.jpg" />
+    <Content Include="Content\BookingBus %281%29.png" />
+    <Content Include="Content\BookingBus %282%29.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CTM.jpg" />
+    <Content Include="Content\ghazala.jpg" />
+    <Content Include="Content\Globus.jpg" />
+    <Content Include="Content\HESPRESS.png" />
+    <Content Include="Content\itrane.jpg" />
+    <Content Include="Content\jana.jpg" />
+    <Content Include="Content\LECONOMISTE.png" />
+    <Content Include="Content\logo.jpg" />
+    <Content Include="Content\mdb.min.css" />
+    <Content Include="Content\bghome.png" />
+    <Content Include="Content\payment.png" />
+    <Content Include="Scripts\mdb.min.js" />
+    <Content Include="Content\Medi1.png" />
+    <Content Include="Content\Medi1Radio.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\TELE-MAROC.png" />
+    <Content Include="Content\WLB.png" />
     <Content Include="Global.asax" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -359,7 +382,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\url\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

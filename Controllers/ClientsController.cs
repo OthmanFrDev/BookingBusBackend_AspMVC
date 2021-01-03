@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using BookingBus.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BookingBus.Models;
 
 namespace BookingBus.Controllers
 {
@@ -17,13 +13,14 @@ namespace BookingBus.Controllers
         // GET: Clients
         public ActionResult Index()
         {
+
             int id = int.Parse((Session["UserID"].ToString()));
             ViewBag.id = id;
             if (Session["UserID"] != null && Session["role"].ToString() == "client") {  var clients = db.Clients.Include(c => c.Utilisateur);
             return View(clients.ToList()); }
 
             else { return RedirectToAction("Login", "Home"); }
-           
+
         }
         public ActionResult Demander(int id)
         {
@@ -41,7 +38,7 @@ namespace BookingBus.Controllers
             }
             return View();
         }
-        public ActionResult Reserver() 
+        public ActionResult Reserver()
         {
             return View();
         }

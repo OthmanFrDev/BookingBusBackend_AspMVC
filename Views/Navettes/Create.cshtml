@@ -30,20 +30,17 @@
                 @Html.ValidationMessageFor(model => model.lieu_arriver, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.date_depart, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.date_depart, new {  htmlAttributes = new { type = "datetime-local", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.date_depart, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.date_arriver, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.date_arriver, new { htmlAttributes = new { type = "datetime-local", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.date_arriver, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.date_arriver, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.date_arriver, new { htmlAttributes = new { type = "datetime-local", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.date_arriver, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
@@ -53,12 +50,13 @@
             </div>
         </div>
     </div>
+ </div>
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using BookingBus.Models;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BookingBus.Models;
 
 namespace BookingBus.Controllers
 {
@@ -17,7 +12,7 @@ namespace BookingBus.Controllers
         // GET: Admins
         public ActionResult Index()
         {
-            if (Session["UserID"] != null&& Session["role"].ToString()==role) { return View(); }
+            if (Session["UserID"] != null && Session["role"].ToString() == role) { return View(); }
 
             else { return RedirectToAction("Login", "Home"); }
         }
@@ -123,8 +118,8 @@ namespace BookingBus.Controllers
         [HttpPost]
         public ActionResult detail()
         {
-          
-            return RedirectToAction("Index","Utilisateurs");
+
+            return RedirectToAction("Index", "Utilisateurs");
         }
 
         protected override void Dispose(bool disposing)
