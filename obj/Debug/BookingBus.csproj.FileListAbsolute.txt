@@ -79,3 +79,4 @@ C:\Users\othman\source\repos\BookingBusBackend\obj\Debug\BookingBus.csproj.CoreC
 C:\Users\othman\source\repos\BookingBusBackend\obj\Debug\BookingBus.csproj.CopyComplete
 C:\Users\othman\source\repos\BookingBusBackend\obj\Debug\BookingBus.dll
 C:\Users\othman\source\repos\BookingBusBackend\obj\Debug\BookingBus.pdb
+C:\Users\othman\source\repos\BookingBusBackend\obj\Debug\BookingBus.csprojAssemblyReference.cache

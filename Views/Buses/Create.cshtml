@@ -59,18 +59,24 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div hidden class="form-group">
             @Html.LabelFor(model => model.id_societe, "id_societe", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id_societe", null, htmlAttributes: new { @class = "form-control" })
+                <input name="id_societe" type="number" value="@ViewBag.id" />
                 @Html.ValidationMessageFor(model => model.id_societe, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.id_navette, "id_navette", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Navette.lieu_depart, "depart", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id_navette", null, htmlAttributes: new { @class = "form-control" })
+                <select name="id_navette">
+                    @foreach (var item in ViewBag.navr)
+                    {
+                        <option  value="@item.id_navette">@item.lieu_depart - @item.lieu_arriver</option>
+}
+
+                </select>
                 @Html.ValidationMessageFor(model => model.id_navette, "", new { @class = "text-danger" })
             </div>
         </div>

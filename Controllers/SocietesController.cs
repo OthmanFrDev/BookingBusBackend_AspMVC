@@ -13,18 +13,25 @@ namespace BookingBus.Controllers
         private BookingBusEntities db = new BookingBusEntities();
 
         // GET: Societes
+        
         public ActionResult Index()
         {
-            // new url().Urlsup(role);
-            int id = int.Parse((Session["UserID"].ToString()));
 
-            var societes = db.Abonnements.Where(s => s.id_societe == id);
-            return View(societes.ToList());
+           // new url().Urlsup(role);
+            int id = int.Parse((Session["UserID"].ToString()));
+            ViewBag.id = id;
+             var societes = db.Abonnements.Where(s=>s.id_societe==id);
+            return View(societes.ToList()); 
+        }
+        public ActionResult createbus(int id)
+        {
+            return RedirectToAction("Create", "Buses",new { id=id});
         }
 
-        public ActionResult creatabonnement()
+        public ActionResult creatabonnement(int id)
         {
-            return RedirectToAction("create", "Abonnements");
+
+            return RedirectToAction("create","Abonnements",new { id=id});
         }
         [HttpPost]
         public ActionResult Creatabonnement(Abonnement abonnement)
