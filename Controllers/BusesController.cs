@@ -38,10 +38,13 @@ namespace BookingBus.Controllers
         }
 
         // GET: Buses/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
+            ViewBag.id = id;
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart");
+            ViewBag.navr = db.Navettes.ToList();
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu");
+            
             return View();
         }
 
@@ -56,11 +59,12 @@ namespace BookingBus.Controllers
             {
                 db.Buses.Add(bus);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Societes");
             }
 
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", bus.id_navette);
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", bus.id_societe);
+            
             return View(bus);
         }
 

@@ -37,9 +37,10 @@ namespace BookingBus.Controllers
         }
 
         // GET: Demandes/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur");
+            ViewBag.id = id;
             return View();
         }
 
@@ -54,7 +55,7 @@ namespace BookingBus.Controllers
             {
                 db.Demandes.Add(demande);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Clients");
             }
 
             ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", demande.id_client);

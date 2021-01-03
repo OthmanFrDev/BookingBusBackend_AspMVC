@@ -17,15 +17,17 @@ namespace BookingBus.Controllers
         // GET: Clients
         public ActionResult Index()
         {
+            int id = int.Parse((Session["UserID"].ToString()));
+            ViewBag.id = id;
             if (Session["UserID"] != null && Session["role"].ToString() == "client") {  var clients = db.Clients.Include(c => c.Utilisateur);
             return View(clients.ToList()); }
 
             else { return RedirectToAction("Login", "Home"); }
            
         }
-        public ActionResult Demander()
+        public ActionResult Demander(int id)
         {
-            return RedirectToAction("Create","Demandes");
+            return RedirectToAction("Create","Demandes",new { id=id});
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
