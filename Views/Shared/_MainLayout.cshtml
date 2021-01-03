@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/mdb.min.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
     <!-- NavBar-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#"><img src="~/Content/" style="margin-top=0px;margin-bottom:0px;" /></a>
+    <nav class="navbar navbar-expand-lg"style="background-color: #fff">
+        <a class="navbar-brand" href="#"><img src="~/Content/BookingBus (2).png" style="margin-top=0px;margin-bottom:0px;" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <i class="navbar-toggler-icon fas fa-bars" style="color: #F59A2E"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav mr-auto">
-                <a class="nav-item nav-link active" href="#"><i class="fas fa-home"></i>Acceuil</a>
+                <a class="nav-item nav-link active" href="#" ><i class="fas fa-home"></i>Acceuil</a>
                 <a class="nav-item nav-link" href="#"><i class="fas fa-info-circle"></i>A propos</a>
                 <a class="nav-item nav-link" href="#"><i class="fas fa-info-circle"></i>A propos</a>
             </ul>
@@ -41,11 +42,23 @@
                 </ul>
             </span>
         </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-4 col-sm-4" style="text-align:center">
+                    <h5 class="color-blanc">
+                        Cartes accept&#233;es
+                    </h5>
+                    <img src="~/Content/payment.png" style="width:250px;height:50px;"/>
+                </div>
+            </div>
+        </div>
         <span id="ftext">&copy; All rights reserved (Beta version by NEMMASSI and FROUKH)</span>
     </footer>
     <!-- Site footer -->
     <script src="~/Scripts/jquery-3.5.1.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/mdb.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js" integrity="sha512-oHBLR38hkpOtf4dW75gdfO7VhEKg2fsitvHZYHZjObc4BPKou2PGenyxA5ZJ8CCqWytBx5wpiSqwVEBy84b7tw==" crossorigin="anonymous"></script>
 </body>
 </html>

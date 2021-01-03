@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using BookingBus.Models;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BookingBus.Models;
 
 namespace BookingBus.Controllers
 {
     public class AdminsController : Controller
     {
         private BookingBusEntities db = new BookingBusEntities();
-
+        string role = "admin";
         // GET: Admins
         public ActionResult Index()
         {
-            var admins = db.Admins.Include(a => a.Utilisateur);
-            return View(admins.ToList());
+            if (Session["UserID"] != null && Session["role"].ToString() == role) { return View(); }
+
+            else { return RedirectToAction("Login", "Home"); }
         }
 
-        // GET: Admins/Details/5
+        // GET: Admins/Details/5        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -101,12 +97,12 @@ namespace BookingBus.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Admin admin = db.Admins.Find(id);
-            if (admin == null)
+            Utilisateur user = db.Utilisateurs.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(admin);
+            return View(user);
         }
 
         // POST: Admins/Delete/5
@@ -114,10 +110,16 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Admin admin = db.Admins.Find(id);
-            db.Admins.Remove(admin);
+            Utilisateur user = db.Utilisateurs.Find(id);
+            db.Utilisateurs.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult detail()
+        {
+
+            return RedirectToAction("Index", "Utilisateurs");
         }
 
         protected override void Dispose(bool disposing)
@@ -128,5 +130,6 @@ namespace BookingBus.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

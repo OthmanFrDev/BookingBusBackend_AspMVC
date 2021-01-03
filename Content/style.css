@@ -1,8 +1,14 @@
 ﻿
-
+html{background-color:none;}
 
 nav{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.navbar-nav > a ,.nav-link{
+    color: #0d0d0d;
+}
+.navbar-nav > a > .fas {
+    color: #F59A2E;
 }
 footer {
     background-color: #DBE5E7;
@@ -437,4 +443,71 @@ input:checked + .slider:before {
 
 .card img {
     width: 100%;
+}
+/* css First Carousel home */
+.col-md-3 {
+    display: inline-block;
+    margin-left: -4px;
+}
+.col-md-3 img {
+        width: 100px;
+        height: auto;
+}
+
+@media(max-width:768px){
+    .col-md-3 {
+        display:none;
+    }
+    #partenaire{
+        display:none;
+    }
+    #presse{
+        display: none;
+    }
+}
+@media(max-width:768px) {
+    #partenaire {
+        display: none;
+    }
+}
+@media(max-width:768px) {
+    #presse {
+        display: none;
+    }
+}
+@media(max-width:768px) {
+    .peach-gradient >img{
+        width:99vw;
+        height:80vh;
+    }
+}
+@media screen and (max-width: 992px){
+    .peach-gradient > img {
+        width: 99vw;
+        height: 80vh;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .peach-gradient > img {
+        width: 99vw;
+        height: 80vh;
+    }
+}
+@media screen and (max-width: 1330px) {
+    .peach-gradient > img {
+        width: 99vw;
+        height: 80vh;
+    }
+}
+@media screen and (max-width: 1550px) {
+    .peach-gradient > img {
+        width: 99vw;
+        height: 80vh;
+    }
+}
+@media screen and (max-width: 1870px) {
+    .peach-gradient > img {
+        width: 99vw;
+        height: 80vh;
+    }
 }

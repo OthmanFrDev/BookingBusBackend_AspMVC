@@ -99,14 +99,37 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\2M.png" />
+    <Content Include="Content\Aloula.png" />
+    <Content Include="Content\bablah.jpg" />
+    <Content Include="Content\babsalama.jpg" />
+    <Content Include="Content\bachiri.jpg" />
+    <Content Include="Content\BookingBus %281%29.png" />
+    <Content Include="Content\BookingBus %282%29.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CTM.jpg" />
+    <Content Include="Content\ghazala.jpg" />
+    <Content Include="Content\Globus.jpg" />
+    <Content Include="Content\HESPRESS.png" />
+    <Content Include="Content\itrane.jpg" />
+    <Content Include="Content\jana.jpg" />
+    <Content Include="Content\LECONOMISTE.png" />
+    <Content Include="Content\logo.jpg" />
+    <Content Include="Content\mdb.min.css" />
+    <Content Include="Content\bghome.png" />
+    <Content Include="Content\payment.png" />
+    <Content Include="Scripts\mdb.min.js" />
+    <Content Include="Content\Medi1.png" />
+    <Content Include="Content\Medi1Radio.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\TELE-MAROC.png" />
+    <Content Include="Content\WLB.png" />
     <Content Include="Global.asax" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -349,6 +372,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_LoginInfo.cshtml" />
     <Content Include="Views\Home\UserDashBoard.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,37 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BookingBus.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BookingBus.Models;
 
 namespace BookingBus.Controllers
 {
     public class SocietesController : Controller
     {
+        string role = "societe";
         private BookingBusEntities db = new BookingBusEntities();
 
         // GET: Societes
         public ActionResult Index()
         {
+            // new url().Urlsup(role);
             int id = int.Parse((Session["UserID"].ToString()));
 
-             var societes = db.Abonnements.Where(s=>s.id_societe==id);
-            return View(societes.ToList()); 
+            var societes = db.Abonnements.Where(s => s.id_societe == id);
+            return View(societes.ToList());
         }
 
         public ActionResult creatabonnement()
         {
-            return RedirectToAction("create","Abonnements");
+            return RedirectToAction("create", "Abonnements");
         }
         [HttpPost]
         public ActionResult Creatabonnement(Abonnement abonnement)
         {
             new AbonnementsController().Create(abonnement);
-            return  RedirectToAction("Index", "Abonnements");
+            return RedirectToAction("Index", "Abonnements");
         }
         // GET: Societes/Details/5
         public ActionResult Details(int? id)

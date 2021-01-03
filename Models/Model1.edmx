@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BookingBusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BookingBusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Abonnement">
           <Key>
             <PropertyRef Name="id_abonnement" />
@@ -112,18 +112,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Admin_Utilisateur">
-          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
-          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Utilisateur">
-              <PropertyRef Name="id_utilisateur" />
-            </Principal>
-            <Dependent Role="Admin">
-              <PropertyRef Name="id_utilisateur" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Bus_Navette">
           <End Role="Navette" Type="Self.Navette" Multiplicity="1" />
           <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
@@ -148,14 +136,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Client_Utilisateur">
-          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+        <Association Name="fk_ct1">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ct2">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Utilisateur">
               <PropertyRef Name="id_utilisateur" />
             </Principal>
             <Dependent Role="Client">
+              <PropertyRef Name="id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ct3">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Societe" Type="Self.Societe" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Societe">
               <PropertyRef Name="id_utilisateur" />
             </Dependent>
           </ReferentialConstraint>
@@ -196,18 +214,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Societe_Utilisateur">
-          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
-          <End Role="Societe" Type="Self.Societe" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Utilisateur">
-              <PropertyRef Name="id_utilisateur" />
-            </Principal>
-            <Dependent Role="Societe">
-              <PropertyRef Name="id_utilisateur" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="BookingBusModelStoreContainer">
           <EntitySet Name="Abonnement" EntityType="Self.Abonnement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
@@ -226,10 +232,6 @@
             <End Role="Societe" EntitySet="Societe" />
             <End Role="Abonnement" EntitySet="Abonnement" />
           </AssociationSet>
-          <AssociationSet Name="FK_Admin_Utilisateur" Association="Self.FK_Admin_Utilisateur">
-            <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="Admin" EntitySet="Admin" />
-          </AssociationSet>
           <AssociationSet Name="FK_Bus_Navette" Association="Self.FK_Bus_Navette">
             <End Role="Navette" EntitySet="Navette" />
             <End Role="Bus" EntitySet="Bus" />
@@ -238,9 +240,17 @@
             <End Role="Societe" EntitySet="Societe" />
             <End Role="Bus" EntitySet="Bus" />
           </AssociationSet>
-          <AssociationSet Name="FK_Client_Utilisateur" Association="Self.FK_Client_Utilisateur">
+          <AssociationSet Name="fk_ct1" Association="Self.fk_ct1">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ct2" Association="Self.fk_ct2">
             <End Role="Utilisateur" EntitySet="Utilisateur" />
             <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ct3" Association="Self.fk_ct3">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Societe" EntitySet="Societe" />
           </AssociationSet>
           <AssociationSet Name="FK_Demande_Client" Association="Self.FK_Demande_Client">
             <End Role="Client" EntitySet="Client" />
@@ -254,13 +264,8 @@
             <End Role="Client" EntitySet="Client" />
             <End Role="Effectuer" EntitySet="Effectuer" />
           </AssociationSet>
-          <AssociationSet Name="FK_Societe_Utilisateur" Association="Self.FK_Societe_Utilisateur">
-            <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="Societe" EntitySet="Societe" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BookingBusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

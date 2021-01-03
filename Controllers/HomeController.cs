@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BookingBus.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using BookingBus.Models;
 
 namespace BookingBus.Controllers
 {
     public class HomeController : Controller
     {
+        private BookingBusEntities db = new BookingBusEntities();
+        public ActionResult Index()
+        {
+            var societe = db.Societes;
+            return View(societe.ToList());
+        }
         public ActionResult Login()
         {
+            if (Session["UserID"] != null) { return RedirectToAction("UserDashBoard"); }
             return View();
         }
 
@@ -20,7 +24,7 @@ namespace BookingBus.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (BookingBusEntities  db = new BookingBusEntities ())
+                using (BookingBusEntities db = new BookingBusEntities())
                 {
                     var obj = db.Utilisateurs.Where(a => a.mail.Equals(objUser.mail) && a.mdp.Equals(objUser.mdp)).FirstOrDefault();
                     if (obj != null)
@@ -30,7 +34,7 @@ namespace BookingBus.Controllers
                         Session["mail"] = obj.mail.ToString();
                         Session["telephone"] = obj.telephone.ToString();
                         Session["role"] = obj.role.ToString();
-                       
+
                         //Session["user"] = objUser;
                         return RedirectToAction("UserDashBoard");
                     }
@@ -38,7 +42,7 @@ namespace BookingBus.Controllers
             }
             return View(objUser);
         }
-        
+
         public ActionResult Logout()
         {
             Session.Clear();

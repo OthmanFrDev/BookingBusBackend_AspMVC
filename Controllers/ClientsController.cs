@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using BookingBus.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BookingBus.Models;
 
 namespace BookingBus.Controllers
 {
@@ -17,12 +13,18 @@ namespace BookingBus.Controllers
         // GET: Clients
         public ActionResult Index()
         {
-            var clients = db.Clients.Include(c => c.Utilisateur);
-            return View(clients.ToList());
+            if (Session["UserID"] != null && Session["role"].ToString() == "client")
+            {
+                var clients = db.Clients.Include(c => c.Utilisateur);
+                return View(clients.ToList());
+            }
+
+            else { return RedirectToAction("Login", "Home"); }
+
         }
         public ActionResult Demander()
         {
-            return RedirectToAction("Create","Demandes");
+            return RedirectToAction("Create", "Demandes");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -36,14 +38,13 @@ namespace BookingBus.Controllers
             }
             return View();
         }
-        public ActionResult Reserver() 
+        public ActionResult Reserver()
         {
             return View();
         }
         [HttpPost]
         public ActionResult Reserver(Abonnement abonnement)
         {
-
 
             return View();
         }

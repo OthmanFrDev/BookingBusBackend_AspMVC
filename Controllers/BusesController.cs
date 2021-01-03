@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using BookingBus.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BookingBus.Models;
 
 namespace BookingBus.Controllers
 {
@@ -19,7 +15,7 @@ namespace BookingBus.Controllers
         {
             var buses = db.Buses.Include(b => b.Navette).Include(b => b.Societe);
             return View(buses.ToList());
-            
+
         }
 
         // GET: Buses/Details/5
