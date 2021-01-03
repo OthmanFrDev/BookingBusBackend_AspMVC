@@ -9,49 +9,52 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.depart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.arriver)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date_depart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date_arriver)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Client.id_utilisateur)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.depart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.arriver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_depart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_arriver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client.id_utilisateur)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.depart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.arriver)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_depart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_arriver)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Client.id_utilisateur)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_demande }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_demande }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_demande })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.depart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.arriver)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date_depart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date_arriver)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.id_utilisateur)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id_demande }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id_demande }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id_demande })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

@@ -7,7 +7,7 @@
 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
     <fieldset>
-        
+
 
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -16,33 +16,36 @@
             <div style="border: 1px solid red">
                 @ViewBag.Message
             </div>
-        }<div class="wrapper fadeInDown">
-    <div id="formContent">
-        <!-- Tabs Titles -->
-        <!-- Icon -->
-        <div class="fadeIn first">
-            <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+        }
+        <div class="wrapper fadeInDown">
+                <div id="formContent">
+                    <!-- Tabs Titles -->
+                    <!-- Icon -->
+                    <div class="fadeIn first">
+                        <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+                        <div class="fadeIn first">
+                            <label class="switch fadeIn first">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                        <!-- Login Form -->
+                        <form>
+                            <input type="text" id="login" class="fadeIn second" name="mail" placeholder="login">
+                            <input type="password" id="password" class="fadeIn third" name="mdp" placeholder="password">
+                            <input type="submit" class="fadeIn fourth" value="Log In">
+                        </form>
+
+                        <!-- Remind Passowrd -->
+                        <div id="formFooter">
+                            <a class="underlineHover" href="#">Forgot Password?</a>
+                        </div>
+
+                    </div>
         </div>
-
-        <!-- Login Form -->
-        <form>
-            <input type="text" id="login" class="fadeIn second" name="mail" placeholder="login">
-            <input type="password" id="password" class="fadeIn third" name="mdp" placeholder="password">
-            <input type="submit" class="fadeIn fourth" value="Log In">
-        </form>
-
-        <!-- Remind Passowrd -->
-        <div id="formFooter">
-            <a class="underlineHover" href="#">Forgot Password?</a>
-        </div>
-
-    </div>
-</div>
-       
     </fieldset>
 
 }
-
-
-<!------ Include the above in your HEAD tag ---------->
 

@@ -17,10 +17,28 @@ namespace BookingBus.Controllers
         // GET: Clients
         public ActionResult Index()
         {
-            var clients = db.Clients.Include(c => c.Utilisateur);
-            return View(clients.ToList());
-        }
+            if (Session["UserID"] != null && Session["role"].ToString() == "client") {  var clients = db.Clients.Include(c => c.Utilisateur);
+            return View(clients.ToList()); }
 
+            else { return RedirectToAction("Login", "Home"); }
+           
+        }
+        public ActionResult Demander()
+        {
+            return RedirectToAction("Create","Demandes");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Demander(Demande dm)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Demandes.Add(dm);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
         public ActionResult Reserver() 
         {
             return View();

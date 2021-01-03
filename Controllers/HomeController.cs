@@ -9,8 +9,15 @@ namespace BookingBus.Controllers
 {
     public class HomeController : Controller
     {
+        private BookingBusEntities db = new BookingBusEntities();
+        public ActionResult Index()
+        {
+            var societe = db.Societes;
+            return View(societe.ToList());
+        }
         public ActionResult Login()
         {
+            if (Session["UserID"] != null) { return RedirectToAction("UserDashBoard"); }
             return View();
         }
 
@@ -49,5 +56,6 @@ namespace BookingBus.Controllers
                 return RedirectToAction("Login");
             }
         }
+
     }
 }

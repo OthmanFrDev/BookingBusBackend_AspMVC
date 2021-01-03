@@ -12,11 +12,13 @@ namespace BookingBus.Controllers
 {
     public class SocietesController : Controller
     {
+        string role = "societe";
         private BookingBusEntities db = new BookingBusEntities();
 
         // GET: Societes
         public ActionResult Index()
         {
+           // new url().Urlsup(role);
             int id = int.Parse((Session["UserID"].ToString()));
 
              var societes = db.Abonnements.Where(s=>s.id_societe==id);

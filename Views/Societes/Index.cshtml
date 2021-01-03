@@ -4,61 +4,158 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.date_debut)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date_fin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Societe.Utilisateur.nom_complet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.prix)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Navette.lieu_depart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Navette.lieu_arriver)
-        </th>
-        <th></th>
-    </tr>
+<!---->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card">
+                <div class="image">
+                    <img src="http://loremflickr.com/320/150?random=4" />
+                </div>
+                <div class="card-inner">
+                    <div class="header">
+                        <h2>Title</h2>
+                        <h3>Sub-Head</h3>
+                    </div>
+                    <div class="content">
+                        <p>Content area</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card">
+                <div class="image">
+                    <img src="http://loremflickr.com/320/150?random=5" />
+                </div>
+                <div class="card-inner">
+                    <div class="header">
+                        <h2>Title</h2>
+                        <h3>Sub-Head</h3>
+                    </div>
+                    <div class="content">
+                        <p>Content area</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card">
+                <div class="image">
+                    <img src="http://loremflickr.com/320/150?random=6" />
+                </div>
+                <div class="card-inner">
+                    <div class="header">
+                        <h2>Title</h2>
+                        <h3>Sub-Head</h3>
+                    </div>
+                    <div class="content">
+                        <p>Content area</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card">
+                <div class="image">
+                    <img src="http://loremflickr.com/320/150?random=2" />
+                </div>
+                <div class="card-inner">
+                    <div class="header">
+                        <h2>Title</h2>
+                        <h3>Sub-Head</h3>
+                    </div>
+                    <div class="content">
+                        <p>Content area</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card">
+                <div class="image">
+                    <img src="http://loremflickr.com/320/150?random=3" />
+                </div>
+                <div class="card-inner">
+                    <div class="header">
+                        <h2>Title</h2>
+                        <h3>Sub-Head</h3>
+                    </div>
+                    <div class="content">
+                        <p>Content area</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card">
+                <div class="image">
+                    <img src="http://loremflickr.com/320/150" />
+                </div>
+                <div class="card-inner">
+                    <div class="header">
+                        <h2>Title</h2>
+                        <h3>Sub-Head</h3>
+                    </div>
+                    <div class="content">
+                        <p>Content area</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card">
+                <div class="image">
+                    <img src="http://loremflickr.com/320/150?random=2" />
+                </div>
+                <div class="card-inner">
+                    <div class="header">
+                        <h2>Title</h2>
+                        <h3>Sub-Head</h3>
+                    </div>
+                    <div class="content">
+                        <p>Content area</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card">
+                <div class="image">
+                    <img src="http://loremflickr.com/320/150?random=3" />
+                </div>
+                <div class="card-inner">
+                    <div class="header">
+                        <h2>Title</h2>
+                        <h3>Sub-Head</h3>
+                    </div>
+                    <div class="content">
+                        <p>Content area</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card">
+                <div class="image">
+                    <img src="http://loremflickr.com/320/150" />
+                </div>
+                <div class="card-inner">
+                    <div class="header">
+                        <h2>Title</h2>
+                        <h3>Sub-Head</h3>
+                    </div>
+                    <div class="content">
+                        <p>Content area</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.date_debut)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.date_fin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Societe.Utilisateur.nom_complet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.prix)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Navette.lieu_depart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Navette.lieu_arriver)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id_abonnement }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id_abonnement }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id_abonnement })
-            </td>
-        </tr>
-    }
-
-</table>

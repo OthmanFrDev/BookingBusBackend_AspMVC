@@ -66,11 +66,14 @@ namespace BookingBus.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Navette navette = db.Navettes.Find(id);
+
             if (navette == null)
             {
                 return HttpNotFound();
             }
-            return View(navette);
+            else { ViewBag.nav = navette;
+            return View(navette);}
+            
         }
 
         // POST: Navettes/Edit/5
@@ -80,6 +83,7 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id_navette,lieu_depart,lieu_arriver,date_depart,date_arriver")] Navette navette)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Entry(navette).State = EntityState.Modified;

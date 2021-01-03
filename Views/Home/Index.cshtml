@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BookingBus.Models.Societe>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.lieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utilisateur.nom_complet)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.lieu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utilisateur.nom_complet)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_utilisateur }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_utilisateur }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_utilisateur })
+        </td>
+    </tr>
+}
+
+</table>
