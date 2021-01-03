@@ -18,6 +18,7 @@ namespace BookingBus.Controllers
         public ActionResult Index()
         {
             var buses = db.Buses.Include(b => b.Navette).Include(b => b.Societe);
+            
             return View(buses.ToList());
             
         }
