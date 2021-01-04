@@ -4,22 +4,38 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/mdb.min.css" rel="stylesheet" />
-    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" runat="server"/>
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
     <!-- NavBar-->
     <nav class="navbar navbar-expand-lg"style="background-color: #fff">
-        <a class="navbar-brand" href="#"><img src="~/Content/BookingBus (2).png" style="margin-top=0px;margin-bottom:0px;" /></a>
+        <a class="navbar-brand" href="#"><img src="~/Content/BookingBus (2).png" style="margin-top:0px;margin-bottom:0px;" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="navbar-toggler-icon fas fa-bars" style="color: #F59A2E"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav mr-auto">
-                <a class="nav-item nav-link active" href="#" ><i class="fas fa-home"></i>Acceuil</a>
-                <a class="nav-item nav-link" href="#"><i class="fas fa-info-circle"></i>A propos</a>
+                <a class="nav-item nav-link active" href="https://localhost:44357/Home"><i class="fas fa-home"></i>Acceuil</a>
+                @if (Session["role"]!=null) { 
+                if (Session["role"].ToString() == "societe")
+                {
+                    <a class="nav-item nav-link" href="https://localhost:44357/societes"><i class="fas fa-info-circle"></i>personal space</a>
+                }
+                else if(Session["role"].ToString()=="client")
+                {
+                <a class="nav-item nav-link" href="https://localhost:44357/clients"><i class="fas fa-info-circle"></i>personal space</a>
+                }
+
+                else if(Session["role"].ToString()=="admin")
+                {
+                <a class="nav-item nav-link" href="https://localhost:44357/admins"><i class="fas fa-info-circle"></i>personal space</a>
+                    }
+                   
+                }
                 <a class="nav-item nav-link" href="#"><i class="fas fa-info-circle"></i>A propos</a>
             </ul>
             <!---->
@@ -57,7 +73,7 @@
     <!-- Site footer -->
     <script src="~/Scripts/jquery-3.5.1.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/mdb.min.js"></script>
+   
     <script src="~/Scripts/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js" integrity="sha512-oHBLR38hkpOtf4dW75gdfO7VhEKg2fsitvHZYHZjObc4BPKou2PGenyxA5ZJ8CCqWytBx5wpiSqwVEBy84b7tw==" crossorigin="anonymous"></script>
 </body>

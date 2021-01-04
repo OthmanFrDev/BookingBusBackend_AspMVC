@@ -16,7 +16,8 @@ namespace BookingBus.Controllers
 
             int id = int.Parse((Session["UserID"].ToString()));
             ViewBag.id = id;
-            if (Session["UserID"] != null && Session["role"].ToString() == "client") {  var clients = db.Clients.Include(c => c.Utilisateur);
+            if (Session["UserID"] != null && Session["role"].ToString() == "client") {
+                var clients = db.Utilisateurs.Where(u => u.role =="client") ;
             return View(clients.ToList()); }
 
             else { return RedirectToAction("Login", "Home"); }

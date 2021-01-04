@@ -13,7 +13,9 @@ namespace BookingBus.Controllers
         // GET: Abonnements
         public ActionResult Index()
         {
-            var abonnements = db.Abonnements.Include(a => a.Navette).Include(a => a.Societe);
+            int id = int.Parse((Session["UserID"].ToString()));
+            ViewBag.id = id;
+            var abonnements = db.Abonnements.Include(a => a.Navette).Include(a => a.Societe).ToList();
             return View(abonnements.ToList());
         }
 
@@ -53,7 +55,7 @@ namespace BookingBus.Controllers
             {
                 db.Abonnements.Add(abonnement);
                 db.SaveChanges();
-                return RedirectToAction("Index","Societes");
+                return RedirectToAction("Index");
             }
 
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", abonnement.id_navette);
@@ -119,7 +121,7 @@ namespace BookingBus.Controllers
             Abonnement abonnement = db.Abonnements.Find(id);
             db.Abonnements.Remove(abonnement);
             db.SaveChanges();
-            return RedirectToAction("Index","Societes");
+            return RedirectToAction("Index"         );
         }
 
         protected override void Dispose(bool disposing)

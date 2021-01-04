@@ -5,10 +5,14 @@
 }
 
 <h2>Index</h2>
-
-<p>
+@if (Session["role"] != null) { if (Session["role"].ToString() == "client") 
+    { 
+ <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+} 
+}
+
 <div class="container">
     <table class="table table-bordered table-hover">
         <tr>
@@ -32,28 +36,35 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.depart)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.arriver)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date_depart)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date_arriver)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Client.id_utilisateur)
-                </td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.depart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.arriver)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_depart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_arriver)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.id_utilisateur)
+        </td>
+        @if (Session["role"] != null)
+        {
+            if (Session["role"].ToString() == "client")
+            {
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.id_demande }) |
                     @Html.ActionLink("Details", "Details", new { id = item.id_demande }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.id_demande })
                 </td>
-            </tr>
+            }
+        }
+        
+    </tr>
         }
 
     </table>

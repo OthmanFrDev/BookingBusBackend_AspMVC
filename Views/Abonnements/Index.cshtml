@@ -4,71 +4,41 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+
+
+
+
+@Html.ActionLink("create new abonnement", "create", new { id = ViewBag.id }, "")
+
 
 <div class="container">
-    <table class="table table-bordered table-hover">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.date_debut)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.date_fin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.id_societe)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.prix)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Navette.lieu_depart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Societe.lieu)
-            </th>
-            <th></th>
-        </tr>
-        
+    <div class="row">
+
         @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date_debut)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date_fin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.id_societe)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.prix)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Navette.lieu_depart)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Societe.lieu)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_abonnement }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id_abonnement }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id_abonnement })
-                </td>
-            </tr>
+        {<div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="card">
+                    <div class="image">
+                        <img src="http://loremflickr.com/320/150?random=4" />
+                    </div>
+                    <div class="card-inner">
+                        <div class="header">
+                            
+                            <h3>@item.Navette.lieu_depart - @item.Navette.lieu_arriver</h3>
+                        </div>
+                        <div class="content">
+                            <p>prix: @item.prix</p>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id_abonnement }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.id_abonnement }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id_abonnement })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 2094df9f4794d11413101b73798def8868c4f17c
-
-=======
-        </table>
->>>>>>> 09a79c1f1d012a18b888dac73ee9914fce4ab56a
-</div>
+    </div>
+    </div>

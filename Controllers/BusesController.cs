@@ -13,6 +13,8 @@ namespace BookingBus.Controllers
         // GET: Buses
         public ActionResult Index()
         {
+            int id = int.Parse((Session["UserID"].ToString()));
+            ViewBag.id = id;
             var buses = db.Buses.Include(b => b.Navette).Include(b => b.Societe);
             
             return View(buses.ToList());
