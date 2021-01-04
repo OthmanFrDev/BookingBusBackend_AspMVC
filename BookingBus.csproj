@@ -104,8 +104,8 @@
     <Content Include="Content\bablah.jpg" />
     <Content Include="Content\babsalama.jpg" />
     <Content Include="Content\bachiri.jpg" />
-    <Content Include="Content\BookingBus %281%29.png" />
     <Content Include="Content\BookingBus %282%29.png" />
+    <Content Include="Content\BookingBus.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -120,10 +120,8 @@
     <Content Include="Content\jana.jpg" />
     <Content Include="Content\LECONOMISTE.png" />
     <Content Include="Content\logo.jpg" />
-    <Content Include="Content\mdb.min.css" />
     <Content Include="Content\bghome.png" />
     <Content Include="Content\payment.png" />
-    <Content Include="Scripts\mdb.min.js" />
     <Content Include="Content\Medi1.png" />
     <Content Include="Content\Medi1Radio.png" />
     <Content Include="Content\Site.css" />

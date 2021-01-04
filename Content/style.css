@@ -1,9 +1,6 @@
 ﻿
 html{background-color:none;}
 
-nav{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
 .navbar-nav > a ,.nav-link{
     color: #0d0d0d;
 }
@@ -453,7 +450,6 @@ input:checked + .slider:before {
         width: 100px;
         height: auto;
 }
-
 @media(max-width:768px){
     .col-md-3 {
         display:none;
@@ -511,3 +507,4 @@ input:checked + .slider:before {
         height: 80vh;
     }
 }
+/*Recherche Home*/
