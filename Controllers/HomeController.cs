@@ -6,11 +6,14 @@ namespace BookingBus.Controllers
 {
     public class HomeController : Controller
     {
+        
         private BookingBusEntities db = new BookingBusEntities();
         public ActionResult Index()
         {
             var societe = db.Societes;
-            return View(societe.ToList());
+            
+            return View();
+           
         }
         public ActionResult Login()
         {

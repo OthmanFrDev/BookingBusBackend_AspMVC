@@ -16,7 +16,10 @@ namespace BookingBus.Controllers
 
             else { return RedirectToAction("Login", "Home"); }
         }
-
+        public ActionResult lister(string role) 
+        {
+            return RedirectToAction("lister", "Utilisateurs",new { role = role });
+        }
         // GET: Admins/Details/5        
         public ActionResult Details(int? id)
         {

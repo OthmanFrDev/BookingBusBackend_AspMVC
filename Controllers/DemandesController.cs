@@ -16,7 +16,7 @@ namespace BookingBus.Controllers
             var demandes = db.Demandes.Include(d => d.Client);
             return View(demandes.ToList());
         }
-
+      
         // GET: Demandes/Details/5
         public ActionResult Details(int? id)
         {

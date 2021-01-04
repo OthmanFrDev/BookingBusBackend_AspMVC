@@ -23,6 +23,16 @@ namespace BookingBus.Controllers
              var societes = db.Abonnements.Where(s=>s.id_societe==id);
             return View(societes.ToList()); 
         }
+        public ActionResult lister(string role)
+        {
+            if (role == "abonnement") { return RedirectToAction("Index", "Abonnements"); }
+            else if (role == "bus") { return RedirectToAction("Index", "Buses"); }
+            return View();
+        }
+        public ActionResult consulter() 
+        {
+            return RedirectToAction("Index", "Demandes");
+        }
         public ActionResult createbus(int id)
         {
             return RedirectToAction("Create", "Buses",new { id=id});

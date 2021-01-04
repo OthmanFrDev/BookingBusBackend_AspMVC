@@ -3,34 +3,81 @@
 @{
     ViewBag.Title = "Index";
 }
-@Html.ActionLink("create new abonnement", "creatabonnement",new { id = ViewBag.id }, "")
 
-@Html.ActionLink("create new bus", "createbus", new { id = ViewBag.id }, "")
+
+
+    
+
+
 <div class="container">
+ 
+    @Html.ActionLink("consulter", "consulter")
     <div class="row">
 
-        @foreach (var item in Model)
-        {<div class="col-lg-4 col-md-4 col-sm-4">
-                <div class="card">
-                    <div class="image">
-                        <img src="http://loremflickr.com/320/150?random=4" />
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon col-xs-6">
+                        <i class="fas fa-house-user"></i>
                     </div>
-                    <div class="card-inner">
-                        <div class="header">
-                            <h2>Title</h2>
-                            <h3>Sub-Head</h3>
-                        </div>
-                        <div class="content">
-                            <p>Content area</p>
-                            @Html.ActionLink("Details", "Delete", "Abonnements", new { id = item.id_abonnement }, "")
+                    <div class="container col-xs-6">
+                        <p class="card-category ">ABONNEMENTS :</p>
+
+                        <div class="card-title">
+                            <h1 class="display-1 font-weight-normal"></h1>
                         </div>
                     </div>
                 </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="fas fa-house-user"></i> @Html.ActionLink("details", "lister", new { role = "abonnement" }, "")
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon col-xs-6">
+                        <i class="fas fa-house-user"></i>
+                    </div>
+                    <div class="container col-xs-6">
+                        <p class="card-category ">BUSES:</p>
+                        <div class="card-title">
+                            <h1 class="display-1 font-weight-normal"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="fas fa-house-user"></i>@Html.ActionLink("details", "lister", new { role = "bus" }, "")
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon col-xs-6">
+                        <i class="fas fa-house-user"></i>
+                    </div>
+                    <div class="container col-xs-6">
+                        <p class="card-category ">DEMANDES:</p>
+                        <div class="card-title">
+                            <h1 class="display-1 font-weight-normal"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="fas fa-house-user"></i>@Html.ActionLink("consulter", "consulter")
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-
-        }
     </div>
 </div>
 

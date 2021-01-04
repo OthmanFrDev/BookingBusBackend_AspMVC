@@ -1,17 +1,14 @@
 ﻿
+
 html {
     background-color: none;
 }
 
-<<<<<<< HEAD
-.navbar-nav > a ,.nav-link{
-=======
 nav {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .navbar-nav > a, .nav-link {
->>>>>>> c81cfde0b0a295f6fd379e8ddc814a9590f489d0
     color: #0d0d0d;
 }
 
@@ -462,14 +459,9 @@ input:checked + .slider:before {
     .col-md-3 img {
         width: 100%;
         height: auto;
-<<<<<<< HEAD
-}
-@media(max-width:768px){
-=======
     }
 
 @media(max-width:768px) {
->>>>>>> c81cfde0b0a295f6fd379e8ddc814a9590f489d0
     .col-md-3 {
         display: none;
     }
@@ -536,7 +528,3 @@ input:checked + .slider:before {
         height: 80vh;
     }
 }
-<<<<<<< HEAD
-/*Recherche Home*/
-=======
->>>>>>> c81cfde0b0a295f6fd379e8ddc814a9590f489d0

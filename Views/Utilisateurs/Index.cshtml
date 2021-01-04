@@ -27,15 +27,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.role)
             </th>
-            <th>
+            <th hidden>
                 @Html.DisplayNameFor(model => model.Admin.id_utilisateur)
             </th>
-            <th>
+            <th hidden>
                 @Html.DisplayNameFor(model => model.Client.id_utilisateur)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Societe.lieu)
-            </th>
+           
+                <th>
+                    @Html.DisplayNameFor(model => model.Societe.lieu)
+                </th>
+
+
             <th></th>
         </tr>
 

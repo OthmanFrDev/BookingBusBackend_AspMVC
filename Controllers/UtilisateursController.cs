@@ -13,9 +13,23 @@ namespace BookingBus.Controllers
         // GET: Utilisateurs
         public ActionResult Index()
         {
-            var utilisateurs = db.Utilisateurs.Include(u => u.Admin).Include(u => u.Client).Include(u => u.Societe);
-            return View(utilisateurs.ToList());
+            //ViewBag.role = role;
+            //if (role == 1) {  var utilisateurs = db.Utilisateurs.Where(u => u.role == "client").Include(u => u.Client); return View(utilisateurs.ToList());}
+            //else if(role == 2) { var utilisateurs = db.Utilisateurs.Where(u=>u.role=="societe").Include(u => u.Societe); return View(utilisateurs.ToList()); }
+            //return View("Index","Admins");
+            return View();
+
         }
+        public ActionResult lister(string role)
+        {
+            ViewBag.role = role;
+            if (role == "client") { var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Client); return View(utilisateurs.ToList()); }
+            else if (role == "societe") { var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Societe); return View(utilisateurs.ToList()); }
+            return View("Index", "Admins");
+
+
+        }
+
 
         // GET: Utilisateurs/Details/5
         public ActionResult Details(int? id)
@@ -38,6 +52,7 @@ namespace BookingBus.Controllers
             ViewBag.id_utilisateur = new SelectList(db.Admins, "id_utilisateur", "id_utilisateur");
             ViewBag.id_utilisateur = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur");
             ViewBag.id_utilisateur = new SelectList(db.Societes, "id_utilisateur", "lieu");
+
             return View();
         }
 
@@ -46,11 +61,17 @@ namespace BookingBus.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_utilisateur,nom_complet,mail,mdp,telephone,role")] Utilisateur utilisateur)
+        public ActionResult Create([Bind(Include = "id_utilisateur,nom_complet,mail,mdp,telephone,role")] Utilisateur utilisateur,string lieu)
         {
+            
             if (ModelState.IsValid)
             {
+                
                 db.Utilisateurs.Add(utilisateur);
+                
+                if (utilisateur.role == "client") { db.Clients.Add(new Client { id_utilisateur=utilisateur.id_utilisateur}); }
+                else if (utilisateur.role == "admin") { db.Admins.Add(new Admin { id_utilisateur = utilisateur.id_utilisateur }); }
+                else if (utilisateur.role == "societe") { db.Societes.Add(new Societe { id_utilisateur = utilisateur.id_utilisateur ,lieu=lieu}); }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -90,12 +111,12 @@ namespace BookingBus.Controllers
             {
                 db.Entry(utilisateur).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("lister",new { role=utilisateur.role});
             }
             ViewBag.id_utilisateur = new SelectList(db.Admins, "id_utilisateur", "id_utilisateur", utilisateur.id_utilisateur);
             ViewBag.id_utilisateur = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", utilisateur.id_utilisateur);
             ViewBag.id_utilisateur = new SelectList(db.Societes, "id_utilisateur", "lieu", utilisateur.id_utilisateur);
-            return View(utilisateur);
+            return View("Index","Admins");
         }
 
         // GET: Utilisateurs/Delete/5
@@ -121,7 +142,7 @@ namespace BookingBus.Controllers
             Utilisateur utilisateur = db.Utilisateurs.Find(id);
             db.Utilisateurs.Remove(utilisateur);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("lister",new { role=utilisateur.role});
         }
 
         protected override void Dispose(bool disposing)
