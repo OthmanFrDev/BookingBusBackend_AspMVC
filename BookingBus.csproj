@@ -101,6 +101,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bus.png" />
+    <Content Include="Content\company.png" />
+    <Content Include="Content\market-research.png" />
+    <Content Include="Content\pathway.png" />
+    <Content Include="Content\rating.png" />
+    <Content Include="Content\request.png" />
+    <Content Include="favicon.png" />
     <Content Include="Content\2M.png" />
     <Content Include="Content\Aloula.png" />
     <Content Include="Content\bablah.jpg" />
@@ -374,8 +381,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_LoginInfo.cshtml" />
     <Content Include="Views\Home\UserDashBoard.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Utilisateurs\lister.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

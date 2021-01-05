@@ -3,52 +3,57 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div class="container">
-    <table class="table table-bordered table-hover">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.lieu_depart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.lieu_arriver)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.date_depart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.date_arriver)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+<div class="container" >
+    <div class="col m-3" style="text-align:center">
+        <a class="btn" style="background-color: #F59A2E" href="@Url.Action("Create")"><i class="fas fa-plus"></i>Ajouter une navette</a>
+    </div>
+    <table class="table table-bordered table-hover table-responsive-lg table-hover">
+        <thead style="background-color: #F59A2E">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.lieu_depart)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.lieu_arriver)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date_depart)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date_arriver)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_navette }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id_navette }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id_navette })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.lieu_depart)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.lieu_arriver)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.date_depart)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.date_arriver)
+                </th>
+                <th><i class="fas fa-edit"></i></th>
+                <th><i class="fas fa-info-circle"></i></th>
+                <th><i class="fas fa-trash-alt"></i></th>
             </tr>
-        }
-
+        </thead>
+        <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lieu_depart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lieu_arriver)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date_depart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date_arriver)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.id_navette })"><i class="fas fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Details", new { id = item.id_navette })"><i class="fas fa-info-circle"></i></a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Delete", new { id = item.id_navette })"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                 </tr>
+                }
+        </tbody>
     </table>
 </div>

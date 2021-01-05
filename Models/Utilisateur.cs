@@ -11,11 +11,13 @@ namespace BookingBus.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Utilisateur
     {
         public int id_utilisateur { get; set; }
         public string nom_complet { get; set; }
+        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*")]
         public string mail { get; set; }
         public string mdp { get; set; }
         public string telephone { get; set; }

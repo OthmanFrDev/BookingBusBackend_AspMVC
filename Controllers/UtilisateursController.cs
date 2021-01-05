@@ -47,12 +47,12 @@ namespace BookingBus.Controllers
         }
 
         // GET: Utilisateurs/Create
-        public ActionResult Create()
+        public ActionResult Create(string role)
         {
             ViewBag.id_utilisateur = new SelectList(db.Admins, "id_utilisateur", "id_utilisateur");
             ViewBag.id_utilisateur = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur");
             ViewBag.id_utilisateur = new SelectList(db.Societes, "id_utilisateur", "lieu");
-
+            ViewBag.role = role;
             return View();
         }
 
@@ -73,7 +73,7 @@ namespace BookingBus.Controllers
                 else if (utilisateur.role == "admin") { db.Admins.Add(new Admin { id_utilisateur = utilisateur.id_utilisateur }); }
                 else if (utilisateur.role == "societe") { db.Societes.Add(new Societe { id_utilisateur = utilisateur.id_utilisateur ,lieu=lieu}); }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("index","Home");
             }
 
             ViewBag.id_utilisateur = new SelectList(db.Admins, "id_utilisateur", "id_utilisateur", utilisateur.id_utilisateur);
@@ -122,21 +122,11 @@ namespace BookingBus.Controllers
         // GET: Utilisateurs/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Utilisateur utilisateur = db.Utilisateurs.Find(id);
-            if (utilisateur == null)
-            {
-                return HttpNotFound();
-            }
-            return View(utilisateur);
+            return RedirectToAction("DeleteConfirmed", new { id = id });
         }
 
         // POST: Utilisateurs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpGet, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             Utilisateur utilisateur = db.Utilisateurs.Find(id);
