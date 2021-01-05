@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BookingBusModelStoreContainer" CdmEntityContainer="BookingBusEntities">
+  <EntityContainerMapping StorageEntityContainer="BookingBusModel1StoreContainer" CdmEntityContainer="BookingBusEntities1">
     <EntitySetMapping Name="Abonnements">
-      <EntityTypeMapping TypeName="BookingBusModel.Abonnement">
+      <EntityTypeMapping TypeName="BookingBusModel1.Abonnement">
         <MappingFragment StoreEntitySet="Abonnement">
           <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
           <ScalarProperty Name="date_debut" ColumnName="date_debut" />
@@ -14,14 +14,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Admins">
-      <EntityTypeMapping TypeName="BookingBusModel.Admin">
+      <EntityTypeMapping TypeName="BookingBusModel1.Admin">
         <MappingFragment StoreEntitySet="Admin">
           <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Buses">
-      <EntityTypeMapping TypeName="BookingBusModel.Bus">
+      <EntityTypeMapping TypeName="BookingBusModel1.Bus">
         <MappingFragment StoreEntitySet="Bus">
           <ScalarProperty Name="id_bus" ColumnName="id_bus" />
           <ScalarProperty Name="nom" ColumnName="nom" />
@@ -35,14 +35,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Clients">
-      <EntityTypeMapping TypeName="BookingBusModel.Client">
+      <EntityTypeMapping TypeName="BookingBusModel1.Client">
         <MappingFragment StoreEntitySet="Client">
           <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Demandes">
-      <EntityTypeMapping TypeName="BookingBusModel.Demande">
+      <EntityTypeMapping TypeName="BookingBusModel1.Demande">
         <MappingFragment StoreEntitySet="Demande">
           <ScalarProperty Name="id_demande" ColumnName="id_demande" />
           <ScalarProperty Name="depart" ColumnName="depart" />
@@ -53,8 +53,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Effectuers">
+      <EntityTypeMapping TypeName="BookingBusModel1.Effectuer">
+        <MappingFragment StoreEntitySet="Effectuer">
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
+          <ScalarProperty Name="duree" ColumnName="duree" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Navettes">
-      <EntityTypeMapping TypeName="BookingBusModel.Navette">
+      <EntityTypeMapping TypeName="BookingBusModel1.Navette">
         <MappingFragment StoreEntitySet="Navette">
           <ScalarProperty Name="id_navette" ColumnName="id_navette" />
           <ScalarProperty Name="lieu_depart" ColumnName="lieu_depart" />
@@ -65,7 +74,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Societes">
-      <EntityTypeMapping TypeName="BookingBusModel.Societe">
+      <EntityTypeMapping TypeName="BookingBusModel1.Societe">
         <MappingFragment StoreEntitySet="Societe">
           <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
           <ScalarProperty Name="lieu" ColumnName="lieu" />
@@ -73,7 +82,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Utilisateurs">
-      <EntityTypeMapping TypeName="BookingBusModel.Utilisateur">
+      <EntityTypeMapping TypeName="BookingBusModel1.Utilisateur">
         <MappingFragment StoreEntitySet="Utilisateur">
           <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
           <ScalarProperty Name="nom_complet" ColumnName="nom_complet" />
@@ -84,13 +93,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="Effectuer" TypeName="BookingBusModel.Effectuer" StoreEntitySet="Effectuer">
-      <EndProperty Name="Abonnement">
-        <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
-      </EndProperty>
-      <EndProperty Name="Client">
-        <ScalarProperty Name="id_utilisateur" ColumnName="id_client" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

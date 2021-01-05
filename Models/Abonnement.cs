@@ -17,7 +17,7 @@ namespace BookingBus.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Abonnement()
         {
-            this.Clients = new HashSet<Client>();
+            this.Effectuers = new HashSet<Effectuer>();
         }
     
         public int id_abonnement { get; set; }
@@ -30,6 +30,6 @@ namespace BookingBus.Models
         public virtual Navette Navette { get; set; }
         public virtual Societe Societe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Client> Clients { get; set; }
+        public virtual ICollection<Effectuer> Effectuers { get; set; }
     }
 }

@@ -11,12 +11,18 @@ namespace BookingBus.Controllers
         private BookingBusEntities db = new BookingBusEntities();
 
         // GET: Demandes
-        public ActionResult Index()
+  
+        public ActionResult Index(int? id)
         {
-            var demandes = db.Demandes.Include(d => d.Client);
-            return View(demandes.ToList());
+            if (id != null) { ViewBag.id = id;
+            var demandes = db.Demandes.Include(d => d.Client).Where(d => d.id_client == id);
+            return View(demandes.ToList()); }
+            else {
+                var demandes = db.Demandes.Include(d => d.Client);
+                return View(demandes.ToList());
+            }
         }
-      
+
         // GET: Demandes/Details/5
         public ActionResult Details(int? id)
         {

@@ -5,6 +5,7 @@ using System.Web.Mvc;
 
 namespace BookingBus.Controllers
 {
+   
     public class AdminsController : Controller
     {
         private BookingBusEntities db = new BookingBusEntities();
@@ -12,18 +13,20 @@ namespace BookingBus.Controllers
         // GET: Admins
         public ActionResult Index()
         {
+
             if (Session["UserID"] != null && Session["role"].ToString() == role) { return View(); }
 
             else { return RedirectToAction("Login", "Home"); }
         }
         public ActionResult lister(string role) 
         {
-            return RedirectToAction("lister", "Utilisateurs",new { role = role });
+            if (Session["UserID"] != null && Session["role"].ToString() == role) {  return RedirectToAction("lister", "Utilisateurs",new { role = role });}
+            else { return RedirectToAction("Login", "Home"); }
         }
         // GET: Admins/Details/5        
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null && Session["role"].ToString() == role) {        if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -32,14 +35,16 @@ namespace BookingBus.Controllers
             {
                 return HttpNotFound();
             }
-            return View(admin);
+            return View(admin);}
+            else { return RedirectToAction("Login", "Home"); }
         }
 
         // GET: Admins/Create
         public ActionResult Create()
         {
-            ViewBag.id_utilisateur = new SelectList(db.Utilisateurs, "id_utilisateur", "nom_complet");
-            return View();
+            if (Session["UserID"] != null && Session["role"].ToString() == role) {ViewBag.id_utilisateur = new SelectList(db.Utilisateurs, "id_utilisateur", "nom_complet");
+            return View(); }
+            else { return RedirectToAction("Login", "Home"); }
         }
 
         // POST: Admins/Create
@@ -49,6 +54,7 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_utilisateur")] Admin admin)
         {
+
             if (ModelState.IsValid)
             {
                 db.Admins.Add(admin);
@@ -63,7 +69,7 @@ namespace BookingBus.Controllers
         // GET: Admins/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null && Session["role"].ToString() == role) {       if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -73,7 +79,8 @@ namespace BookingBus.Controllers
                 return HttpNotFound();
             }
             ViewBag.id_utilisateur = new SelectList(db.Utilisateurs, "id_utilisateur", "nom_complet", admin.id_utilisateur);
-            return View(admin);
+            return View(admin);}
+            else { return RedirectToAction("Login", "Home"); }
         }
 
         // POST: Admins/Edit/5
@@ -96,7 +103,8 @@ namespace BookingBus.Controllers
         // GET: Admins/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null && Session["role"].ToString() == role) { 
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -105,7 +113,8 @@ namespace BookingBus.Controllers
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(user);}
+            else { return RedirectToAction("Login", "Home"); }
         }
 
         // POST: Admins/Delete/5
@@ -121,8 +130,8 @@ namespace BookingBus.Controllers
         [HttpPost]
         public ActionResult detail()
         {
-
-            return RedirectToAction("Index", "Utilisateurs");
+            if (Session["UserID"] != null && Session["role"].ToString() == role) { return RedirectToAction("Index", "Utilisateurs");}
+            else { return RedirectToAction("Login", "Home"); }
         }
 
         protected override void Dispose(bool disposing)

@@ -528,3 +528,9 @@ input:checked + .slider:before {
         height: 80vh;
     }
 }
+@media screen and (max-width: 2860px) {
+    .peach-gradient > img {
+        width: 99vw;
+        height: 80vh;
+    }
+}

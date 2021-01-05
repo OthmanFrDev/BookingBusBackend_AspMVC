@@ -16,7 +16,7 @@ namespace BookingBus.Models
     public partial class BookingBusEntities : DbContext
     {
         public BookingBusEntities()
-            : base("name=BookingBusEntities")
+            : base("name=BookingBusEntities1")
         {
         }
     
@@ -30,6 +30,7 @@ namespace BookingBus.Models
         public virtual DbSet<Bus> Buses { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Demande> Demandes { get; set; }
+        public virtual DbSet<Effectuer> Effectuers { get; set; }
         public virtual DbSet<Navette> Navettes { get; set; }
         public virtual DbSet<Societe> Societes { get; set; }
         public virtual DbSet<Utilisateur> Utilisateurs { get; set; }

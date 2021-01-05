@@ -1,0 +1,43 @@
+﻿@model BookingBus.Models.Effectuer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Effectuer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.duree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Abonnement.id_abonnement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Abonnement.id_abonnement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.id_utilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.id_utilisateur)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

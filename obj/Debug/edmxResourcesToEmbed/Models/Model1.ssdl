@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="BookingBusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="BookingBusModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Abonnement">
     <Key>
       <PropertyRef Name="id_abonnement" />
     </Key>
     <Property Name="id_abonnement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="date_debut" Type="date" Nullable="false" />
-    <Property Name="date_fin" Type="date" Nullable="false" />
+    <Property Name="date_debut" Type="datetime" Nullable="false" />
+    <Property Name="date_fin" Type="datetime" Nullable="false" />
     <Property Name="id_navette" Type="int" Nullable="false" />
     <Property Name="id_societe" Type="int" Nullable="false" />
     <Property Name="prix" Type="real" Nullable="false" />
@@ -54,6 +54,7 @@
     </Key>
     <Property Name="id_client" Type="int" Nullable="false" />
     <Property Name="id_abonnement" Type="int" Nullable="false" />
+    <Property Name="duree" Type="int" />
   </EntityType>
   <EntityType Name="Navette">
     <Key>
@@ -62,8 +63,8 @@
     <Property Name="id_navette" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="lieu_depart" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="lieu_arriver" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="date_depart" Type="date" Nullable="false" />
-    <Property Name="date_arriver" Type="date" Nullable="false" />
+    <Property Name="date_depart" Type="datetime" Nullable="false" />
+    <Property Name="date_arriver" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Societe">
     <Key>
@@ -209,7 +210,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="BookingBusModelStoreContainer">
+  <EntityContainer Name="BookingBusModel1StoreContainer">
     <EntitySet Name="Abonnement" EntityType="Self.Abonnement" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />

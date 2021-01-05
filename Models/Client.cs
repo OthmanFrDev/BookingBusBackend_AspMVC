@@ -18,7 +18,7 @@ namespace BookingBus.Models
         public Client()
         {
             this.Demandes = new HashSet<Demande>();
-            this.Abonnements = new HashSet<Abonnement>();
+            this.Effectuers = new HashSet<Effectuer>();
         }
     
         public int id_utilisateur { get; set; }
@@ -27,6 +27,6 @@ namespace BookingBus.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Demande> Demandes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Abonnement> Abonnements { get; set; }
+        public virtual ICollection<Effectuer> Effectuers { get; set; }
     }
 }
