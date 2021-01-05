@@ -4,79 +4,77 @@
     ViewBag.Title = "lister";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
+<div class="container">
+        <table class="table table-bordered table-hover table-responsive-lg table-hover">
+            <thead style="background-color: #F59A2E">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.nom_complet)</th>
+                    <th>@Html.DisplayNameFor(model => model.mail)</th>
+                    <th>@Html.DisplayNameFor(model => model.mdp)</th>
+                    <th>@Html.DisplayNameFor(model => model.telephone)</th>
+                    <th>@Html.DisplayNameFor(model => model.role)</th>
+                    @if (ViewBag.role == "societe")
+                    {
+                    <th>@Html.DisplayNameFor(model => model.Societe.lieu)</th>
+                    }
+                    <th><i class="fas fa-trash-alt"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                  @foreach (var item in Model)
+                        {
+                         <tr>
+                             <td >
+                                 @Html.DisplayFor(modelItem => item.nom_complet)
+                             </td>
+                             <td >
+                                 @Html.DisplayFor(modelItem => item.mail)
+                             </td>
+                             <td >
+                                 @Html.DisplayFor(modelItem => item.mdp)
+                             </td>
+                             <td>
+                                 @Html.DisplayFor(modelItem => item.telephone)
+                             </td>
+                             <td>
+                                 @Html.DisplayFor(modelItem => item.role)
+                             </td>
+                             
+                                @if (ViewBag.role == "societe")
+                                {
+                                    <td class="cell100 column1">
+                                    @Html.DisplayFor(modelItem => item.Societe.lieu)
+                                     </td>
+                                 }
 
-<h2>lister</h2>
-
-<p>
-    @Html.ActionLink("back", "Index","Admins")
-</p>
-<table class="table table-bordered table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nom_complet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mdp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telephone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.role)
-        </th>
-        <th hidden>
-            @Html.DisplayNameFor(model => model.Admin.id_utilisateur)
-        </th>
-        <th hidden>
-            @Html.DisplayNameFor(model => model.Client.id_utilisateur)
-        </th>
-        @if (ViewBag.role == "societe")
-        {
-            <th>
-                @Html.DisplayNameFor(model => model.Societe.lieu)
-            </th>
-}
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.nom_complet)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.mail)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.mdp)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.telephone)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.role)
-    </td>
-    <td hidden>
-        @Html.DisplayFor(modelItem => item.Admin.id_utilisateur)
-    </td>
-    <td hidden>
-        @Html.DisplayFor(modelItem => item.Client.id_utilisateur)
-    </td>
-    @if (ViewBag.role == "societe")
-    {
-        <td>
-            @Html.DisplayFor(modelItem => item.Societe.lieu)
-        </td>
-    }
-
-    <td>
-       
-        @Html.ActionLink("Delete", "Delete", new { id = item.id_utilisateur })
-    </td>
-</tr>
-}
-
-</table>
+                         <td>
+                             <a href="@Url.Action("Delete", new { id = item.id_utilisateur })" data-toggle="modal" data-target="#exampleModal"> <i class="fas fa-trash-alt"></i></a>
+                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog" role="document">
+                                     <div class="modal-content">
+                                         <div class="modal-header" style="text-align:center">
+                                             <div class="col" style="text-align:center">
+                                                 <img src="~/Content/BookingBus.png" id="icon" alt="User Icon" />
+                                             </div>
+                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                             </button>
+                                         </div>
+                                         <div class="modal-body">
+                                             <div class="col" style="text-align:center;">
+                                                 <h1>êtes vous sûr de vouloir supprimé ce client ?</h1>
+                                             </div>
+                                             <div class="row justify-content-center">
+                                                 <div class="col-lg-6 col-md-6 col-sm-6" style="text-align:center;"><button type="button" class="btn btn-secondary m-3" data-dismiss="modal">Non</button></div>
+                                                 <div class="col-lg-6 col-md-6 col-sm-6" style="text-align:center;"><a href="@Url.Action("Delete","Utilisateurs",new { id=item.id_utilisateur})" class="btn m-3" style="background-color: #F59A2E;width:70%">Oui</a></div>
+                                              </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </td>
+                         </tr>
+                   }
+            </tbody>
+        </table>
+</div>

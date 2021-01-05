@@ -238,4 +238,3 @@ C:\Users\MSI\source\repos\BookingBusBackend\bin\System.Memory.xml
 C:\Users\MSI\source\repos\BookingBusBackend\bin\System.Numerics.Vectors.xml
 C:\Users\MSI\source\repos\BookingBusBackend\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\MSI\source\repos\BookingBusBackend\bin\System.Text.Encodings.Web.xml
-C:\Users\MSI\source\repos\BookingBusBackend\obj\Debug\BookingBus.csprojAssemblyReference.cache

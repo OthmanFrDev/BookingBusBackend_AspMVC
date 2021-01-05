@@ -4,77 +4,39 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Utilisateur</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.nom_complet, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.nom_complet, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.nom_complet, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.mail, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.mail, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.mail, "", new { @class = "text-danger" })
-        </div>
-    </div>
-   
-    <div class="form-group">
-            @Html.LabelFor(model => model.Societe.lieu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input name="lieu" type="text" />
-                @Html.ValidationMessageFor(model => model.Societe.lieu, "", new { @class = "text-danger" })
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img src="~/Content/BookingBus.png" id="icon" alt="User Icon" />
             </div>
-        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.mdp, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.mdp, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.mdp, "", new { @class = "text-danger" })
+            <!-- Login Form -->
+            <form>
+                <input type="text" id="login" class="fadeIn second" name="nom_complet" placeholder="Nom Complet">
+                <input type="text" id="password" class="fadeIn third" name="mail" placeholder="E-mail">
+                <input type="password" id="login" class="fadeIn second" name="mdp" placeholder="Mot de passe">
+                <input type="password" id="password" class="fadeIn third" placeholder="Mot de passe">
+                <input type="text" id="login" class="fadeIn second" name="telephone" placeholder="06-XX-XX-XX-XX">
+                @if (ViewBag.role.Equals("societe"))
+                {
+                    <input type="text" id="login" class="fadeIn second" name="lieu" placeholder="Lieu">
+                }
+                <input hidden value="@ViewBag.role" />
+                <input type="submit" class="fadeIn fourth" value="S'inscrire" style="background-color: #F59A2E">
+
+            </form>
+
+            <!-- Remind Passowrd -->
+
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.telephone, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.telephone, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.telephone, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.role, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -3,34 +3,21 @@
 @{
     ViewBag.Title = "Index";
 }
-
-
-
-    
-
-
 <div class="container">
  
-    @Html.ActionLink("consulter", "consulter")
-    <div class="row">
+    <div class="row justify-content-center">
 
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-header card-header-warning card-header-icon">
-                    <div class="card-icon col-xs-6">
-                        <i class="fas fa-house-user"></i>
-                    </div>
-                    <div class="container col-xs-6">
-                        <p class="card-category ">ABONNEMENTS :</p>
-
-                        <div class="card-title">
-                            <h1 class="display-1 font-weight-normal"></h1>
-                        </div>
+                    <div class="card-icon col-xs-6" style="text-align:center">
+                        <h3 class="card-category ">Abonnements</h3>
+                        <img src="~/Content/rating.png" style="width:50%;" />
                     </div>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="fas fa-house-user"></i> @Html.ActionLink("details", "lister", new { role = "abonnement" }, "")
+                         @Html.ActionLink("Liste des abonnements", "lister", new { role = "abonnement" }, "")
                     </div>
                 </div>
             </div>
@@ -38,40 +25,30 @@
 
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
-                <div class="card-header card-header-success card-header-icon">
-                    <div class="card-icon col-xs-6">
-                        <i class="fas fa-house-user"></i>
-                    </div>
-                    <div class="container col-xs-6">
-                        <p class="card-category ">BUSES:</p>
-                        <div class="card-title">
-                            <h1 class="display-1 font-weight-normal"></h1>
-                        </div>
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon col-xs-6" style="text-align:center">
+                        <h3 class="card-category ">Bus</h3>
+                        <img src="~/Content/bus.png" style="width:50%;" />
                     </div>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="fas fa-house-user"></i>@Html.ActionLink("details", "lister", new { role = "bus" }, "")
+                        @Html.ActionLink("Liste des Bus", "lister", new { role = "bus" }, "")
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
-                <div class="card-header card-header-success card-header-icon">
-                    <div class="card-icon col-xs-6">
-                        <i class="fas fa-house-user"></i>
-                    </div>
-                    <div class="container col-xs-6">
-                        <p class="card-category ">DEMANDES:</p>
-                        <div class="card-title">
-                            <h1 class="display-1 font-weight-normal"></h1>
-                        </div>
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon col-xs-6" style="text-align:center">
+                        <h3 class="card-category ">Demandes</h3>
+                        <img src="~/Content/request.png" style="width:50%;" />
                     </div>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="fas fa-house-user"></i>@Html.ActionLink("consulter", "consulter")
+                        @Html.ActionLink("consulter les demandes", "consulter")
                     </div>
                 </div>
             </div>

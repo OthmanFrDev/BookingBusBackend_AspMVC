@@ -4,59 +4,47 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
 
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Navette</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.lieu_depart, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.lieu_depart, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.lieu_depart, "", new { @class = "text-danger" })
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="col" style="text-align:center">
+                <h1 style="color: #F59A2E"> Ajouter une navette</h1>
             </div>
-        </div>
+            <form>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.lieu_depart, htmlAttributes: new { @class = "fadeIn second" })
+                @Html.EditorFor(model => model.lieu_depart, new { htmlAttributes = new { @class = "fadeIn second" } })
+                @Html.ValidationMessageFor(model => model.lieu_depart, "", new { @class = "fadeIn second" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.lieu_arriver, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.lieu_arriver, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.lieu_arriver, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.date_arriver, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.date_arriver, new { htmlAttributes = new { type = "datetime-local", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.date_arriver, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.date_arriver, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.date_arriver, new { htmlAttributes = new { type = "datetime-local", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.date_arriver, "", new { @class = "text-danger" })
+
+                @Html.LabelFor(model => model.lieu_arriver, htmlAttributes: new { @class = "fadeIn second" })
+                @Html.EditorFor(model => model.lieu_arriver, new { htmlAttributes = new { @class = "fadeIn second" } })
+                @Html.ValidationMessageFor(model => model.lieu_arriver, "", new { @class = "fadeIn second" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.date_depart, htmlAttributes: new { @class = "fadeIn second" })
+                    <br />
+                    @Html.EditorFor(model => model.date_depart, new { htmlAttributes = new { type = "datetime-local", @class = "fadeIn second" } })
+                <br />
+                    @Html.ValidationMessageFor(model => model.date_arriver, "", new { @class = "fadeIn second" })
                 </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.date_arriver, htmlAttributes: new { @class = "fadeIn second" })
+                    <br />
+                    @Html.EditorFor(model => model.date_arriver, new { htmlAttributes = new { type = "datetime-local", @class = "fadeIn second" } })
+                    <br />
+                    @Html.ValidationMessageFor(model => model.date_arriver, "", new { @class = "fadeIn second" })
+                </div>
+                    <input type="submit" value="Create" style="background-color: #F59A2E" class="fadeIn fourt" />
+            </form>   
         </div>
     </div>
- </div>
-}
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-<script src="~/Scripts/jquery-3.5.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
