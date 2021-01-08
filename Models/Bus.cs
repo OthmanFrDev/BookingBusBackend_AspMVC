@@ -22,6 +22,7 @@ namespace BookingBus.Models
         public string description { get; set; }
         public int id_societe { get; set; }
         public int id_navette { get; set; }
+        public string image { get; set; }
     
         public virtual Navette Navette { get; set; }
         public virtual Societe Societe { get; set; }

@@ -236,6 +236,7 @@
     <Content Include="Content\company.png" />
     <Content Include="Content\market-research.png" />
     <Content Include="Content\pathway.png" />
+    <Content Include="Content\pp.jpg" />
     <Content Include="Content\rating.png" />
     <Content Include="Content\request.png" />
     <Content Include="favicon.png" />
@@ -455,6 +456,9 @@
     <Compile Include="Models\Utilisateur.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ville.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -517,16 +521,13 @@
     <Content Include="Views\Shared\_LoginInfo.cshtml" />
     <Content Include="Views\Home\UserDashBoard.cshtml" />
     <Content Include="Views\Utilisateurs\lister.cshtml" />
-
     <Content Include="Views\Home\rechercher.cshtml" />
     <Content Include="Views\Effectuers\Create.cshtml" />
     <Content Include="Views\Effectuers\Delete.cshtml" />
     <Content Include="Views\Effectuers\Details.cshtml" />
     <Content Include="Views\Effectuers\Edit.cshtml" />
     <Content Include="Views\Effectuers\Index.cshtml" />
-
     <Content Include="Views\Home\Index.cshtml" />
-
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

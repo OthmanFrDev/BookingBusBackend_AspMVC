@@ -21,11 +21,13 @@ namespace BookingBus.Models
         }
     
         public int id_abonnement { get; set; }
+        public string nom_abonnement { get; set; }
         public System.DateTime date_debut { get; set; }
         public System.DateTime date_fin { get; set; }
         public int id_navette { get; set; }
         public int id_societe { get; set; }
         public float prix { get; set; }
+        public string image { get; set; }
     
         public virtual Navette Navette { get; set; }
         public virtual Societe Societe { get; set; }

@@ -34,5 +34,6 @@ namespace BookingBus.Models
         public virtual DbSet<Navette> Navettes { get; set; }
         public virtual DbSet<Societe> Societes { get; set; }
         public virtual DbSet<Utilisateur> Utilisateurs { get; set; }
+        public virtual DbSet<Ville> Villes { get; set; }
     }
 }

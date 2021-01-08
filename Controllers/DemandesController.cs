@@ -41,6 +41,7 @@ namespace BookingBus.Controllers
         // GET: Demandes/Create
         public ActionResult Create(int id)
         {
+
             ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur");
             ViewBag.id = id;
             return View();
@@ -53,11 +54,12 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_demande,depart,arriver,date_depart,date_arriver,id_client")] Demande demande)
         {
+        
             if (ModelState.IsValid)
             {
                 db.Demandes.Add(demande);
                 db.SaveChanges();
-                return RedirectToAction("Index","Clients");
+                return RedirectToAction("Index");
             }
 
             ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", demande.id_client);

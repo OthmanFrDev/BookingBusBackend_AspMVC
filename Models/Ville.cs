@@ -12,18 +12,9 @@ namespace BookingBus.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Utilisateur
+    public partial class Ville
     {
-        public int id_utilisateur { get; set; }
-        public string nom_complet { get; set; }
-        public string mail { get; set; }
-        public string mdp { get; set; }
-        public string telephone { get; set; }
-        public string role { get; set; }
-        public string image { get; set; }
-    
-        public virtual Admin Admin { get; set; }
-        public virtual Client Client { get; set; }
-        public virtual Societe Societe { get; set; }
+        public int id_ville { get; set; }
+        public string nom { get; set; }
     }
 }

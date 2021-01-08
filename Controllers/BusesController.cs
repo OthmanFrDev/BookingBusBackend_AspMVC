@@ -58,7 +58,7 @@ namespace BookingBus.Controllers
             {
                 db.Buses.Add(bus);
                 db.SaveChanges();
-                return RedirectToAction("Index","Societes");
+                return RedirectToAction("Index");
             }
 
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", bus.id_navette);

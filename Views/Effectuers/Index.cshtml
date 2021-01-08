@@ -5,35 +5,34 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    
 <table class="table">
     <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Abonnement.nom_abonnement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.Utilisateur.nom_complet)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.duree)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Abonnement.id_abonnement)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Client.id_utilisateur)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Abonnement.nom_abonnement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.Utilisateur.nom_complet)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.duree)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Abonnement.id_abonnement)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Client.id_utilisateur)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
