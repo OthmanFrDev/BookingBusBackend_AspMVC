@@ -13,16 +13,22 @@ namespace BookingBus.Controllers
         // GET: Clients
         public ActionResult Index()
         {
+            if (Session["UserID"].ToString() != null)
+            {
+                int id = int.Parse((Session["UserID"].ToString()));
+                ViewBag.id = id;
+                if (Session["UserID"] != null && Session["role"].ToString() == "client")
+                {
+                    var clients = db.Utilisateurs.Where(u => u.role == "client");
+                    /* return View(clients.ToList());*/
+                    return View();
+                }
 
-            int id = int.Parse((Session["UserID"].ToString()));
-            ViewBag.id = id;
-            if (Session["UserID"] != null && Session["role"].ToString() == "client") {
-                var clients = db.Utilisateurs.Where(u => u.role =="client") ;
-           /* return View(clients.ToList());*/ return View();
+                else { return RedirectToAction("Login", "Home"); }
             }
-
-            else { return RedirectToAction("Login", "Home"); }
-
+            
+                return RedirectToAction("Login", "Home");
+            
         }
         public ActionResult Demander(int id)
         {
@@ -43,12 +49,15 @@ namespace BookingBus.Controllers
         }
         public ActionResult Reserver(int id)
         {
+            
             if (Session["UserID"] != null && Session["role"].ToString() == "client") { 
                 int id_user = int.Parse((Session["UserID"].ToString()));
+            var exist = db.Effectuers.Where(a => a.id_abonnement == id && a.id_client == id_user ).FirstOrDefault();
+            if (exist != null) { string msg = "Abonnement already exist !"; return RedirectToAction("index","effectuers",new {id=id_user, message=msg}); }
             Abonnement ab = db.Abonnements.Find(id);
             var annee = ab.date_fin.Year-ab.date_debut.Year;
             
-                var date = ab.date_fin.Subtract(ab.date_debut).Days;
+                var date = ab.date_fin.Subtract(System.DateTime.Now).Days;
 
             Effectuer res = new Effectuer{ id_client = id_user, id_abonnement = id,duree=date  };
             db.Effectuers.Add(res);

@@ -52,11 +52,13 @@ namespace BookingBus.Controllers
         // GET: Utilisateurs/Create
         public ActionResult Create(string role)
         {
+            
             ViewBag.id_utilisateur = new SelectList(db.Admins, "id_utilisateur", "id_utilisateur");
             ViewBag.id_utilisateur = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur");
             ViewBag.id_utilisateur = new SelectList(db.Societes, "id_utilisateur", "lieu");
-            ViewBag.role = role;
-            return View();
+            ViewBag.role = role;if (ViewBag.role != null) {
+            return View(); }
+            else { return RedirectToAction("Index","Home"); }
         }
 
         // POST: Utilisateurs/Create
@@ -66,7 +68,10 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_utilisateur,nom_complet,mail,mdp,telephone,role")] Utilisateur utilisateur,string lieu)
         {
-            
+            var exist = db.Utilisateurs.Where(u => u.mail == utilisateur.mail).FirstOrDefault();
+            if (utilisateur.role == null) { return RedirectToAction("Index", "Home"); }
+            if (exist != null) { ViewBag.exist = "mail already exsit please select a new one"; return View(utilisateur); }
+            else { 
             if (ModelState.IsValid)
             {
                 
@@ -82,7 +87,7 @@ namespace BookingBus.Controllers
             ViewBag.id_utilisateur = new SelectList(db.Admins, "id_utilisateur", "id_utilisateur", utilisateur.id_utilisateur);
             ViewBag.id_utilisateur = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", utilisateur.id_utilisateur);
             ViewBag.id_utilisateur = new SelectList(db.Societes, "id_utilisateur", "lieu", utilisateur.id_utilisateur);
-            return View(utilisateur);
+            return View(utilisateur);}
         }
 
         // GET: Utilisateurs/Edit/5
@@ -131,13 +136,9 @@ namespace BookingBus.Controllers
         }
 
         // GET: Utilisateurs/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            return RedirectToAction("DeleteConfirmed", new { id = id });
-        }
-
+    
         // POST: Utilisateurs/Delete/5
-        [HttpGet, ActionName("Delete")]
+        [ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             Utilisateur utilisateur = db.Utilisateurs.Find(id);

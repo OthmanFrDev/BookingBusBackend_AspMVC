@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-
+<h3 class="text-danger text-center">@ViewBag.exist</h3>
     
 <table class="table">
     <tr>
@@ -30,34 +30,39 @@
 
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Abonnement.image)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Abonnement.nom_abonnement)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Client.Utilisateur.nom_complet)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.duree)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Abonnement.Navette.lieu_depart)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Abonnement.Navette.lieu_arriver)
-    </td>
-   
-    <td>
-       
         
-        @Html.ActionLink("Delete", "Delete", new {  id1=item.id_client,id2=item.id_abonnement})
-    </td>
-</tr>
-}
+    @foreach (var item in Model)
+    {   var duree = item.Abonnement.date_fin.Subtract(System.DateTime.Now).Days;
+        if (duree>0) { 
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Abonnement.image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Abonnement.nom_abonnement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.Utilisateur.nom_complet)
+        </td>
+        <td>
+
+            @Html.DisplayFor(modelItem => duree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Abonnement.Navette.lieu_depart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Abonnement.Navette.lieu_arriver)
+        </td>
+
+        <td>
+
+
+            @Html.ActionLink("Delete", "Delete", new { id1 = item.id_client, id2 = item.id_abonnement })
+        </td>
+    </tr>
+        }
+    }
 
 </table>
+  

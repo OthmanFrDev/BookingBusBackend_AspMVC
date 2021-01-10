@@ -18,20 +18,27 @@ namespace BookingBus.Controllers
         {
 
             // new url().Urlsup(role);
-            if (Session["UserID"] != null && Session["role"].ToString() == "societe") { 
+            if (Session["UserID"].ToString() != null) 
+            {
+                if (Session["UserID"] != null && Session["role"].ToString() == "societe") { 
                 int id = int.Parse((Session["UserID"].ToString()));
             ViewBag.id = id;
              var societes = db.Abonnements.Where(s=>s.id_societe==id);
             return View(societes.ToList());  }
             else { return RedirectToAction("Index", "Home"); }
+            }
+            else { return RedirectToAction("login", "Home"); }
         }
         public ActionResult lister(string role)
         {
+            if (Session["UserID"].ToString() != null) { 
             int id = int.Parse((Session["UserID"].ToString()));
             if (Session["UserID"] != null && Session["role"].ToString() == "societe") {    if (role == "abonnement") { return RedirectToAction("Index", "Abonnements",new { ids=id}); }
             else if (role == "bus") { return RedirectToAction("Index", "Buses", new { id = id }); }
             return View();}
             else { return RedirectToAction("Index", "Home"); }
+            }
+            else { return RedirectToAction("login", "Home"); }
         }
         public ActionResult consulter() 
         {

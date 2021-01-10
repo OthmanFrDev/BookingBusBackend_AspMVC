@@ -28,28 +28,44 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+@foreach (var item in Model)
+{
+    var duree = item.date_fin.Subtract(System.DateTime.Now).Days;
+    if (duree > 0)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.date_debut)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.date_fin)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.prix)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Navette.lieu_depart)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Navette.lieu_arriver)
+    </td>
+    @if (Session["role"] != null) { 
+    if (Session["role"].ToString() == "client")
+    {
         <td>
-            @Html.DisplayFor(modelItem => item.date_debut)
+
+           @Html.ActionLink("Reserver", "reserver", "clients", new { id = item.id_abonnement }, "")
+
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_fin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prix)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Navette.lieu_depart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Navette.lieu_arriver)
-        </td>
-        <td>
-           
-            @Html.ActionLink("Reserver", "reserver","clients", new { id=item.id_abonnement },"")
-        </td>
-    </tr>
+        }
+    }
+    else { <td>
+
+    @Html.ActionLink("Reserver", "reserver", "clients", new { id = item.id_abonnement }, "")
+
+</td>}
+</tr>
+    }
 }
 
 </table>

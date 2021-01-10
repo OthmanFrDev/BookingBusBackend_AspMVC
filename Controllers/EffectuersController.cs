@@ -15,13 +15,13 @@ namespace BookingBus.Controllers
         private BookingBusEntities db = new BookingBusEntities();
 
         // GET: Effectuers
-        public ActionResult Index(int id)
+        public ActionResult Index(int id, string? message)
         { 
             var effectuers = db.Effectuers.Include(e => e.Abonnement).Include(e => e.Client).Where(e=>e.id_client==id);
             var query = (from e in effectuers join b in db.Buses on e.Abonnement.id_navette equals b.id_navette  select b).ToList();
             ViewBag.bus = query;
+            ViewBag.exist = message;
            
-         
             return View(effectuers.ToList());
         }
 
