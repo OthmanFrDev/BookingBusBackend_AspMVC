@@ -4,27 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="680ce5f8fcbe4758a34efe0ed38c7691" Name="Diagram1">
-        <EntityTypeShape EntityType="BookingBusModel1.Abonnement" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookingBusModel1.Admin" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookingBusModel1.Bus" Width="1.5" PointX="8.25" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookingBusModel1.Client" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookingBusModel1.Demande" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookingBusModel1.Effectuer" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookingBusModel1.Navette" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookingBusModel1.Societe" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookingBusModel1.Utilisateur" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookingBusModel1.Ville" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="BookingBusModel1.FK_Abonnement_Navette" ManuallyRouted="false" />
-        <AssociationConnector Association="BookingBusModel1.FK_Abonnement_Societe" ManuallyRouted="false" />
-        <AssociationConnector Association="BookingBusModel1.FK_Effectuer_Abonnement" ManuallyRouted="false" />
-        <AssociationConnector Association="BookingBusModel1.fk_ct1" ManuallyRouted="false" />
-        <AssociationConnector Association="BookingBusModel1.FK_Bus_Navette" ManuallyRouted="false" />
-        <AssociationConnector Association="BookingBusModel1.FK_Bus_Societe" ManuallyRouted="false" />
-        <AssociationConnector Association="BookingBusModel1.fk_ct2" ManuallyRouted="false" />
-        <AssociationConnector Association="BookingBusModel1.FK_Demande_Client" ManuallyRouted="false" />
-        <AssociationConnector Association="BookingBusModel1.FK_Effectuer_Client" ManuallyRouted="false" />
-        <AssociationConnector Association="BookingBusModel1.fk_ct3" ManuallyRouted="false" />
+      <Diagram DiagramId="b5bfdcad000b4f1cb07f32729c90dfeb" Name="Diagram1">
+        <EntityTypeShape EntityType="BookingBusModel.Abonnement" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookingBusModel.Admin" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookingBusModel.Bus" Width="1.5" PointX="8.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookingBusModel.Client" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookingBusModel.Demande" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookingBusModel.Effectuer" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookingBusModel.Navette" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookingBusModel.Societe" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookingBusModel.Utilisateur" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookingBusModel.Ville" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="BookingBusModel.FK_Abonnement_Navette" ManuallyRouted="false" />
+        <AssociationConnector Association="BookingBusModel.FK_Abonnement_Societe" ManuallyRouted="false" />
+        <AssociationConnector Association="BookingBusModel.FK_Effectuer_Abonnement" ManuallyRouted="false" />
+        <AssociationConnector Association="BookingBusModel.fk_ct1" ManuallyRouted="false" />
+        <AssociationConnector Association="BookingBusModel.FK_Bus_Navette" ManuallyRouted="false" />
+        <AssociationConnector Association="BookingBusModel.FK_Bus_Societe" ManuallyRouted="false" />
+        <AssociationConnector Association="BookingBusModel.fk_ct2" ManuallyRouted="false" />
+        <AssociationConnector Association="BookingBusModel.FK_Demande_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="BookingBusModel.FK_Effectuer_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="BookingBusModel.fk_ct3" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

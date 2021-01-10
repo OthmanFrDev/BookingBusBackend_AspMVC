@@ -34,7 +34,9 @@ namespace BookingBus.Controllers
         // GET: Navettes/Create
         public ActionResult Create()
         {
+            ViewBag.ville = db.Villes.OrderBy(v => v.nom).Select(v=>v.nom).ToList();
             return View();
+            
         }
 
         // POST: Navettes/Create

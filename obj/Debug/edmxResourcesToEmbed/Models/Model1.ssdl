@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="BookingBusModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="BookingBusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Abonnement">
     <Key>
       <PropertyRef Name="id_abonnement" />
@@ -49,6 +49,7 @@
     <Property Name="date_depart" Type="datetime" Nullable="false" />
     <Property Name="date_arriver" Type="datetime" Nullable="false" />
     <Property Name="id_client" Type="int" Nullable="false" />
+    <Property Name="number" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Effectuer">
     <Key>
@@ -232,7 +233,7 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="BookingBusModel1StoreContainer">
+  <EntityContainer Name="BookingBusModelStoreContainer">
     <EntitySet Name="Abonnement" EntityType="Self.Abonnement" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BookingBusModel1StoreContainer" CdmEntityContainer="BookingBusEntities1">
+  <EntityContainerMapping StorageEntityContainer="BookingBusModelStoreContainer" CdmEntityContainer="BookingBusEntities">
     <EntitySetMapping Name="Abonnements">
-      <EntityTypeMapping TypeName="BookingBusModel1.Abonnement">
+      <EntityTypeMapping TypeName="BookingBusModel.Abonnement">
         <MappingFragment StoreEntitySet="Abonnement">
           <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
           <ScalarProperty Name="nom_abonnement" ColumnName="nom_abonnement" />
@@ -16,14 +16,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Admins">
-      <EntityTypeMapping TypeName="BookingBusModel1.Admin">
+      <EntityTypeMapping TypeName="BookingBusModel.Admin">
         <MappingFragment StoreEntitySet="Admin">
           <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Buses">
-      <EntityTypeMapping TypeName="BookingBusModel1.Bus">
+      <EntityTypeMapping TypeName="BookingBusModel.Bus">
         <MappingFragment StoreEntitySet="Bus">
           <ScalarProperty Name="id_bus" ColumnName="id_bus" />
           <ScalarProperty Name="nom" ColumnName="nom" />
@@ -38,14 +38,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Clients">
-      <EntityTypeMapping TypeName="BookingBusModel1.Client">
+      <EntityTypeMapping TypeName="BookingBusModel.Client">
         <MappingFragment StoreEntitySet="Client">
           <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Demandes">
-      <EntityTypeMapping TypeName="BookingBusModel1.Demande">
+      <EntityTypeMapping TypeName="BookingBusModel.Demande">
         <MappingFragment StoreEntitySet="Demande">
           <ScalarProperty Name="id_demande" ColumnName="id_demande" />
           <ScalarProperty Name="depart" ColumnName="depart" />
@@ -53,11 +53,12 @@
           <ScalarProperty Name="date_depart" ColumnName="date_depart" />
           <ScalarProperty Name="date_arriver" ColumnName="date_arriver" />
           <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="number" ColumnName="number" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Effectuers">
-      <EntityTypeMapping TypeName="BookingBusModel1.Effectuer">
+      <EntityTypeMapping TypeName="BookingBusModel.Effectuer">
         <MappingFragment StoreEntitySet="Effectuer">
           <ScalarProperty Name="id_client" ColumnName="id_client" />
           <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
@@ -66,7 +67,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Navettes">
-      <EntityTypeMapping TypeName="BookingBusModel1.Navette">
+      <EntityTypeMapping TypeName="BookingBusModel.Navette">
         <MappingFragment StoreEntitySet="Navette">
           <ScalarProperty Name="id_navette" ColumnName="id_navette" />
           <ScalarProperty Name="lieu_depart" ColumnName="lieu_depart" />
@@ -77,7 +78,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Societes">
-      <EntityTypeMapping TypeName="BookingBusModel1.Societe">
+      <EntityTypeMapping TypeName="BookingBusModel.Societe">
         <MappingFragment StoreEntitySet="Societe">
           <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
           <ScalarProperty Name="lieu" ColumnName="lieu" />
@@ -85,7 +86,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Utilisateurs">
-      <EntityTypeMapping TypeName="BookingBusModel1.Utilisateur">
+      <EntityTypeMapping TypeName="BookingBusModel.Utilisateur">
         <MappingFragment StoreEntitySet="Utilisateur">
           <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
           <ScalarProperty Name="nom_complet" ColumnName="nom_complet" />
@@ -98,7 +99,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Villes">
-      <EntityTypeMapping TypeName="BookingBusModel1.Ville">
+      <EntityTypeMapping TypeName="BookingBusModel.Ville">
         <MappingFragment StoreEntitySet="Ville">
           <ScalarProperty Name="id_ville" ColumnName="id_ville" />
           <ScalarProperty Name="nom" ColumnName="nom" />

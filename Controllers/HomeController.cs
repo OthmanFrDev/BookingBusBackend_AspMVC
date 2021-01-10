@@ -10,9 +10,9 @@ namespace BookingBus.Controllers
         private BookingBusEntities db = new BookingBusEntities();
         public ActionResult Index()
         {
-            var navettes = db.Navettes;
+            var ville = db.Villes.OrderBy(v=>v.nom);
             
-            return View(navettes.ToList());
+            return View(ville.ToList());
             
         }
         public ActionResult rechercher(string ld,string la)

@@ -54,16 +54,25 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_demande,depart,arriver,date_depart,date_arriver,id_client")] Demande demande)
         {
-        
-            if (ModelState.IsValid)
-            {
-                db.Demandes.Add(demande);
+            var olddemande = db.Demandes.Where(d=>d.depart==demande.depart && d.arriver==demande.arriver && d.date_arriver==demande.date_arriver && d.date_depart==demande.date_depart).FirstOrDefault();
+            if (olddemande != null) {
+                olddemande.number += 1;
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                db.Entry(olddemande).State = EntityState.Modified; 
+                return RedirectToAction("Index"); }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    demande.number = 1;
+                    db.Demandes.Add(demande);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", demande.id_client);
-            return View(demande);
+                ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", demande.id_client);
+                return View(demande);
+            }
         }
 
         // GET: Demandes/Edit/5
@@ -79,6 +88,7 @@ namespace BookingBus.Controllers
                 return HttpNotFound();
             }
             ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", demande.id_client);
+            ViewBag.number = demande.number;
             return View(demande);
         }
 
@@ -87,7 +97,7 @@ namespace BookingBus.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_demande,depart,arriver,date_depart,date_arriver,id_client")] Demande demande)
+        public ActionResult Edit([Bind(Include = "id_demande,depart,arriver,date_depart,date_arriver,id_client,number")] Demande demande)
         {
             if (ModelState.IsValid)
             {

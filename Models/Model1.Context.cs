@@ -16,7 +16,7 @@ namespace BookingBus.Models
     public partial class BookingBusEntities : DbContext
     {
         public BookingBusEntities()
-            : base("name=BookingBusEntities1")
+            : base("name=BookingBusEntities")
         {
         }
     

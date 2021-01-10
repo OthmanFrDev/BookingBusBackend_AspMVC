@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BookingBusModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BookingBusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Abonnement">
           <Key>
             <PropertyRef Name="id_abonnement" />
@@ -54,6 +54,7 @@
           <Property Name="date_depart" Type="datetime" Nullable="false" />
           <Property Name="date_arriver" Type="datetime" Nullable="false" />
           <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="number" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Effectuer">
           <Key>
@@ -237,7 +238,7 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BookingBusModel1StoreContainer">
+        <EntityContainer Name="BookingBusModelStoreContainer">
           <EntitySet Name="Abonnement" EntityType="Self.Abonnement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
@@ -298,7 +299,7 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="BookingBusModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="BookingBusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Abonnement">
           <Key>
             <PropertyRef Name="id_abonnement" />
@@ -357,6 +358,7 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
           <Property Name="date_depart" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="date_arriver" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="number" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Demande_Client" FromRole="Demande" ToRole="Client" />
         </EntityType>
         <EntityType Name="Effectuer">
@@ -549,7 +551,7 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BookingBusEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BookingBusEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Abonnements" EntityType="Self.Abonnement" />
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Buses" EntityType="Self.Bus" />
@@ -606,9 +608,9 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BookingBusModel1StoreContainer" CdmEntityContainer="BookingBusEntities1">
+        <EntityContainerMapping StorageEntityContainer="BookingBusModelStoreContainer" CdmEntityContainer="BookingBusEntities">
           <EntitySetMapping Name="Abonnements">
-            <EntityTypeMapping TypeName="BookingBusModel1.Abonnement">
+            <EntityTypeMapping TypeName="BookingBusModel.Abonnement">
               <MappingFragment StoreEntitySet="Abonnement">
                 <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
                 <ScalarProperty Name="nom_abonnement" ColumnName="nom_abonnement" />
@@ -622,14 +624,14 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Admins">
-            <EntityTypeMapping TypeName="BookingBusModel1.Admin">
+            <EntityTypeMapping TypeName="BookingBusModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
                 <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Buses">
-            <EntityTypeMapping TypeName="BookingBusModel1.Bus">
+            <EntityTypeMapping TypeName="BookingBusModel.Bus">
               <MappingFragment StoreEntitySet="Bus">
                 <ScalarProperty Name="id_bus" ColumnName="id_bus" />
                 <ScalarProperty Name="nom" ColumnName="nom" />
@@ -644,14 +646,14 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="BookingBusModel1.Client">
+            <EntityTypeMapping TypeName="BookingBusModel.Client">
               <MappingFragment StoreEntitySet="Client">
                 <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Demandes">
-            <EntityTypeMapping TypeName="BookingBusModel1.Demande">
+            <EntityTypeMapping TypeName="BookingBusModel.Demande">
               <MappingFragment StoreEntitySet="Demande">
                 <ScalarProperty Name="id_demande" ColumnName="id_demande" />
                 <ScalarProperty Name="depart" ColumnName="depart" />
@@ -659,11 +661,12 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
                 <ScalarProperty Name="date_depart" ColumnName="date_depart" />
                 <ScalarProperty Name="date_arriver" ColumnName="date_arriver" />
                 <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="number" ColumnName="number" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Effectuers">
-            <EntityTypeMapping TypeName="BookingBusModel1.Effectuer">
+            <EntityTypeMapping TypeName="BookingBusModel.Effectuer">
               <MappingFragment StoreEntitySet="Effectuer">
                 <ScalarProperty Name="id_client" ColumnName="id_client" />
                 <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
@@ -672,7 +675,7 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Navettes">
-            <EntityTypeMapping TypeName="BookingBusModel1.Navette">
+            <EntityTypeMapping TypeName="BookingBusModel.Navette">
               <MappingFragment StoreEntitySet="Navette">
                 <ScalarProperty Name="id_navette" ColumnName="id_navette" />
                 <ScalarProperty Name="lieu_depart" ColumnName="lieu_depart" />
@@ -683,7 +686,7 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Societes">
-            <EntityTypeMapping TypeName="BookingBusModel1.Societe">
+            <EntityTypeMapping TypeName="BookingBusModel.Societe">
               <MappingFragment StoreEntitySet="Societe">
                 <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
                 <ScalarProperty Name="lieu" ColumnName="lieu" />
@@ -691,7 +694,7 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Utilisateurs">
-            <EntityTypeMapping TypeName="BookingBusModel1.Utilisateur">
+            <EntityTypeMapping TypeName="BookingBusModel.Utilisateur">
               <MappingFragment StoreEntitySet="Utilisateur">
                 <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
                 <ScalarProperty Name="nom_complet" ColumnName="nom_complet" />
@@ -704,7 +707,7 @@ warning 6002: The table/view 'BookingBus.dbo.Ville' does not have a primary key 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Villes">
-            <EntityTypeMapping TypeName="BookingBusModel1.Ville">
+            <EntityTypeMapping TypeName="BookingBusModel.Ville">
               <MappingFragment StoreEntitySet="Ville">
                 <ScalarProperty Name="id_ville" ColumnName="id_ville" />
                 <ScalarProperty Name="nom" ColumnName="nom" />

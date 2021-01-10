@@ -9,7 +9,9 @@
     
 <table class="table">
     <tr>
-
+        <th>
+            @Html.DisplayNameFor(model => model.Abonnement.image)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Abonnement.nom_abonnement)
         </th>
@@ -19,27 +21,43 @@
         <th>
             @Html.DisplayNameFor(model => model.duree)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Abonnement.Navette.lieu_depart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Abonnement.Navette.lieu_arriver)
+        </th>
+
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Abonnement.image)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Abonnement.nom_abonnement)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Client.Utilisateur.nom_complet)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.duree)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Abonnement.Navette.lieu_depart)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Abonnement.Navette.lieu_arriver)
+    </td>
+   
+    <td>
+       
         
-        <td>
-            @Html.DisplayFor(modelItem => item.Abonnement.nom_abonnement)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Client.Utilisateur.nom_complet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.duree)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+        @Html.ActionLink("Delete", "Delete", new {  id1=item.id_client,id2=item.id_abonnement})
+    </td>
+</tr>
 }
 
 </table>

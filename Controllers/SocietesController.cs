@@ -27,8 +27,9 @@ namespace BookingBus.Controllers
         }
         public ActionResult lister(string role)
         {
-            if (Session["UserID"] != null && Session["role"].ToString() == "societe") {    if (role == "abonnement") { return RedirectToAction("Index", "Abonnements"); }
-            else if (role == "bus") { return RedirectToAction("Index", "Buses"); }
+            int id = int.Parse((Session["UserID"].ToString()));
+            if (Session["UserID"] != null && Session["role"].ToString() == "societe") {    if (role == "abonnement") { return RedirectToAction("Index", "Abonnements",new { ids=id}); }
+            else if (role == "bus") { return RedirectToAction("Index", "Buses", new { id = id }); }
             return View();}
             else { return RedirectToAction("Index", "Home"); }
         }

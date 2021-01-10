@@ -8,7 +8,7 @@
 @if (Session["role"] != null) { if (Session["role"].ToString() == "client") 
     { 
  <p>
-    @Html.ActionLink("demander", "Create",new { id=ViewBag.id},"")
+    @Html.ActionLink("demander", "Create",new { id=Session["UserID"]},"")
 </p>
 } 
 }
@@ -31,6 +31,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Client.id_utilisateur)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.number)
+            </th>
             <th></th>
         </tr>
 
@@ -52,6 +55,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Client.id_utilisateur)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.number)
+        </td>
         @if (Session["role"] != null)
         {
             if (Session["role"].ToString() == "client")
@@ -63,7 +69,7 @@
                 </td>
             }
         }
-        
+
     </tr>
         }
 

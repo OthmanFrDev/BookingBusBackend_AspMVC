@@ -8,14 +8,15 @@ namespace BookingBus.Controllers
 {
     public class BusesController : Controller
     {
+        
         private BookingBusEntities db = new BookingBusEntities();
 
         // GET: Buses
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            int id = int.Parse((Session["UserID"].ToString()));
-            ViewBag.id = id;
-            var buses = db.Buses.Include(b => b.Navette).Include(b => b.Societe);
+            int ids = int.Parse((Session["UserID"].ToString()));
+            ViewBag.id = ids;
+            var buses = db.Buses.Include(b => b.Navette).Include(b => b.Societe).Where(b=>b.id_societe==id);
             
             return View(buses.ToList());
 
@@ -54,11 +55,12 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_bus,nom,nbr_place,climatiseur,tv,description,id_societe,id_navette")] Bus bus)
         {
+            int ids = int.Parse((Session["UserID"].ToString()));
             if (ModelState.IsValid)
             {
                 db.Buses.Add(bus);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = ids });
             }
 
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", bus.id_navette);
@@ -91,11 +93,12 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id_bus,nom,nbr_place,climatiseur,tv,description,id_societe,id_navette")] Bus bus)
         {
+            int ids = int.Parse((Session["UserID"].ToString()));
             if (ModelState.IsValid)
             {
                 db.Entry(bus).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = ids });
             }
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", bus.id_navette);
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", bus.id_societe);
@@ -122,10 +125,11 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            int ids = int.Parse((Session["UserID"].ToString()));
             Bus bus = db.Buses.Find(id);
             db.Buses.Remove(bus);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new {id=ids});
         }
 
         protected override void Dispose(bool disposing)
