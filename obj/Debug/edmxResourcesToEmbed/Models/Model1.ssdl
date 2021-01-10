@@ -8,8 +8,10 @@
     <Property Name="date_debut" Type="date" Nullable="false" />
     <Property Name="date_fin" Type="date" Nullable="false" />
     <Property Name="id_navette" Type="int" Nullable="false" />
-    <Property Name="id_societe" Type="int" Nullable="false" />
     <Property Name="prix" Type="real" Nullable="false" />
+    <Property Name="nom_abonnement" Type="varchar" MaxLength="50" />
+    <Property Name="image" Type="varchar" MaxLength="50" />
+    <Property Name="id_societe" Type="int" />
   </EntityType>
   <EntityType Name="Admin">
     <Key>
@@ -29,6 +31,7 @@
     <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="id_societe" Type="int" Nullable="false" />
     <Property Name="id_navette" Type="int" Nullable="false" />
+    <Property Name="image" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Client">
     <Key>
@@ -54,6 +57,7 @@
     </Key>
     <Property Name="id_client" Type="int" Nullable="false" />
     <Property Name="id_abonnement" Type="int" Nullable="false" />
+    <Property Name="duree" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Navette">
     <Key>
@@ -62,8 +66,8 @@
     <Property Name="id_navette" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="lieu_depart" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="lieu_arriver" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="date_depart" Type="date" Nullable="false" />
-    <Property Name="date_arriver" Type="date" Nullable="false" />
+    <Property Name="date_depart" Type="datetime" Nullable="false" />
+    <Property Name="date_arriver" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Societe">
     <Key>
@@ -82,7 +86,27 @@
     <Property Name="mdp" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="telephone" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="role" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="image" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Ville">
+    <Key>
+      <PropertyRef Name="id_ville" />
+    </Key>
+    <Property Name="id_ville" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK__Abonnemen__id_so__01142BA1">
+    <End Role="Societe" Type="Self.Societe" Multiplicity="0..1" />
+    <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Societe">
+        <PropertyRef Name="id_utilisateur" />
+      </Principal>
+      <Dependent Role="Abonnement">
+        <PropertyRef Name="id_societe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Abonnement_Navette">
     <End Role="Navette" Type="Self.Navette" Multiplicity="1" />
     <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
@@ -92,18 +116,6 @@
       </Principal>
       <Dependent Role="Abonnement">
         <PropertyRef Name="id_navette" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Abonnement_Societe">
-    <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
-    <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Societe">
-        <PropertyRef Name="id_utilisateur" />
-      </Principal>
-      <Dependent Role="Abonnement">
-        <PropertyRef Name="id_societe" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -131,7 +143,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_ct1">
+  <Association Name="fk_ct124">
     <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -145,7 +157,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_ct2">
+  <Association Name="fk_ct13">
     <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -219,12 +231,13 @@
     <EntitySet Name="Navette" EntityType="Self.Navette" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Societe" EntityType="Self.Societe" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Abonnement_Navette" Association="Self.FK_Abonnement_Navette">
-      <End Role="Navette" EntitySet="Navette" />
+    <EntitySet Name="Ville" EntityType="Self.Ville" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Abonnemen__id_so__01142BA1" Association="Self.FK__Abonnemen__id_so__01142BA1">
+      <End Role="Societe" EntitySet="Societe" />
       <End Role="Abonnement" EntitySet="Abonnement" />
     </AssociationSet>
-    <AssociationSet Name="FK_Abonnement_Societe" Association="Self.FK_Abonnement_Societe">
-      <End Role="Societe" EntitySet="Societe" />
+    <AssociationSet Name="FK_Abonnement_Navette" Association="Self.FK_Abonnement_Navette">
+      <End Role="Navette" EntitySet="Navette" />
       <End Role="Abonnement" EntitySet="Abonnement" />
     </AssociationSet>
     <AssociationSet Name="FK_Bus_Navette" Association="Self.FK_Bus_Navette">
@@ -235,11 +248,11 @@
       <End Role="Societe" EntitySet="Societe" />
       <End Role="Bus" EntitySet="Bus" />
     </AssociationSet>
-    <AssociationSet Name="fk_ct1" Association="Self.fk_ct1">
+    <AssociationSet Name="fk_ct124" Association="Self.fk_ct124">
       <End Role="Utilisateur" EntitySet="Utilisateur" />
       <End Role="Admin" EntitySet="Admin" />
     </AssociationSet>
-    <AssociationSet Name="fk_ct2" Association="Self.fk_ct2">
+    <AssociationSet Name="fk_ct13" Association="Self.fk_ct13">
       <End Role="Utilisateur" EntitySet="Utilisateur" />
       <End Role="Client" EntitySet="Client" />
     </AssociationSet>

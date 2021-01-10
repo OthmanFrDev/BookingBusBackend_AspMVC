@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookingBus.Models.Societe>
+﻿@model IEnumerable<BookingBus.Models.Navette>
 
 @{
     ViewBag.Title = "Index";
@@ -13,28 +13,29 @@
         <div class="col" style="position:absolute;top:30%;z-index:1;text-align:center;">
             <img src="~/Content/BookingBus.png" style="margin-top:0px;margin-bottom:0px; width:auto;" />
         </div>
-        <form class="form-inline" style="position:absolute;top:45%;z-index:1">
+        <form class="form-inline" style="position:absolute;top:45%;z-index:1" action="@Url.Action("rechercher")" >
             <div class="col-sm-4 col-md-4 col-lg-4 m-0">
                 <div class="form-group mr-2">
-                    <select class="form-control" id="exampleFormControlSelect1" style="opacity:0.5;">
+                    <select class="form-control" id="exampleFormControlSelect1" style="opacity:0.5;" name="ld">
                         <option> Ville Départ</option>
-                        <option>Rabat</option>
-                        <option>Casablanca</option>
-                        <option>Agadir</option>
-                        <option>Tanger</option>
-                        <option>Tétouan</option>
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.lieu_depart">@item.lieu_depart</option>
+                        }
+                       
                     </select>
                 </div>
             </div>
             <div class="col-sm-4 col-md-4 col-lg-4 m-0">
                 <div class="form-group mr-2">
-                    <select class="form-control" id="exampleFormControlSelect2" style="opacity:0.5;">
+                    <select class="form-control" id="exampleFormControlSelect2" style="opacity:0.5;"name="la">
                         <option> Ville Arrivée</option>
-                        <option>Rabat</option>
-                        <option>Casablanca</option>
-                        <option>Agadir</option>
-                        <option>Tanger</option>
-                        <option>Tétouan</option>
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.lieu_arriver">@item.lieu_arriver</option>
+                        }
+
+                       
                     </select>
                 </div>
             </div>
@@ -105,6 +106,7 @@
                     <img src="~/Content/bablah.jpg" style="width:40%">
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3">
+
                     <img src="~/Content/CTM.jpg" style="width:40%">
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3">
@@ -116,7 +118,9 @@
             </div>
             <div class="carousel-item" style="text-align:center">
                 <div class="col-lg-3 col-md-3 col-sm-3">
+
                     <img src="~/Content/bachiri.jpg" style="width:40%">
+
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <img src="~/Content/ghazala.jpg" style="width:40%">
@@ -160,8 +164,10 @@
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <img src="~/Content/LECONOMISTE.png" style="width:40%">
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3" style="width:40%">
-                    <img src="~/Content/Medi1.png">
+
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <img src="~/Content/Medi1.png" style="width:40%">
+
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <img src="~/Content/WLB.png" style="width:40%">
@@ -184,4 +190,5 @@
         </div>
     </div>
 </div>
+
 <!--test              -->

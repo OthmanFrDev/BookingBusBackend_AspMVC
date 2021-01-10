@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BookingBus.Models.Effectuer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+    
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Abonnement.nom_abonnement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.Utilisateur.nom_complet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.duree)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Abonnement.nom_abonnement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.Utilisateur.nom_complet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.duree)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

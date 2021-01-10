@@ -10,10 +10,17 @@ namespace BookingBus.Controllers
         private BookingBusEntities db = new BookingBusEntities();
         public ActionResult Index()
         {
-            var societe = db.Societes;
+            var navettes = db.Navettes;
             
-            return View();
-           
+            return View(navettes.ToList());
+            
+        }
+        public ActionResult rechercher(string ld,string la)
+        {
+            var abonnement = db.Abonnements;
+            var query = from a in db.Abonnements join n in db.Navettes on a.id_navette equals n.id_navette where n.lieu_depart == ld && n.lieu_arriver == la select a;
+            return View(query.ToList());
+
         }
         public ActionResult Login()
         {
@@ -37,6 +44,7 @@ namespace BookingBus.Controllers
                         Session["mail"] = obj.mail.ToString();
                         Session["telephone"] = obj.telephone.ToString();
                         Session["role"] = obj.role.ToString();
+                        Session["img"] = obj.image.ToString();
 
                         //Session["user"] = objUser;
                         return RedirectToAction("UserDashBoard");
@@ -56,7 +64,7 @@ namespace BookingBus.Controllers
         public ActionResult UserDashBoard()
         {
             if (Session["UserID"] != null && Session["role"].ToString() == "societe") { return RedirectToAction("Index", "Societes"); }
-            else if (Session["UserID"] != null && Session["role"].ToString() == "admin") { return RedirectToAction("Index", "Admins"); }
+            else if (Session["UserID"] != null && Session["role"].ToString() == "admin") {   ;return RedirectToAction("Index", "Admins"); }
             else if (Session["UserID"] != null && Session["role"].ToString() == "client") { return RedirectToAction("Index", "Clients"); }
             else
             {

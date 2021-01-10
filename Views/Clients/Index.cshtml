@@ -1,36 +1,51 @@
-﻿@model IEnumerable<BookingBus.Models.Client>
-
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Demander", "Demander", new { id = ViewBag.id }, "")
-</p>
+﻿
 <div class="container">
-    <table class="table table-bordered table-hover">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Utilisateur.nom_complet)
-            </th>
-            <th></th>
-        </tr>
+    <div class="row justify-content-center">
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Utilisateur.nom_complet)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_utilisateur }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id_utilisateur }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id_utilisateur })
-                </td>
-            </tr>
-        }
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon col-xs-6">
+                        <i class="fas fa-house-user"></i>
+                    </div>
+                    <div class="container col-xs-6" style="text-align:center">
+                        <p class="card-category ">Abonnements</p>
+                        <img src="~/Content/rating.png" style="width:50%;" />
+                        <div class="card-title">
+                            <h1 class="display-1 font-weight-normal"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="fas fa-house-user"></i> @Html.ActionLink("details", "Index","Effectuers", new { id = ViewBag.id }, "")
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    </table>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon col-xs-6">
+                        <i class="fas fa-house-user"></i>
+                    </div>
+                    <div class="container col-xs-6" style="text-align:center">
+                        <p class="card-category ">Demandes</p>
+                        <img src="~/Content/request.png" style="width:50%;" />
+                        <div class="card-title">
+                            <h1 class="display-1 font-weight-normal"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="fas fa-house-user"></i>@Html.ActionLink("details", "Index","demandes", new { id =ViewBag.id  }, "")
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+
+    </div>
 </div>

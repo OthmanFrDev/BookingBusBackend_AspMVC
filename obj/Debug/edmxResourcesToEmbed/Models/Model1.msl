@@ -10,6 +10,8 @@
           <ScalarProperty Name="id_navette" ColumnName="id_navette" />
           <ScalarProperty Name="id_societe" ColumnName="id_societe" />
           <ScalarProperty Name="prix" ColumnName="prix" />
+          <ScalarProperty Name="nom_abonnement" ColumnName="nom_abonnement" />
+          <ScalarProperty Name="image" ColumnName="image" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -31,6 +33,7 @@
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="id_societe" ColumnName="id_societe" />
           <ScalarProperty Name="id_navette" ColumnName="id_navette" />
+          <ScalarProperty Name="image" ColumnName="image" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -50,6 +53,15 @@
           <ScalarProperty Name="date_depart" ColumnName="date_depart" />
           <ScalarProperty Name="date_arriver" ColumnName="date_arriver" />
           <ScalarProperty Name="id_client" ColumnName="id_client" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Effectuers">
+      <EntityTypeMapping TypeName="BookingBusModel.Effectuer">
+        <MappingFragment StoreEntitySet="Effectuer">
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
+          <ScalarProperty Name="duree" ColumnName="duree" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -75,6 +87,7 @@
     <EntitySetMapping Name="Utilisateurs">
       <EntityTypeMapping TypeName="BookingBusModel.Utilisateur">
         <MappingFragment StoreEntitySet="Utilisateur">
+          <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
           <ScalarProperty Name="nom_complet" ColumnName="nom_complet" />
           <ScalarProperty Name="mail" ColumnName="mail" />
@@ -84,13 +97,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="Effectuer" TypeName="BookingBusModel.Effectuer" StoreEntitySet="Effectuer">
-      <EndProperty Name="Abonnement">
-        <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
-      </EndProperty>
-      <EndProperty Name="Client">
-        <ScalarProperty Name="id_utilisateur" ColumnName="id_client" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="Villes">
+      <EntityTypeMapping TypeName="BookingBusModel.Ville">
+        <MappingFragment StoreEntitySet="Ville">
+          <ScalarProperty Name="id_ville" ColumnName="id_ville" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

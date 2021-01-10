@@ -31,14 +31,14 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.date_depart, htmlAttributes: new { @class = "fadeIn second" })
                 <br />
-                @Html.EditorFor(model => model.date_depart, new { htmlAttributes = new { type = "datetime-local", @class = "fadeIn second" } })
+                @Html.EditorFor(model => model.date_depart, new { htmlAttributes = new { type = "time", @class = "fadeIn second" } })
                 <br />
                 @Html.ValidationMessageFor(model => model.date_arriver, "", new { @class = "fadeIn second" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.date_arriver, htmlAttributes: new { @class = "fadeIn second" })
                 <br />
-                @Html.EditorFor(model => model.date_arriver, new { htmlAttributes = new { type = "datetime-local", @class = "fadeIn second" } })
+                @Html.EditorFor(model => model.date_arriver, new { htmlAttributes = new { type = "time", @class = "fadeIn second" } })
                 <br />
                 @Html.ValidationMessageFor(model => model.date_arriver, "", new { @class = "fadeIn second" })
             </div>

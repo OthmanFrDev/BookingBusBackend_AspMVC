@@ -4,11 +4,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+
 @if (Session["role"] != null) { if (Session["role"].ToString() == "client") 
     { 
  <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("demander", "Create",new { id=ViewBag.id},"")
 </p>
 } 
 }

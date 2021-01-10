@@ -18,14 +18,16 @@ namespace BookingBus.Controllers
             ViewBag.id = id;
             if (Session["UserID"] != null && Session["role"].ToString() == "client") {
                 var clients = db.Utilisateurs.Where(u => u.role =="client") ;
-            return View(clients.ToList()); }
+           /* return View(clients.ToList());*/ return View();
+            }
 
             else { return RedirectToAction("Login", "Home"); }
 
         }
         public ActionResult Demander(int id)
         {
-            return RedirectToAction("Create","Demandes",new { id=id});
+            if (Session["UserID"] != null && Session["role"].ToString() == "client") {   return RedirectToAction("Create","Demandes",new { id=id});}
+            else { return RedirectToAction("Login", "Home"); }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -39,9 +41,20 @@ namespace BookingBus.Controllers
             }
             return View();
         }
-        public ActionResult Reserver()
+        public ActionResult Reserver(int id)
         {
-            return View();
+            if (Session["UserID"] != null && Session["role"].ToString() == "client") { 
+                int id_user = int.Parse((Session["UserID"].ToString()));
+            Abonnement ab = db.Abonnements.Find(id);
+            var annee = ab.date_fin.Year-ab.date_debut.Year;
+            
+                var date = ab.date_debut.CompareTo(ab.date_fin);
+
+            Effectuer res = new Effectuer{ id_client = id_user, id_abonnement = id,duree=date  };
+            db.Effectuers.Add(res);
+            db.SaveChanges();
+            return RedirectToAction("Index","home");}
+            else { return RedirectToAction("Login", "Home"); }
         }
         [HttpPost]
         public ActionResult Reserver(Abonnement abonnement)
@@ -52,7 +65,7 @@ namespace BookingBus.Controllers
         // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null && Session["role"].ToString() == "client") {       if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -61,14 +74,17 @@ namespace BookingBus.Controllers
             {
                 return HttpNotFound();
             }
-            return View(client);
+            return View(client);}
+            else { return RedirectToAction("Login", "Home"); }
         }
 
         // GET: Clients/Create
         public ActionResult Create()
         {
-            ViewBag.id_utilisateur = new SelectList(db.Utilisateurs, "id_utilisateur", "nom_complet");
-            return View();
+            if (Session["UserID"] != null && Session["role"].ToString() == "client") 
+            { ViewBag.id_utilisateur = new SelectList(db.Utilisateurs, "id_utilisateur", "nom_complet");
+            return View(); }
+            else { return RedirectToAction("Login", "Home"); }
         }
 
         // POST: Clients/Create
@@ -92,7 +108,8 @@ namespace BookingBus.Controllers
         // GET: Clients/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null && Session["role"].ToString() == "client") { 
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -103,6 +120,8 @@ namespace BookingBus.Controllers
             }
             ViewBag.id_utilisateur = new SelectList(db.Utilisateurs, "id_utilisateur", "nom_complet", client.id_utilisateur);
             return View(client);
+            }
+            else { return RedirectToAction("Login", "Home"); }
         }
 
         // POST: Clients/Edit/5
@@ -125,7 +144,8 @@ namespace BookingBus.Controllers
         // GET: Clients/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null && Session["role"].ToString() == "client") { 
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -135,6 +155,8 @@ namespace BookingBus.Controllers
                 return HttpNotFound();
             }
             return View(client);
+            }
+            else { return RedirectToAction("Login", "Home"); }
         }
 
         // POST: Clients/Delete/5

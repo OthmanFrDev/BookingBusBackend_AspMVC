@@ -4,53 +4,52 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h3>Etes vous sûr de vouloir supprimer ?</h3>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.lieu_depart)
+            </dt>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Navette</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.lieu_depart)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.lieu_depart)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.lieu_depart)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.lieu_arriver)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.lieu_arriver)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.lieu_arriver)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.lieu_arriver)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.date_depart)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date_depart)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.date_depart)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_depart)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.date_arriver)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date_arriver)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.date_arriver)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_arriver)
-        </dd>
+        </dl>
 
-    </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Supprimer" class="fadeIn fourth" style="background-color: #F59A2E" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
 </div>

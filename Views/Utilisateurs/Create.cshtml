@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","Utilisateurs",FormMethod.Post,new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -27,7 +27,8 @@
                 {
                     <input type="text" id="login" class="fadeIn second" name="lieu" placeholder="Lieu">
                 }
-                <input hidden value="@ViewBag.role" />
+                <input type="file" name="imagefile" class="fadeIn second" />
+                <input hidden name="role" value="@ViewBag.role" />
                 <input type="submit" class="fadeIn fourth" value="S'inscrire" style="background-color: #F59A2E">
 
             </form>

@@ -1,4 +1,5 @@
 ﻿using BookingBus.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -15,7 +16,8 @@ namespace BookingBus.Controllers
         {
             int id = int.Parse((Session["UserID"].ToString()));
             ViewBag.id = id;
-            var abonnements = db.Abonnements.Include(a => a.Navette).Include(a => a.Societe).ToList();
+            ViewBag.img = db.Societes.Find(id).Utilisateur.image;
+            var abonnements = db.Abonnements.Include(a => a.Navette).Include(a => a.Societe1).ToList();
             return View(abonnements.ToList());
         }
 
@@ -71,11 +73,20 @@ namespace BookingBus.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Abonnement abonnement = db.Abonnements.Find(id);
+            List<SelectListItem> Navette = new List<SelectListItem>();
+            string navetta = "";
+            foreach (var n in db.Navettes)
+            {
+                navetta = n.lieu_depart + " - " + n.lieu_arriver;
+                Navette.Add(new SelectListItem { Text = navetta, Value = n.id_navette.ToString() });
+            }
+            var req = (from n in db.Navettes where n.id_navette == abonnement.id_navette select n).FirstOrDefault();
+            Navette.Find(n => n.Text == req.lieu_depart + " - " + req.lieu_arriver).Selected = true;
+            ViewBag.id_navette = Navette;
             if (abonnement == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", abonnement.id_navette);
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", abonnement.id_societe);
             return View(abonnement);
         }
