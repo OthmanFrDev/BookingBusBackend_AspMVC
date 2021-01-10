@@ -24,11 +24,14 @@ namespace BookingBus.Controllers
         }
         public ActionResult lister(string role)
         {
-            ViewBag.role = role;
+            if (Session["UserID"] != null && Session["role"].ToString() == "admin") { 
+                ViewBag.role = role;
             if (role == "client") { var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Client); return View(utilisateurs.ToList()); }
             else if (role == "societe") { var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Societe); return View(utilisateurs.ToList()); }
             return View("Index", "Admins");
-
+                          }
+            else { return RedirectToAction("Index", "Home"); }
+                
 
         }
 
@@ -101,6 +104,8 @@ namespace BookingBus.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.role = utilisateur.role;
+            ViewBag.lieu = utilisateur.Societe.lieu;
             ViewBag.id_utilisateur = new SelectList(db.Admins, "id_utilisateur", "id_utilisateur", utilisateur.id_utilisateur);
             ViewBag.id_utilisateur = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", utilisateur.id_utilisateur);
             ViewBag.id_utilisateur = new SelectList(db.Societes, "id_utilisateur", "lieu", utilisateur.id_utilisateur);
@@ -112,18 +117,24 @@ namespace BookingBus.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_utilisateur,nom_complet,mail,mdp,telephone,role")] Utilisateur utilisateur)
+        public ActionResult Edit([Bind(Include = "id_utilisateur,nom_complet,mail,mdp,telephone,role")] Utilisateur utilisateur,string lieu)
         {
+            ViewBag.role = utilisateur.role;
+           
+
             if (ModelState.IsValid)
             {
+                var societe = db.Societes.Find(utilisateur.id_utilisateur);
+                societe.lieu = lieu;
                 db.Entry(utilisateur).State = EntityState.Modified;
+                db.Entry(societe).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("lister",new { role=utilisateur.role});
+                return RedirectToAction("details",new { id=utilisateur.id_utilisateur});
             }
             ViewBag.id_utilisateur = new SelectList(db.Admins, "id_utilisateur", "id_utilisateur", utilisateur.id_utilisateur);
             ViewBag.id_utilisateur = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", utilisateur.id_utilisateur);
             ViewBag.id_utilisateur = new SelectList(db.Societes, "id_utilisateur", "lieu", utilisateur.id_utilisateur);
-            return View("Index","Admins");
+            return View();
         }
 
         // GET: Utilisateurs/Delete/5

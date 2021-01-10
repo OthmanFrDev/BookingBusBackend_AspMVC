@@ -7,49 +7,29 @@
 
 
 
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="card">
+                    <div class="image">
+                        <img src="~/Content/UserPic/@item.Societe1.Utilisateur.image" style="width:320px;height:150px;" />
+                    </div>
+                    <div class="card-inner">
+                        <div class="header" style="text-align:center">
+                            <h2 style="color:black">prix: @item.prix</h2>
+                            <h4>@item.date_debut.ToShortDateString() -@item.date_fin.ToShortDateString()</h4>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.date_debut)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date_fin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.prix)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Navette.lieu_depart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Navette.lieu_arriver)
-        </th>
-        <th></th>
-    </tr>
+                        </div>
+                        <div class="content" style="text-align:center">
+                            <h4>@item.Navette.lieu_depart - @item.Navette.lieu_arriver</h4>
+                            <a href="@Url.Action("reserver", "clients", new { id = item.id_abonnement })" class = "btn fadeIn fourth" style="background-color: #F59A2E">Réserver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_debut)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_fin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prix)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Navette.lieu_depart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Navette.lieu_arriver)
-        </td>
-        <td>
-           
-            @Html.ActionLink("Reserver", "reserver","clients", new { id=item.id_abonnement },"")
-        </td>
-    </tr>
-}
-
-</table>

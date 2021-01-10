@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookingBus.Models.Navette>
+﻿@model IEnumerable<BookingBus.Models.Ville>
 
 @{
     ViewBag.Title = "Index";
@@ -8,34 +8,34 @@
 <div class="row m-0  peach-gradient color-block" style="position:relative;">
     <img src="~/Content/bghome.png" />
 </div>
-<div class="container" id="homerecherche" >
-    <div class="row justify-content-center m-auto" >
+<div class="container" id="homerecherche">
+    <div class="row justify-content-center m-auto">
         <div class="col" style="position:absolute;top:30%;z-index:1;text-align:center;">
             <img src="~/Content/BookingBus.png" style="margin-top:0px;margin-bottom:0px; width:auto;" />
         </div>
-        <form class="form-inline" style="position:absolute;top:45%;z-index:1" action="@Url.Action("rechercher")" >
+        <form class="form-inline" style="position:absolute;top:45%;z-index:1" action="@Url.Action("rechercher")">
             <div class="col-sm-4 col-md-4 col-lg-4 m-0">
                 <div class="form-group mr-2">
                     <select class="form-control" id="exampleFormControlSelect1" style="opacity:0.5;" name="ld">
                         <option> Ville Départ</option>
                         @foreach (var item in Model)
                         {
-                            <option value="@item.lieu_depart">@item.lieu_depart</option>
+                            <option value="@item.nom">@item.nom</option>
                         }
-                       
+
                     </select>
                 </div>
             </div>
             <div class="col-sm-4 col-md-4 col-lg-4 m-0">
                 <div class="form-group mr-2">
-                    <select class="form-control" id="exampleFormControlSelect2" style="opacity:0.5;"name="la">
+                    <select class="form-control" id="exampleFormControlSelect2" style="opacity:0.5;" name="la">
                         <option> Ville Arrivée</option>
                         @foreach (var item in Model)
                         {
-                            <option value="@item.lieu_arriver">@item.lieu_arriver</option>
+                            <option value="@item.nom">@item.nom</option>
                         }
 
-                       
+
                     </select>
                 </div>
             </div>

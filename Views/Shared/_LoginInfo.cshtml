@@ -5,7 +5,7 @@
     {
         @Html.AntiForgeryToken()
     <ul class="navbar-nav">
-            <img src="~/Content/UserPic/@Session["img"]" width="40" height="40" class="rounded-circle d-none d-sm-block" />
+            <img src="~/Content/UserPic/@Session["img"]" width="40" height="40" class="rounded-circle d-none d-sm-none  d-md-none d-lg-block" />
         <li class="nav-item">
             <a href="@Url.Action("Details", "Utilisateurs", new { id = @Session["UserID"] })" class="nav-link">
                 Bonjour @Session["UserName"].ToString()

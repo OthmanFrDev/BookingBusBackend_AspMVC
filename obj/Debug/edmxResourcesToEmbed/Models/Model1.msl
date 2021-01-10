@@ -53,6 +53,7 @@
           <ScalarProperty Name="date_depart" ColumnName="date_depart" />
           <ScalarProperty Name="date_arriver" ColumnName="date_arriver" />
           <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="number" ColumnName="number" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

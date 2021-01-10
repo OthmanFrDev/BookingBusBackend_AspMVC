@@ -58,6 +58,7 @@
     <Property Name="date_depart" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="date_arriver" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="id_client" Type="Int32" Nullable="false" />
+    <Property Name="number" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Client" Relationship="Self.FK_Demande_Client" FromRole="Demande" ToRole="Client" />
   </EntityType>
   <EntityType Name="Effectuer">

@@ -9,15 +9,17 @@ namespace BookingBus.Controllers
 {
     public class AbonnementsController : Controller
     {
+        
         private BookingBusEntities db = new BookingBusEntities();
 
         // GET: Abonnements
-        public ActionResult Index()
+        public ActionResult Index(int ids)
         {
             int id = int.Parse((Session["UserID"].ToString()));
             ViewBag.id = id;
             ViewBag.img = db.Societes.Find(id).Utilisateur.image;
-            var abonnements = db.Abonnements.Include(a => a.Navette).Include(a => a.Societe1).ToList();
+
+            var abonnements = db.Abonnements.Include(a => a.Navette).Include(a => a.Societe1).Where(a=>a.id_societe==ids).ToList();
             return View(abonnements.ToList());
         }
 
@@ -53,11 +55,12 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_abonnement,date_debut,date_fin,id_navette,id_societe,prix")] Abonnement abonnement)
         {
+            int id = int.Parse((Session["UserID"].ToString()));
             if (ModelState.IsValid)
             {
                 db.Abonnements.Add(abonnement);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { ids=id});
             }
 
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", abonnement.id_navette);
@@ -98,11 +101,12 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id_abonnement,date_debut,date_fin,id_navette,id_societe,prix")] Abonnement abonnement)
         {
+            int id = int.Parse((Session["UserID"].ToString()));
             if (ModelState.IsValid)
             {
                 db.Entry(abonnement).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { ids = id });
             }
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", abonnement.id_navette);
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", abonnement.id_societe);
@@ -129,10 +133,11 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            int ids = int.Parse((Session["UserID"].ToString()));
             Abonnement abonnement = db.Abonnements.Find(id);
             db.Abonnements.Remove(abonnement);
             db.SaveChanges();
-            return RedirectToAction("Index"         );
+            return RedirectToAction("Index" , new { ids = ids });
         }
 
         protected override void Dispose(bool disposing)

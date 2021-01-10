@@ -4,68 +4,74 @@
     ViewBag.Title = "Index";
 }
 
-
-@if (Session["role"] != null) { if (Session["role"].ToString() == "client") 
-    { 
- <p>
-    @Html.ActionLink("demander", "Create",new { id=ViewBag.id},"")
-</p>
-} 
-}
-
 <div class="container">
-    <table class="table table-bordered table-hover">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.depart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.arriver)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.date_depart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.date_arriver)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Client.id_utilisateur)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
+    @if (Session["role"] != null)
+    {
+        if (Session["role"].ToString() == "client")
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.depart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.arriver)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_depart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_arriver)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Client.id_utilisateur)
-        </td>
-        @if (Session["role"] != null)
-        {
-            if (Session["role"].ToString() == "client")
-            {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_demande }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id_demande }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id_demande })
-                </td>
+            <div class="col m-3" style="text-align:center">
+                <a class="btn" style="background-color: #F59A2E" href="@Url.Action("Create", new { id = ViewBag.id })"><i class="fas fa-plus"></i>Envoyer une Demande</a>
+            </div>
             }
-        }
-        
-    </tr>
-        }
+    }
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.depart)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.arriver)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.date_depart)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.date_arriver)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Client.id_utilisateur)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.number)
+                    </th>
+                    <th></th>
+                </tr>
 
-    </table>
-</div>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.depart)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.arriver)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date_depart)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date_arriver)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Client.id_utilisateur)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.number)
+                        </td>
+                        @if (Session["role"] != null)
+                        {
+                            if (Session["role"].ToString() == "client")
+                            {
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.id_demande }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.id_demande }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.id_demande })
+                                </td>
+                            }
+                        }
+
+                    </tr>
+                }
+
+            </table>
+        </div>

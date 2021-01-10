@@ -16,8 +16,12 @@ namespace BookingBus.Controllers
 
         // GET: Effectuers
         public ActionResult Index(int id)
-        {
+        { 
             var effectuers = db.Effectuers.Include(e => e.Abonnement).Include(e => e.Client).Where(e=>e.id_client==id);
+            var query = (from e in effectuers join b in db.Buses on e.Abonnement.id_navette equals b.id_navette  select b).ToList();
+            ViewBag.bus = query;
+           
+         
             return View(effectuers.ToList());
         }
 
@@ -99,13 +103,13 @@ namespace BookingBus.Controllers
         }
 
         // GET: Effectuers/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id1,int? id2)
         {
-            if (id == null)
+            if (id1 == null||id2==null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Effectuer effectuer = db.Effectuers.Find(id);
+            Effectuer effectuer = db.Effectuers.Find(id1,id2);
             if (effectuer == null)
             {
                 return HttpNotFound();
@@ -116,12 +120,12 @@ namespace BookingBus.Controllers
         // POST: Effectuers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id1,int id2)
         {
-            Effectuer effectuer = db.Effectuers.Find(id);
+            Effectuer effectuer = db.Effectuers.Find(id1,id2);
             db.Effectuers.Remove(effectuer);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new { id=id1});
         }
 
         protected override void Dispose(bool disposing)

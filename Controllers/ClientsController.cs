@@ -48,12 +48,12 @@ namespace BookingBus.Controllers
             Abonnement ab = db.Abonnements.Find(id);
             var annee = ab.date_fin.Year-ab.date_debut.Year;
             
-                var date = ab.date_debut.CompareTo(ab.date_fin);
+                var date = ab.date_fin.Subtract(ab.date_debut).Days;
 
             Effectuer res = new Effectuer{ id_client = id_user, id_abonnement = id,duree=date  };
             db.Effectuers.Add(res);
             db.SaveChanges();
-            return RedirectToAction("Index","home");}
+            return RedirectToAction("Index","Effectuers",new { id = Session["UserID"]} );}
             else { return RedirectToAction("Login", "Home"); }
         }
         [HttpPost]
