@@ -11,11 +11,14 @@ namespace BookingBus.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Bus
     {
         public int id_bus { get; set; }
+        [Display(Name ="Marque")]
         public string nom { get; set; }
+        [Display(Name ="Nb place")]
         public int nbr_place { get; set; }
         public bool climatiseur { get; set; }
         public bool tv { get; set; }

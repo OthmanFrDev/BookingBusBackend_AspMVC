@@ -11,12 +11,20 @@ namespace BookingBus.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Utilisateur
     {
         public int id_utilisateur { get; set; }
+        [Display(Name ="Nom Complet")]
         public string nom_complet { get; set; }
+        [Display(Name = "E-mail")]
+        [Required]
         public string mail { get; set; }
+        [Display(Name = "Mot de passe")]
+        [Required(ErrorMessage = "Mot de passe est obligatoire")]
+        [StringLength(255, ErrorMessage = "Doit contenir minimun 5 caractères", MinimumLength = 5)]
         public string mdp { get; set; }
         public string telephone { get; set; }
         public string role { get; set; }

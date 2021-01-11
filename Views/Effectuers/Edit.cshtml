@@ -20,7 +20,7 @@
         @Html.HiddenFor(model => model.id_abonnement)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.duree, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.duree, htmlAttributes: new { @class = "badge badge-warning w-25 control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.duree, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.duree, "", new { @class = "text-danger" })

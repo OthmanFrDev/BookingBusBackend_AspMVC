@@ -120,7 +120,9 @@ namespace BookingBus.Controllers
                 return HttpNotFound();
             }
             ViewBag.role = utilisateur.role;
+            if (utilisateur.role=="societe") {
             ViewBag.lieu = utilisateur.Societe.lieu;
+            }
             ViewBag.id_utilisateur = new SelectList(db.Admins, "id_utilisateur", "id_utilisateur", utilisateur.id_utilisateur);
             ViewBag.id_utilisateur = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", utilisateur.id_utilisateur);
             ViewBag.id_utilisateur = new SelectList(db.Societes, "id_utilisateur", "lieu", utilisateur.id_utilisateur);
@@ -132,17 +134,29 @@ namespace BookingBus.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_utilisateur,nom_complet,mail,mdp,telephone,role")] Utilisateur utilisateur,string lieu)
+        public ActionResult Edit([Bind(Include = "id_utilisateur,nom_complet,mail,mdp,telephone,role")] Utilisateur utilisateur,string lieu, HttpPostedFileBase imagefile)
         {
             ViewBag.role = utilisateur.role;
-           
+            if (imagefile != null)
+                {
+                    string namePic = Path.GetFileNameWithoutExtension(imagefile.FileName);
+                    string ext = Path.GetExtension(imagefile.FileName);
+                    namePic += System.DateTime.Now.ToString("yymmssfff") + ext;
+                    string path = Path.Combine(Server.MapPath("~/Content/UserPic/"), namePic);
+                    utilisateur.image = namePic;
+                    imagefile.SaveAs(path);
+                }
+                else
+                {
+                    utilisateur.image = "default.jpg";
+                }
 
             if (ModelState.IsValid)
             {
                 var societe = db.Societes.Find(utilisateur.id_utilisateur);
-                societe.lieu = lieu;
+               
                 db.Entry(utilisateur).State = EntityState.Modified;
-                db.Entry(societe).State = EntityState.Modified;
+                if (utilisateur.role == "societe") { societe.lieu = lieu;db.Entry(societe).State = EntityState.Modified;}
                 db.SaveChanges();
                 return RedirectToAction("details",new { id=utilisateur.id_utilisateur});
             }
@@ -162,6 +176,8 @@ namespace BookingBus.Controllers
             {
                 Utilisateur utilisateur = db.Utilisateurs.Find(id);
                 db.Utilisateurs.Remove(utilisateur);
+                var effec = db.Effectuers.Where(e => e.id_abonnement == db.Abonnements.Where(a=>a.id_societe==utilisateur.id_utilisateur).Select(a=>a.id_abonnement).FirstOrDefault()).FirstOrDefault();
+                if (effec != null) { db.Effectuers.Remove(effec); db.SaveChanges(); }
                 db.SaveChanges();
                 return RedirectToAction("lister", new { role = utilisateur.role });
             }

@@ -8,10 +8,10 @@
           <ScalarProperty Name="date_debut" ColumnName="date_debut" />
           <ScalarProperty Name="date_fin" ColumnName="date_fin" />
           <ScalarProperty Name="id_navette" ColumnName="id_navette" />
-          <ScalarProperty Name="id_societe" ColumnName="id_societe" />
           <ScalarProperty Name="prix" ColumnName="prix" />
           <ScalarProperty Name="nom_abonnement" ColumnName="nom_abonnement" />
           <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="id_societe" ColumnName="id_societe" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -88,13 +88,13 @@
     <EntitySetMapping Name="Utilisateurs">
       <EntityTypeMapping TypeName="BookingBusModel.Utilisateur">
         <MappingFragment StoreEntitySet="Utilisateur">
-          <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
           <ScalarProperty Name="nom_complet" ColumnName="nom_complet" />
           <ScalarProperty Name="mail" ColumnName="mail" />
           <ScalarProperty Name="mdp" ColumnName="mdp" />
           <ScalarProperty Name="telephone" ColumnName="telephone" />
           <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="image" ColumnName="image" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
