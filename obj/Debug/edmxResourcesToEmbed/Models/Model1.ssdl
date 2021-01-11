@@ -49,7 +49,7 @@
     <Property Name="date_depart" Type="date" Nullable="false" />
     <Property Name="date_arriver" Type="date" Nullable="false" />
     <Property Name="id_client" Type="int" Nullable="false" />
-    <Property Name="number" Type="int" Nullable="false" />
+    <Property Name="number" Type="int" />
   </EntityType>
   <EntityType Name="Effectuer">
     <Key>

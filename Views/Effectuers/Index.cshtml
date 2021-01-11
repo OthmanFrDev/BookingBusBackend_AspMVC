@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
     <div class="container">
+        <h3 class="text-danger text-center">@ViewBag.exist</h3>
         <div class="row">
             @foreach (var item in Model)
             {
@@ -28,3 +29,4 @@
             }
         </div>
     </div>
+

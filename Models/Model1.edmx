@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BookingBusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BookingBusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Abonnement">
           <Key>
             <PropertyRef Name="id_abonnement" />
@@ -54,7 +54,7 @@
           <Property Name="date_depart" Type="date" Nullable="false" />
           <Property Name="date_arriver" Type="date" Nullable="false" />
           <Property Name="id_client" Type="int" Nullable="false" />
-          <Property Name="number" Type="int" Nullable="false" />
+          <Property Name="number" Type="int" />
         </EntityType>
         <EntityType Name="Effectuer">
           <Key>
@@ -279,7 +279,8 @@
             <End Role="Effectuer" EntitySet="Effectuer" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BookingBusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -291,13 +292,13 @@
           <Property Name="date_debut" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="date_fin" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="id_navette" Type="Int32" Nullable="false" />
-          <Property Name="id_societe" Type="Int32" />
           <Property Name="prix" Type="Single" Nullable="false" />
           <Property Name="nom_abonnement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_societe" Type="Int32" />
+          <NavigationProperty Name="Societe1" Relationship="Self.FK__Abonnemen__id_so__01142BA1" FromRole="Abonnement" ToRole="Societe" />
           <NavigationProperty Name="Navette" Relationship="Self.FK_Abonnement_Navette" FromRole="Abonnement" ToRole="Navette" />
           <NavigationProperty Name="Effectuers" Relationship="Self.FK_Effectuer_Abonnement" FromRole="Abonnement" ToRole="Effectuer" />
-          <NavigationProperty Name="Societe1" Relationship="BookingBusModel.FK__Abonnemen__id_so__01142BA1" FromRole="Abonnement" ToRole="Societe" />
         </EntityType>
         <EntityType Name="Admin">
           <Key>
@@ -341,7 +342,7 @@
           <Property Name="date_depart" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="date_arriver" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="id_client" Type="Int32" Nullable="false" />
-          <Property Name="number" Type="Int32" Nullable="false" />
+          <Property Name="number" Type="Int32" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Demande_Client" FromRole="Demande" ToRole="Client" />
         </EntityType>
         <EntityType Name="Effectuer">
@@ -373,9 +374,9 @@
           </Key>
           <Property Name="id_utilisateur" Type="Int32" Nullable="false" />
           <Property Name="lieu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Abonnements" Relationship="Self.FK__Abonnemen__id_so__01142BA1" FromRole="Societe" ToRole="Abonnement" />
           <NavigationProperty Name="Buses" Relationship="Self.FK_Bus_Societe" FromRole="Societe" ToRole="Bus" />
           <NavigationProperty Name="Utilisateur" Relationship="Self.fk_ct3" FromRole="Societe" ToRole="Utilisateur" />
-          <NavigationProperty Name="Abonnements" Relationship="BookingBusModel.FK__Abonnemen__id_so__01142BA1" FromRole="Societe" ToRole="Abonnement" />
         </EntityType>
         <EntityType Name="Utilisateur">
           <Key>
@@ -387,10 +388,10 @@
           <Property Name="mdp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Admin" Relationship="Self.fk_ct124" FromRole="Utilisateur" ToRole="Admin" />
           <NavigationProperty Name="Client" Relationship="Self.fk_ct13" FromRole="Utilisateur" ToRole="Client" />
           <NavigationProperty Name="Societe" Relationship="Self.fk_ct3" FromRole="Utilisateur" ToRole="Societe" />
-          <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Ville">
           <Key>
@@ -399,6 +400,18 @@
           <Property Name="id_ville" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
+        <Association Name="FK__Abonnemen__id_so__01142BA1">
+          <End Role="Societe" Type="Self.Societe" Multiplicity="0..1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Societe">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="id_societe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Abonnement_Navette">
           <End Role="Navette" Type="Self.Navette" Multiplicity="1" />
           <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
@@ -524,6 +537,10 @@
           <EntitySet Name="Societes" EntityType="Self.Societe" />
           <EntitySet Name="Utilisateurs" EntityType="Self.Utilisateur" />
           <EntitySet Name="Villes" EntityType="Self.Ville" />
+          <AssociationSet Name="FK__Abonnemen__id_so__01142BA1" Association="Self.FK__Abonnemen__id_so__01142BA1">
+            <End Role="Societe" EntitySet="Societes" />
+            <End Role="Abonnement" EntitySet="Abonnements" />
+          </AssociationSet>
           <AssociationSet Name="FK_Abonnement_Navette" Association="Self.FK_Abonnement_Navette">
             <End Role="Navette" EntitySet="Navettes" />
             <End Role="Abonnement" EntitySet="Abonnements" />
@@ -560,23 +577,7 @@
             <End Role="Utilisateur" EntitySet="Utilisateurs" />
             <End Role="Societe" EntitySet="Societes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Abonnemen__id_so__01142BA1" Association="BookingBusModel.FK__Abonnemen__id_so__01142BA1">
-            <End Role="Societe" EntitySet="Societes" />
-            <End Role="Abonnement" EntitySet="Abonnements" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK__Abonnemen__id_so__01142BA1">
-          <End Type="BookingBusModel.Societe" Role="Societe" Multiplicity="0..1" />
-          <End Type="BookingBusModel.Abonnement" Role="Abonnement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Societe">
-              <PropertyRef Name="id_utilisateur" />
-            </Principal>
-            <Dependent Role="Abonnement">
-              <PropertyRef Name="id_societe" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -590,10 +591,10 @@
                 <ScalarProperty Name="date_debut" ColumnName="date_debut" />
                 <ScalarProperty Name="date_fin" ColumnName="date_fin" />
                 <ScalarProperty Name="id_navette" ColumnName="id_navette" />
-                <ScalarProperty Name="id_societe" ColumnName="id_societe" />
                 <ScalarProperty Name="prix" ColumnName="prix" />
                 <ScalarProperty Name="nom_abonnement" ColumnName="nom_abonnement" />
                 <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="id_societe" ColumnName="id_societe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -670,13 +671,13 @@
           <EntitySetMapping Name="Utilisateurs">
             <EntityTypeMapping TypeName="BookingBusModel.Utilisateur">
               <MappingFragment StoreEntitySet="Utilisateur">
-                <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
                 <ScalarProperty Name="nom_complet" ColumnName="nom_complet" />
                 <ScalarProperty Name="mail" ColumnName="mail" />
                 <ScalarProperty Name="mdp" ColumnName="mdp" />
                 <ScalarProperty Name="telephone" ColumnName="telephone" />
                 <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="image" ColumnName="image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

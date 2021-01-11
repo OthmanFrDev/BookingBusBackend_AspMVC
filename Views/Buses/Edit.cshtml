@@ -21,31 +21,31 @@
         @Html.HiddenFor(model => model.id_societe)
 
 
-        @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "fadeIn second" })
+        @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "badge badge-warning w-25 fadeIn second" })
         <br />
         @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "fadeIn second" } })
         @Html.ValidationMessageFor(model => model.nom, "", new { @class = " text-danger fadeIn second" })
 
-        @Html.LabelFor(model => model.nbr_place, htmlAttributes: new { @class = "fadeIn second" })
+        @Html.LabelFor(model => model.nbr_place, htmlAttributes: new { @class = "badge badge-warning w-25 fadeIn second" })
         <br />
         @Html.EditorFor(model => model.nbr_place, new { htmlAttributes = new { @type = "text", @class = "fadeIn second" } })
         @Html.ValidationMessageFor(model => model.nbr_place, "", new { @class = "  text-danger fadeIn second" })
         <br />
-        @Html.LabelFor(model => model.climatiseur, htmlAttributes: new { @class = "fadeIn second" })
+        @Html.LabelFor(model => model.climatiseur, htmlAttributes: new { @class = "badge badge-warning w-25 fadeIn second" })
 
         @Html.EditorFor(model => model.climatiseur)
         @Html.ValidationMessageFor(model => model.climatiseur, "", new { @class = "  text-danger fadeIn second" })
         <br />
-        @Html.LabelFor(model => model.tv, htmlAttributes: new { @class = "fadeIn second" })
+        @Html.LabelFor(model => model.tv, htmlAttributes: new { @class = "badge badge-warning w-25 fadeIn second" })
 
         @Html.EditorFor(model => model.tv)
         @Html.ValidationMessageFor(model => model.tv, "", new { @class = "  text-danger fadeIn second" })
         <br />
-        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "fadeIn second" })
+        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "badge badge-warning w-25 fadeIn second" })
         @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "fadeIn second" } })
         @Html.ValidationMessageFor(model => model.description, "", new { @class = " text-danger fadeIn second" })
         <br />
-        @Html.LabelFor(model => model.Navette.lieu_depart, "depart", htmlAttributes: new { @class = "fadeIn second" })
+        @Html.LabelFor(model => model.Navette.lieu_depart, "depart", htmlAttributes: new { @class = "badge badge-warning w-25 fadeIn second" })
 
         @Html.DropDownList("id_navette", null, htmlAttributes: new { @class = "fadeIn second" })
         @Html.ValidationMessageFor(model => model.id_navette, "", new { @class = "text-danger" })

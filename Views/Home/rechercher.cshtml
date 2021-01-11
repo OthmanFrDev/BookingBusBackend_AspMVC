@@ -11,6 +11,9 @@
     <div class="row">
         @foreach (var item in Model)
         {
+            var duree = item.date_fin.Subtract(System.DateTime.Now).Days;
+            if (duree > 0)
+            {
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <div class="card">
                     <div class="image">
@@ -24,12 +27,17 @@
                         </div>
                         <div class="content" style="text-align:center">
                             <h4>@item.Navette.lieu_depart - @item.Navette.lieu_arriver</h4>
-                            <a href="@Url.Action("reserver", "clients", new { id = item.id_abonnement })" class = "btn fadeIn fourth" style="background-color: #F59A2E">Réserver</a>
-                        </div>
+                            @if (Session["role"] != null)
+                            {
+                                if (Session["role"].ToString() == "client")
+                                {<a href="@Url.Action("reserver", "clients", new { id = item.id_abonnement })" class="btn fadeIn fourth" style="background-color: #F59A2E">Réserver</a>}
+                            }
+                            else {  <a href="@Url.Action("reserver", "clients", new { id = item.id_abonnement })" class="btn fadeIn fourth" style="background-color: #F59A2E">Réserver</a>}
+                                </div>
                     </div>
                 </div>
             </div>
-        }
+            } }
     </div>
 </div>
 

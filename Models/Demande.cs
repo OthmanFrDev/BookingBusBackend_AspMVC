@@ -11,7 +11,8 @@ namespace BookingBus.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Demande
     {
         public int id_demande { get; set; }
@@ -20,7 +21,7 @@ namespace BookingBus.Models
         public System.DateTime date_depart { get; set; }
         public System.DateTime date_arriver { get; set; }
         public int id_client { get; set; }
-        public int number { get; set; }
+        public Nullable<int> number { get; set; }
     
         public virtual Client Client { get; set; }
     }

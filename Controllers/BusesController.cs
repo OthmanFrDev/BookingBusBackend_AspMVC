@@ -17,11 +17,14 @@ namespace BookingBus.Controllers
         // GET: Buses
         public ActionResult Index(int id)
         {
-            int ids = int.Parse((Session["UserID"].ToString()));
+            if (Session["UserID"] != null) {
+                int ids = int.Parse((Session["UserID"].ToString()));
             ViewBag.id = ids;
             var buses = db.Buses.Include(b => b.Navette).Include(b => b.Societe).Where(b=>b.id_societe==id);
             
-            return View(buses.ToList());
+            return View(buses.ToList()); 
+            }
+            else { return RedirectToAction("Login", "home"); }
 
         }
 
@@ -58,15 +61,19 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_bus,nom,nbr_place,climatiseur,tv,description,id_societe,id_navette,image")] Bus bus,HttpPostedFileBase imagefile)
         {
-            int ids = int.Parse((Session["UserID"].ToString()));
+            if (Session["UserID"] != null)
+            {
+                int ids = int.Parse((Session["UserID"].ToString()));
             if (ModelState.IsValid)
             {
+                    if (imagefile != null) { 
                 string namePic = Path.GetFileNameWithoutExtension(imagefile.FileName);
                 string ext = Path.GetExtension(imagefile.FileName);
                 namePic += System.DateTime.Now.ToString("yymmssfff") + ext;
                 string path = Path.Combine(Server.MapPath("~/Content/"), namePic);
                 bus.image = namePic;
-                imagefile.SaveAs(path);
+                imagefile.SaveAs(path);}
+                    else { bus.image = "defaultbus.png"; }
                 bus.nbr_place = (int)bus.nbr_place;
                 db.Buses.Add(bus);
                 db.SaveChanges();
@@ -76,6 +83,8 @@ namespace BookingBus.Controllers
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", bus.id_societe);
             
             return View(bus);
+            }
+            else { return RedirectToAction("Login", "home"); }
         }
 
         // GET: Buses/Edit/5
@@ -118,6 +127,11 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id_bus,nom,nbr_place,climatiseur,tv,description,id_societe,id_navette,image")] Bus bus,HttpPostedFileBase imagefile)
         {
+
+            if (Session["UserID"] != null)
+            {
+                int ids = int.Parse((Session["UserID"].ToString()));
+
             string namePic = Path.GetFileNameWithoutExtension(imagefile.FileName);
             string ext = Path.GetExtension(imagefile.FileName);
             namePic += System.DateTime.Now.ToString("yymmssfff") + ext;
@@ -125,7 +139,8 @@ namespace BookingBus.Controllers
             bus.image = namePic;
             imagefile.SaveAs(path);
 
-            int ids = int.Parse((Session["UserID"].ToString()));
+           
+
             if (ModelState.IsValid)
             {
                 
@@ -137,6 +152,8 @@ namespace BookingBus.Controllers
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", bus.id_navette);
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", bus.id_societe);
             return View(bus);
+            }
+            else { return RedirectToAction("Login", "home"); }
         }
 
         // GET: Buses/Delete/5
@@ -161,11 +178,15 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            int ids = int.Parse((Session["UserID"].ToString()));
+            if (Session["UserID"] != null)
+            {
+                int ids = int.Parse((Session["UserID"].ToString()));
             Bus bus = db.Buses.Find(id);
             db.Buses.Remove(bus);
             db.SaveChanges();
             return RedirectToAction("Index",new {id=ids});
+            }
+            else { return RedirectToAction("Login", "home"); }
         }
 
         protected override void Dispose(bool disposing)

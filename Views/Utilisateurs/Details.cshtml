@@ -4,79 +4,73 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Utilisateur</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nom_complet)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nom_complet)
-        </dd>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <dl class="dl-horizontal" style="padding:5px;">
+            <dt class="badge badge-warning p-2 h4" style="width:25%;height:auto">
+                @Html.DisplayNameFor(model => model.nom_complet)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.mail)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.nom_complet)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.mail)
-        </dd>
+            <dt class="badge badge-warning p-2 h4" style="width:25%;height:auto">
+                @Html.DisplayNameFor(model => model.mail)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.mdp)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.mail)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.mdp)
-        </dd>
+            <dt class="badge badge-warning p-2 h4" style="width:25%;height:auto">
+                @Html.DisplayNameFor(model => model.mdp)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.telephone)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.mdp)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.telephone)
-        </dd>
+            <dt class="badge badge-warning p-2 h4" style="width:25%;height:auto">
+                @Html.DisplayNameFor(model => model.telephone)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.role)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.telephone)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.role)
-        </dd>
+            <dt class="badge badge-warning p-2 h4" style="width:25%;height:auto">
+                @Html.DisplayNameFor(model => model.role)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Admin.id_utilisateur)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.role)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Admin.id_utilisateur)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Client.id_utilisateur)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Client.id_utilisateur)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Societe.lieu)
-        </dt>
+            @if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "societe")
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Societe.lieu)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Societe.lieu)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Societe.lieu)
+                    </dd>
+}
+            }
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id_utilisateur }) |
-    @Html.ActionLink("Back to List", "lister",new { role=Model.role})
-</p>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id_utilisateur }) |
+        @Html.ActionLink("Back to List", "lister", new { role = Model.role })
+    </p>
+    </div>

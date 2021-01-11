@@ -4,12 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div class="wrapper fadeInDown">
     <div id="formContent">
-        <dl class="dl-horizontal">
-            <dt>
+        <dl class="dl-horizontal" style="padding:5px">
+            <dt class="badge badge-warning p-2 h4" style="width:25%;height:auto">
                 @Html.DisplayNameFor(model => model.lieu_depart)
             </dt>
 
@@ -17,7 +15,7 @@
                 @Html.DisplayFor(model => model.lieu_depart)
             </dd>
 
-            <dt>
+            <dt class="badge badge-warning p-2 h4" style="width:25%;height:auto">
                 @Html.DisplayNameFor(model => model.lieu_arriver)
             </dt>
 
@@ -25,7 +23,7 @@
                 @Html.DisplayFor(model => model.lieu_arriver)
             </dd>
 
-            <dt>
+            <dt class="badge badge-warning p-2 h4" style="width:25%;height:auto">
                 @Html.DisplayNameFor(model => model.date_depart)
             </dt>
 
@@ -33,7 +31,7 @@
                 @Html.DisplayFor(model => model.date_depart)
             </dd>
 
-            <dt>
+            <dt class="badge badge-warning p-2 h4" style="width:25%;height:auto">
                 @Html.DisplayNameFor(model => model.date_arriver)
             </dt>
 

@@ -7,7 +7,7 @@
 @using (Html.BeginForm("Create","Utilisateurs",FormMethod.Post,new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
@@ -18,19 +18,31 @@
 
             <!-- Login Form -->
             <form>
+                @Html.LabelFor(model => model.nom_complet, htmlAttributes: new { @class = "badge badge-warning w-25 fadeIn first " })
                 <input type="text" id="login" class="fadeIn second" name="nom_complet" placeholder="Nom Complet">
-                <input type="text" id="password" class="fadeIn third" name="mail" placeholder="E-mail">
-                <input type="password" id="login" class="fadeIn second" name="mdp" placeholder="Mot de passe">
-                <input type="password" id="password" class="fadeIn third" placeholder="Mot de passe">
-                <input type="text" id="login" class="fadeIn second" name="telephone" placeholder="06-XX-XX-XX-XX">
-                @if (ViewBag.role.Equals("societe"))
+
+                @Html.LabelFor(model => model.mail, htmlAttributes: new { @class = "badge badge-warning w-25 fadeIn first " })
+                <input type="text" id="pass" class="fadeIn third" name="mail" placeholder="E-mail"><br />
+                @Html.ValidationMessageFor(model => model.mail, "", new { @class = "text-danger" })
+                <p class="text-danger" style=" font-family:Arial;font-size:12px ">@ViewBag.exist</p>
+
+                @Html.LabelFor(model => model.mdp, htmlAttributes: new { @class = "badge badge-warning w-25 fadeIn first " })
+                <input type="password" id="log" class="fadeIn second" name="mdp" placeholder="Mot de passe"><br />
+                @Html.ValidationMessageFor(model => model.mdp, "", new { @class = "text-danger" })<br />
+                @Html.LabelFor(model => model.telephone, htmlAttributes: new { @class = "badge badge-warning w-25 fadeIn first " })
+                <input type="text" id="lgin" class="fadeIn second" name="telephone" placeholder="06-XX-XX-XX-XX">
+                @Html.ValidationMessageFor(model => model.telephone, "", new { @class = "text-danger" })<br />
+
+                @if (ViewBag.role != null)
                 {
-                    <input type="text" id="login" class="fadeIn second" name="lieu" placeholder="Lieu">
+                    if (ViewBag.role == "societe")
+                    {
+                        <input type="text" id="login" class="fadeIn second" name="lieu" placeholder="Lieu">
+                    }
                 }
-<<<<<<< HEAD
+
                 <input type="file" name="imagefile" class="fadeIn second" />
-=======
->>>>>>> e1159f0e8e5cc78a6441ff93ac4db5079748eb73
+
                 <input hidden name="role" value="@ViewBag.role" />
                 <input type="submit" class="fadeIn fourth" value="S'inscrire" style="background-color: #F59A2E">
 

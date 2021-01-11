@@ -23,11 +23,14 @@ namespace BookingBus.Models
         }
     
         public int id_navette { get; set; }
+        [Display(Name = "Lieu de depart")]
         public string lieu_depart { get; set; }
+        [Display(Name = "Lieu d'arrivé")]
         public string lieu_arriver { get; set; }
-
+        [Display(Name = "Heure de depart")]
         [DataType(DataType.Time)]
         public System.DateTime date_depart { get; set; }
+        [Display(Name = "Heure d'arrivée")]
         [DataType(DataType.Time)]
         public System.DateTime date_arriver { get; set; }
     

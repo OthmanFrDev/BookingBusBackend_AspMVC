@@ -17,17 +17,17 @@ namespace BookingBus.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Societe()
         {
-            this.Buses = new HashSet<Bus>();
             this.Abonnements = new HashSet<Abonnement>();
+            this.Buses = new HashSet<Bus>();
         }
     
         public int id_utilisateur { get; set; }
         public string lieu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Abonnement> Abonnements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bus> Buses { get; set; }
         public virtual Utilisateur Utilisateur { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Abonnement> Abonnements { get; set; }
     }
 }
