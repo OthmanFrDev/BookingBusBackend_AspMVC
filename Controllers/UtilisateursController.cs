@@ -24,14 +24,18 @@ namespace BookingBus.Controllers
         }
         public ActionResult lister(string role)
         {
-            if (Session["UserID"] != null && Session["role"].ToString() == "admin") { 
+            if (Session["UserID"] != null && Session["role"].ToString() == "admin") 
+            { 
                 ViewBag.role = role;
-            if (role == "client") { var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Client); return View(utilisateurs.ToList()); }
-            else if (role == "societe") { var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Societe); return View(utilisateurs.ToList()); }
-            return View("Index", "Admins");
-                          }
-            else { return RedirectToAction("Index", "Home"); }
-                
+                 if (role == "client") { var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Client); return View(utilisateurs.ToList()); }
+                 else if (role == "societe") { var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Societe); return View(utilisateurs.ToList()); }
+                 return View("Index", "Admins");
+            }
+        
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "Home");}
+    
+            return RedirectToAction("Index", "Home");
+
 
         }
 
@@ -154,10 +158,16 @@ namespace BookingBus.Controllers
         [ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Utilisateur utilisateur = db.Utilisateurs.Find(id);
-            db.Utilisateurs.Remove(utilisateur);
-            db.SaveChanges();
-            return RedirectToAction("lister",new { role=utilisateur.role});
+            if (Session["UserID"] != null && Session["role"].ToString() == "admin")
+            {
+                Utilisateur utilisateur = db.Utilisateurs.Find(id);
+                db.Utilisateurs.Remove(utilisateur);
+                db.SaveChanges();
+                return RedirectToAction("lister", new { role = utilisateur.role });
+            }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)

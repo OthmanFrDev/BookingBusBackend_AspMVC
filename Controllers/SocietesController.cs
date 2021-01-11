@@ -9,7 +9,7 @@ namespace BookingBus.Controllers
 {
     public class SocietesController : Controller
     {
-        string role = "societe";
+        
         private BookingBusEntities db = new BookingBusEntities();
 
         // GET: Societes

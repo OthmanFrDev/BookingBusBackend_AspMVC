@@ -24,7 +24,8 @@ namespace BookingBus.Controllers
             var abonnements = db.Abonnements.Include(a => a.Navette).Include(a => a.Societe1).Where(a=>a.id_societe==ids).ToList();
               
             return View(abonnements.ToList()); }
-            else { return RedirectToAction("Login", "Home"); }
+            else if(Session["UserID"] == null) { return RedirectToAction("Login", "Home"); }
+            return RedirectToAction("Login", "Home");
 
         }
 
@@ -44,15 +45,40 @@ namespace BookingBus.Controllers
         }
 
         // GET: Abonnements/Create
-        public ActionResult Create(int id)
+        public ActionResult Create(int id, int? id_navette)
         {
-            if (Session["role"].ToString() == "societe") {
+            if (Session["role"] != null&&Session["role"].ToString() == "societe") {
             ViewBag.id = id;
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart");
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu");
             ViewBag.navr = db.Navettes.ToList();
+
+                if (id_navette != null) {
+                List<SelectListItem> Navette = new List<SelectListItem>();
+                string navetta = "";
+                foreach (var n in db.Navettes)
+                {
+                    navetta = n.lieu_depart + " - " + n.lieu_arriver;
+                    Navette.Add(new SelectListItem { Text = navetta, Value = n.id_navette.ToString() });
+                }
+                var req = (from n in db.Navettes where n.id_navette == id_navette select n).FirstOrDefault();
+                Navette.Find(n => n.Text == req.lieu_depart + " - " + req.lieu_arriver).Selected = true;
+                ViewBag.id_navette = Navette; }
+                else
+                {
+                    List<SelectListItem> Navette = new List<SelectListItem>();
+                    string navetta = "";
+                    foreach (var n in db.Navettes)
+                    {
+                        navetta = n.lieu_depart + " - " + n.lieu_arriver;
+                        Navette.Add(new SelectListItem { Text = navetta, Value = n.id_navette.ToString() });
+                    }
+                    
+                    ViewBag.id_navette = Navette;
+                }
             return View(); }
-            else { return RedirectToAction("Index", "Home"); }
+            else if(Session["role"]==null) { return RedirectToAction("Index", "Home"); }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Abonnements/Create
@@ -67,7 +93,7 @@ namespace BookingBus.Controllers
             if (exist != null) { ViewBag.exist = "Abonnement already exist !"; return View(abonnement); }
             else
             {
-                if (Session["UserID"] != null)
+                if (Session["UserID"].ToString() != null)
                 {
                     int id = int.Parse((Session["UserID"].ToString()));
                     abonnement.id_societe = id;
@@ -82,13 +108,14 @@ namespace BookingBus.Controllers
                     ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", abonnement.id_societe);
                     return RedirectToAction("index", "societes");
                 }
-                else { return RedirectToAction("Login", "Home"); }
+                else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+                return RedirectToAction("index", "Home");
             }
         }
         // GET: Abonnements/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (Session["role"].ToString() == "societe")
+            if (Session["role"] != null&&Session["role"].ToString() == "societe")
             {
                 if (id == null)
                 {
@@ -113,7 +140,8 @@ namespace BookingBus.Controllers
             return View(abonnement);
             }
 
-            else { return RedirectToAction("Index", "Home"); }
+            else if (Session["role"] == null) { return RedirectToAction("Index", "Home"); }
+            return RedirectToAction("Index", "Home");
 
         }
 
@@ -137,13 +165,14 @@ namespace BookingBus.Controllers
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", abonnement.id_societe);
             return View(abonnement);
           }
-            else { return RedirectToAction("login", "Home"); }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+            return RedirectToAction("index", "Home");
         }
 
         // GET: Abonnements/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (Session["role"].ToString() == "societe")
+            if (Session["role"]!=null &&Session["role"].ToString() == "societe")
             {
                 if (id == null)
                 {
@@ -156,7 +185,8 @@ namespace BookingBus.Controllers
                 }
                 return View(abonnement);
             }
-            else { return RedirectToAction("Index", "Home"); }
+            else if (Session["role"] == null) { return RedirectToAction("Index", "Home"); }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Abonnements/Delete/5
@@ -174,7 +204,8 @@ namespace BookingBus.Controllers
             db.SaveChanges();
             return RedirectToAction("Index" , new { ids = ids });
             }
-            else { return RedirectToAction("login", "Home"); }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+            return RedirectToAction("index", "Home");
         }
 
         protected override void Dispose(bool disposing)

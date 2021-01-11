@@ -13,22 +13,21 @@ namespace BookingBus.Controllers
         // GET: Clients
         public ActionResult Index()
         {
-            if (Session["UserID"].ToString() != null)
-            {
-                int id = int.Parse((Session["UserID"].ToString()));
-                ViewBag.id = id;
+           
+               
                 if (Session["UserID"] != null && Session["role"].ToString() == "client")
                 {
+                   int id = int.Parse((Session["UserID"].ToString()));
+                   ViewBag.id = id;
                     var clients = db.Utilisateurs.Where(u => u.role == "client");
                     /* return View(clients.ToList());*/
                     return View();
                 }
 
-                else { return RedirectToAction("Login", "Home"); }
-            }
-            
-                return RedirectToAction("Login", "Home");
-            
+                else if(Session["UserID"] == null) { return RedirectToAction("Login", "Home"); }
+
+            return RedirectToAction("Login", "Home");
+
         }
         public ActionResult Demander(int id)
         {

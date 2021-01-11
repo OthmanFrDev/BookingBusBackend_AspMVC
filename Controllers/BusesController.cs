@@ -24,7 +24,8 @@ namespace BookingBus.Controllers
             
             return View(buses.ToList()); 
             }
-            else { return RedirectToAction("Login", "home"); }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+            return RedirectToAction("Index", "Home");
 
         }
 
@@ -84,13 +85,14 @@ namespace BookingBus.Controllers
             
             return View(bus);
             }
-            else { return RedirectToAction("Login", "home"); }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Buses/Edit/5
         public ActionResult Edit(int? id)
         {
-
+            if (Session["UserID"] != null && Session["role"].ToString() == "societe") {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -117,7 +119,9 @@ namespace BookingBus.Controllers
                 return HttpNotFound();
             }
             
-            return View(bus);
+            return View(bus); }
+             else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Buses/Edit/5
@@ -153,24 +157,30 @@ namespace BookingBus.Controllers
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", bus.id_societe);
             return View(bus);
             }
-            else { return RedirectToAction("Login", "home"); }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Buses/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null && Session["role"].ToString() == "societe")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Bus bus = db.Buses.Find(id);
-            if (bus == null)
-            {
-                return HttpNotFound();
-            }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Bus bus = db.Buses.Find(id);
+                if (bus == null)
+                {
+                    return HttpNotFound();
+                }
 
-            ViewBag.navr = db.Navettes.ToList();
-            return View(bus);
+                ViewBag.navr = db.Navettes.ToList();
+                return View(bus);
+            }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Buses/Delete/5
@@ -178,7 +188,7 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if (Session["UserID"] != null)
+            if (Session["UserID"] != null&&Session["role"].ToString()=="societe")
             {
                 int ids = int.Parse((Session["UserID"].ToString()));
             Bus bus = db.Buses.Find(id);
@@ -186,7 +196,8 @@ namespace BookingBus.Controllers
             db.SaveChanges();
             return RedirectToAction("Index",new {id=ids});
             }
-            else { return RedirectToAction("Login", "home"); }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)

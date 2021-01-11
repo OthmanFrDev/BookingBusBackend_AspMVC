@@ -1,4 +1,5 @@
 ﻿using BookingBus.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -12,15 +13,32 @@ namespace BookingBus.Controllers
 
         // GET: Demandes
   
-        public ActionResult Index(int? id)
+        public ActionResult Index(int? id ,string? msg)
         {
             if (id != null) { ViewBag.id = id;
             var demandes = db.Demandes.Include(d => d.Client).Where(d => d.id_client == id);
             return View(demandes.ToList()); }
             else {
+                if (msg != null) { ViewBag.msg = msg; }
                 var demandes = db.Demandes.Include(d => d.Client);
                 return View(demandes.ToList());
             }
+        }
+        [HttpPost]
+     public ActionResult Ajouterdemande(int id) 
+        {
+            if(Session["UserID"]!=null&& Session["role"].ToString() == "societe") 
+            {
+                var query = (from d in db.Demandes where d.id_demande == id select d).FirstOrDefault();
+                var check = (from t in db.Navettes where t.lieu_depart == query.depart && t.lieu_arriver == query.arriver select t).FirstOrDefault();
+                if (check != null) 
+                {
+                    return RedirectToAction("create", "abonnements",new { id=Session["UserID"].ToString(),id_navette=check.id_navette});
+                }
+                else { string msg = "no route was found !"; return RedirectToAction("index",new { msg=msg}); }
+            }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "home"); }
+            return RedirectToAction("index", "home");
         }
 
         // GET: Demandes/Details/5
@@ -41,10 +59,13 @@ namespace BookingBus.Controllers
         // GET: Demandes/Create
         public ActionResult Create(int id)
         {
-
+            if (Session["UserID"] != null && Session["role"].ToString() == "client") { 
             ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur");
             ViewBag.id = id;
             return View();
+            }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Demandes/Create
@@ -78,7 +99,9 @@ namespace BookingBus.Controllers
         // GET: Demandes/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null && Session["role"].ToString() == "client")
+            {
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -90,6 +113,9 @@ namespace BookingBus.Controllers
             ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", demande.id_client);
             ViewBag.number = demande.number;
             return View(demande);
+            }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Demandes/Edit/5

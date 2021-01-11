@@ -30,14 +30,7 @@
             @Html.ValidationMessageFor(model => model.date_fin, "", new { @class = "text-danger fadeIn second" })<br />
             
             @Html.LabelFor(model => model.Navette.lieu_depart, "Trajet", htmlAttributes: new { @class = "fadeIn second" })<br />
-            <select name="id_navette">
-                @if (ViewBag.navr != null) {
-                foreach (var item in ViewBag.navr)
-                {
-                    <option value="@item.id_navette">@item.lieu_depart - @item.lieu_arriver</option>
-                }
-                }
-            </select>
+            @Html.DropDownList("id_navette",null,htmlAttributes:new {@class = "fadeIn second" })
             @Html.ValidationMessageFor(model => model.id_navette, "", new { @class = "text-danger fadeIn second" })<br />
             <input name="id_societe" type="hidden" value="@ViewBag.id" /><br />
             @Html.ValidationMessageFor(model => model.id_societe, "", new { @class = "text-danger fadeIn second" })

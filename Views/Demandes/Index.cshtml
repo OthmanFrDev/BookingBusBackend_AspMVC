@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<h2 class="text-danger">@ViewBag.msg</h2>
 <div class="container">
     @if (Session["role"] != null)
     {
@@ -42,38 +42,49 @@
         </thead>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.depart)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.arriver)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date_depart.TimeOfDay)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date_arriver.TimeOfDay)
-                </td>
-                
-                <td>
-                    @Html.DisplayFor(modelItem => item.number)
-                </td>
-                @if (Session["role"] != null)
-                {
-                    if (Session["role"].ToString() == "client")
-                    {
-                        <td >
-                            <a href="@Url.Action("Edit", new { id = item.id_demande })"> <i class="fas fa-edit m-2"></i></a>
-                            <a href="@Url.Action("Details", new { id = item.id_demande })"><i class="fas fa-info-circle m-2"></i></a>
-                            <a href="@Url.Action("delete", new { id = item.id_demande })"><i class="fas fa-trash-alt m-2"></i></a>
-                            
-                          
-                        </td>
-                    }
-                }
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.depart)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.arriver)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.date_depart.TimeOfDay)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.date_arriver.TimeOfDay)
+    </td>
 
-            </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.number)
+    </td>
+    @if (Session["role"] != null)
+    {
+        if (Session["role"].ToString() == "client")
+        {
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.id_demande })"> <i class="fas fa-edit m-2"></i></a>
+                <a href="@Url.Action("Details", new { id = item.id_demande })"><i class="fas fa-info-circle m-2"></i></a>
+                <a href="@Url.Action("delete", new { id = item.id_demande })"><i class="fas fa-trash-alt m-2"></i></a>
+
+
+            </td>
+        }
+        else if (Session["role"].ToString() == "societe")
+        {
+          
+                <td>
+                   @using (Html.BeginForm("AjouterDemande", "demandes", new { id = item.id_demande }, FormMethod.Post))
+                    {
+
+                    <input type="submit" class="btn-link border-0" value="Accpeter" />
+                    }
+                </td>
+        }
+     }
+
+</tr>
         }
 
 </table>
