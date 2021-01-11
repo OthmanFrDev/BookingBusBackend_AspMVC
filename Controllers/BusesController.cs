@@ -1,7 +1,10 @@
 ﻿using BookingBus.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace BookingBus.Controllers
@@ -48,26 +51,34 @@ namespace BookingBus.Controllers
             ViewBag.navr = db.Navettes.ToList();
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu");
             
-            return View();
+            return View(); 
         }
-
+         
         // POST: Buses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost] 
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_bus,nom,nbr_place,climatiseur,tv,description,id_societe,id_navette")] Bus bus)
+        public ActionResult Create([Bind(Include = "id_bus,nom,nbr_place,climatiseur,tv,description,id_societe,id_navette,image")] Bus bus,HttpPostedFileBase imagefile)
         {
             if (Session["UserID"] != null)
             {
                 int ids = int.Parse((Session["UserID"].ToString()));
             if (ModelState.IsValid)
             {
+                    if (imagefile != null) { 
+                string namePic = Path.GetFileNameWithoutExtension(imagefile.FileName);
+                string ext = Path.GetExtension(imagefile.FileName);
+                namePic += System.DateTime.Now.ToString("yymmssfff") + ext;
+                string path = Path.Combine(Server.MapPath("~/Content/"), namePic);
+                bus.image = namePic;
+                imagefile.SaveAs(path);}
+                    else { bus.image = "defaultbus.png"; }
+                bus.nbr_place = (int)bus.nbr_place;
                 db.Buses.Add(bus);
                 db.SaveChanges();
                 return RedirectToAction("Index", new { id = ids });
             }
-
             ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", bus.id_navette);
             ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", bus.id_societe);
             
@@ -79,17 +90,33 @@ namespace BookingBus.Controllers
         // GET: Buses/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Bus bus = db.Buses.Find(id);
+            ViewBag.id = Session["user_id"];
+            ViewBag.navr = db.Navettes.ToList();
+            //ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", bus.id_navette);
+            ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", bus.id_societe);
+            List<SelectListItem> Navette = new List<SelectListItem>();
+            string navetta = "";
+            foreach (var n in db.Navettes)
+            {
+                navetta = n.lieu_depart + " - " + n.lieu_arriver;
+                Navette.Add(new SelectListItem { Text = navetta ,Value=n.id_navette.ToString()}) ;
+            }
+            var req = (from n in db.Navettes where n.id_navette == bus.id_navette select n).FirstOrDefault();
+            Navette.Find(n => n.Text == req.lieu_depart + " - " + req.lieu_arriver).Selected=true;
+            ViewBag.id_navette = Navette;
+            ViewBag.id = Session["user_id"];
+
             if (bus == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.id_navette = new SelectList(db.Navettes, "id_navette", "lieu_depart", bus.id_navette);
-            ViewBag.id_societe = new SelectList(db.Societes, "id_utilisateur", "lieu", bus.id_societe);
+            
             return View(bus);
         }
 
@@ -98,13 +125,26 @@ namespace BookingBus.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_bus,nom,nbr_place,climatiseur,tv,description,id_societe,id_navette")] Bus bus)
+        public ActionResult Edit([Bind(Include = "id_bus,nom,nbr_place,climatiseur,tv,description,id_societe,id_navette,image")] Bus bus,HttpPostedFileBase imagefile)
         {
+
             if (Session["UserID"] != null)
             {
                 int ids = int.Parse((Session["UserID"].ToString()));
+
+            string namePic = Path.GetFileNameWithoutExtension(imagefile.FileName);
+            string ext = Path.GetExtension(imagefile.FileName);
+            namePic += System.DateTime.Now.ToString("yymmssfff") + ext;
+            string path = Path.Combine(Server.MapPath("~/Content/"), namePic);
+            bus.image = namePic;
+            imagefile.SaveAs(path);
+
+           
+
             if (ModelState.IsValid)
             {
+                
+                bus.nbr_place = (int)bus.nbr_place;
                 db.Entry(bus).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index", new { id = ids });
@@ -128,6 +168,8 @@ namespace BookingBus.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.navr = db.Navettes.ToList();
             return View(bus);
         }
 

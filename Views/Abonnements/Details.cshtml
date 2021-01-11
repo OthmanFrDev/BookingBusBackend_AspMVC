@@ -4,63 +4,44 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.date_debut)
+            </dt>
 
-<div>
-    <h4>Abonnement</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.date_debut)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.date_debut)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_debut)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.date_fin)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date_fin)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.date_fin)
+            </dd>
+            <dd>
+                @Html.DisplayFor(model => model.id_societe)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_fin)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.prix)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.id_societe)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.prix)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.id_societe)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Navette.lieu_depart)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prix)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.prix)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Navette.lieu_depart)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Navette.lieu_depart)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Societe.lieu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Societe.lieu)
-        </dd>
-
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.Navette.lieu_depart)
+            </dd>
+            @Html.ActionLink("Retour", "Index")
+        </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id_abonnement }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

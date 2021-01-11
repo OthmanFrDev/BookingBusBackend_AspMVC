@@ -5,23 +5,23 @@
       <PropertyRef Name="id_abonnement" />
     </Key>
     <Property Name="id_abonnement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nom_abonnement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="date_debut" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="date_fin" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="date_debut" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_fin" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="id_navette" Type="Int32" Nullable="false" />
-    <Property Name="id_societe" Type="Int32" Nullable="false" />
+    <Property Name="id_societe" Type="Int32" />
     <Property Name="prix" Type="Single" Nullable="false" />
+    <Property Name="nom_abonnement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Navette" Relationship="Self.FK_Abonnement_Navette" FromRole="Abonnement" ToRole="Navette" />
-    <NavigationProperty Name="Societe" Relationship="Self.FK_Abonnement_Societe" FromRole="Abonnement" ToRole="Societe" />
     <NavigationProperty Name="Effectuers" Relationship="Self.FK_Effectuer_Abonnement" FromRole="Abonnement" ToRole="Effectuer" />
+    <NavigationProperty Name="Societe1" Relationship="BookingBusModel.FK__Abonnemen__id_so__01142BA1" FromRole="Abonnement" ToRole="Societe" />
   </EntityType>
   <EntityType Name="Admin">
     <Key>
       <PropertyRef Name="id_utilisateur" />
     </Key>
     <Property Name="id_utilisateur" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Utilisateur" Relationship="Self.fk_ct1" FromRole="Admin" ToRole="Utilisateur" />
+    <NavigationProperty Name="Utilisateur" Relationship="Self.fk_ct124" FromRole="Admin" ToRole="Utilisateur" />
   </EntityType>
   <EntityType Name="Bus">
     <Key>
@@ -44,7 +44,7 @@
       <PropertyRef Name="id_utilisateur" />
     </Key>
     <Property Name="id_utilisateur" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Utilisateur" Relationship="Self.fk_ct2" FromRole="Client" ToRole="Utilisateur" />
+    <NavigationProperty Name="Utilisateur" Relationship="Self.fk_ct13" FromRole="Client" ToRole="Utilisateur" />
     <NavigationProperty Name="Demandes" Relationship="Self.FK_Demande_Client" FromRole="Client" ToRole="Demande" />
     <NavigationProperty Name="Effectuers" Relationship="Self.FK_Effectuer_Client" FromRole="Client" ToRole="Effectuer" />
   </EntityType>
@@ -55,8 +55,8 @@
     <Property Name="id_demande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="depart" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="arriver" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="date_depart" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="date_arriver" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="date_depart" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_arriver" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="id_client" Type="Int32" Nullable="false" />
     <Property Name="number" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Client" Relationship="Self.FK_Demande_Client" FromRole="Demande" ToRole="Client" />
@@ -68,7 +68,7 @@
     </Key>
     <Property Name="id_client" Type="Int32" Nullable="false" />
     <Property Name="id_abonnement" Type="Int32" Nullable="false" />
-    <Property Name="duree" Type="Int32" />
+    <Property Name="duree" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Abonnement" Relationship="Self.FK_Effectuer_Abonnement" FromRole="Effectuer" ToRole="Abonnement" />
     <NavigationProperty Name="Client" Relationship="Self.FK_Effectuer_Client" FromRole="Effectuer" ToRole="Client" />
   </EntityType>
@@ -90,9 +90,9 @@
     </Key>
     <Property Name="id_utilisateur" Type="Int32" Nullable="false" />
     <Property Name="lieu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Abonnements" Relationship="Self.FK_Abonnement_Societe" FromRole="Societe" ToRole="Abonnement" />
     <NavigationProperty Name="Buses" Relationship="Self.FK_Bus_Societe" FromRole="Societe" ToRole="Bus" />
     <NavigationProperty Name="Utilisateur" Relationship="Self.fk_ct3" FromRole="Societe" ToRole="Utilisateur" />
+    <NavigationProperty Name="Abonnements" Relationship="BookingBusModel.FK__Abonnemen__id_so__01142BA1" FromRole="Societe" ToRole="Abonnement" />
   </EntityType>
   <EntityType Name="Utilisateur">
     <Key>
@@ -104,23 +104,20 @@
     <Property Name="mdp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Admin" Relationship="Self.fk_ct1" FromRole="Utilisateur" ToRole="Admin" />
-    <NavigationProperty Name="Client" Relationship="Self.fk_ct2" FromRole="Utilisateur" ToRole="Client" />
+    <NavigationProperty Name="Admin" Relationship="Self.fk_ct124" FromRole="Utilisateur" ToRole="Admin" />
+    <NavigationProperty Name="Client" Relationship="Self.fk_ct13" FromRole="Utilisateur" ToRole="Client" />
     <NavigationProperty Name="Societe" Relationship="Self.fk_ct3" FromRole="Utilisateur" ToRole="Societe" />
+    <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Ville">
     <Key>
       <PropertyRef Name="id_ville" />
-      <PropertyRef Name="nom" />
     </Key>
     <Property Name="id_ville" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Abonnement_Navette">
-    <End Role="Navette" Type="Self.Navette" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Role="Navette" Type="Self.Navette" Multiplicity="1" />
     <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Navette">
@@ -128,18 +125,6 @@
       </Principal>
       <Dependent Role="Abonnement">
         <PropertyRef Name="id_navette" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Abonnement_Societe">
-    <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
-    <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Societe">
-        <PropertyRef Name="id_utilisateur" />
-      </Principal>
-      <Dependent Role="Abonnement">
-        <PropertyRef Name="id_societe" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -155,7 +140,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_ct1">
+  <Association Name="fk_ct124">
     <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -170,9 +155,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Bus_Navette">
-    <End Role="Navette" Type="Self.Navette" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Role="Navette" Type="Self.Navette" Multiplicity="1" />
     <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Navette">
@@ -195,7 +178,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_ct2">
+  <Association Name="fk_ct13">
     <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -210,9 +193,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Demande_Client">
-    <End Role="Client" Type="Self.Client" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
     <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Client">
@@ -224,9 +205,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Effectuer_Client">
-    <End Role="Client" Type="Self.Client" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
     <End Role="Effectuer" Type="Self.Effectuer" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Client">
@@ -266,15 +245,11 @@
       <End Role="Navette" EntitySet="Navettes" />
       <End Role="Abonnement" EntitySet="Abonnements" />
     </AssociationSet>
-    <AssociationSet Name="FK_Abonnement_Societe" Association="Self.FK_Abonnement_Societe">
-      <End Role="Societe" EntitySet="Societes" />
-      <End Role="Abonnement" EntitySet="Abonnements" />
-    </AssociationSet>
     <AssociationSet Name="FK_Effectuer_Abonnement" Association="Self.FK_Effectuer_Abonnement">
       <End Role="Abonnement" EntitySet="Abonnements" />
       <End Role="Effectuer" EntitySet="Effectuers" />
     </AssociationSet>
-    <AssociationSet Name="fk_ct1" Association="Self.fk_ct1">
+    <AssociationSet Name="fk_ct124" Association="Self.fk_ct124">
       <End Role="Utilisateur" EntitySet="Utilisateurs" />
       <End Role="Admin" EntitySet="Admins" />
     </AssociationSet>
@@ -286,7 +261,7 @@
       <End Role="Societe" EntitySet="Societes" />
       <End Role="Bus" EntitySet="Buses" />
     </AssociationSet>
-    <AssociationSet Name="fk_ct2" Association="Self.fk_ct2">
+    <AssociationSet Name="fk_ct13" Association="Self.fk_ct13">
       <End Role="Utilisateur" EntitySet="Utilisateurs" />
       <End Role="Client" EntitySet="Clients" />
     </AssociationSet>
@@ -302,5 +277,21 @@
       <End Role="Utilisateur" EntitySet="Utilisateurs" />
       <End Role="Societe" EntitySet="Societes" />
     </AssociationSet>
+    <AssociationSet Name="FK__Abonnemen__id_so__01142BA1" Association="BookingBusModel.FK__Abonnemen__id_so__01142BA1">
+      <End Role="Societe" EntitySet="Societes" />
+      <End Role="Abonnement" EntitySet="Abonnements" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK__Abonnemen__id_so__01142BA1">
+    <End Type="BookingBusModel.Societe" Role="Societe" Multiplicity="0..1" />
+    <End Type="BookingBusModel.Abonnement" Role="Abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Societe">
+        <PropertyRef Name="id_utilisateur" />
+      </Principal>
+      <Dependent Role="Abonnement">
+        <PropertyRef Name="id_societe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

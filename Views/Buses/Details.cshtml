@@ -4,84 +4,79 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.nom)
+                </dt>
 
-<div>
-    <h4>Bus</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nom)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.nom)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.nom)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.nbr_place)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nbr_place)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.nbr_place)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.nbr_place)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.climatiseur)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.climatiseur)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.climatiseur)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.climatiseur)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.tv)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tv)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.tv)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.tv)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.description)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.description)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Navette.lieu_depart)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Navette.lieu_depart)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Navette.lieu_depart)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Navette.lieu_depart)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Navette.lieu_arriver)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Navette.lieu_arriver)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Navette.lieu_arriver)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Navette.date_depart)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Navette.lieu_arriver)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Navette.date_depart)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Navette.date_depart)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Navette.date_arriver)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Navette.date_depart)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Navette.date_arriver)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Navette.date_arriver)
-        </dd>
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.Navette.date_arriver)
+                </dd>
+            </dl>
+            @Html.ActionLink("Retour", "Index")
+        </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id_bus }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

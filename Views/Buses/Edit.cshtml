@@ -4,91 +4,57 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit","Buses", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Bus</h4>
-        <hr />
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="~/Content/BookingBus.png" id="icon" alt="User Icon" />
+        </div>
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id_bus)
+        @Html.HiddenFor(model => model.id_societe)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.nbr_place, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nbr_place, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nbr_place, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "fadeIn second" })
+        <br />
+        @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "fadeIn second" } })
+        @Html.ValidationMessageFor(model => model.nom, "", new { @class = " text-danger fadeIn second" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.climatiseur, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.climatiseur)
-                    @Html.ValidationMessageFor(model => model.climatiseur, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+        @Html.LabelFor(model => model.nbr_place, htmlAttributes: new { @class = "fadeIn second" })
+        <br />
+        @Html.EditorFor(model => model.nbr_place, new { htmlAttributes = new { @type = "text", @class = "fadeIn second" } })
+        @Html.ValidationMessageFor(model => model.nbr_place, "", new { @class = "  text-danger fadeIn second" })
+        <br />
+        @Html.LabelFor(model => model.climatiseur, htmlAttributes: new { @class = "fadeIn second" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.tv, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.tv)
-                    @Html.ValidationMessageFor(model => model.tv, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+        @Html.EditorFor(model => model.climatiseur)
+        @Html.ValidationMessageFor(model => model.climatiseur, "", new { @class = "  text-danger fadeIn second" })
+        <br />
+        @Html.LabelFor(model => model.tv, htmlAttributes: new { @class = "fadeIn second" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.EditorFor(model => model.tv)
+        @Html.ValidationMessageFor(model => model.tv, "", new { @class = "  text-danger fadeIn second" })
+        <br />
+        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "fadeIn second" })
+        @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "fadeIn second" } })
+        @Html.ValidationMessageFor(model => model.description, "", new { @class = " text-danger fadeIn second" })
+        <br />
+        @Html.LabelFor(model => model.Navette.lieu_depart, "depart", htmlAttributes: new { @class = "fadeIn second" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_societe, "id_societe", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("id_societe", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.id_societe, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_navette, "id_navette", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("id_navette", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.id_navette, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+        @Html.DropDownList("id_navette", null, htmlAttributes: new { @class = "fadeIn second" })
+        @Html.ValidationMessageFor(model => model.id_navette, "", new { @class = "text-danger" })
+        <br />
+        <input type="file" name="imagefile" class="fadeIn second" />
+        <br />
+        <input type="submit" class="fadeIn fourth" value="Modifier" style="background-color: #F59A2E" />
     </div>
+</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

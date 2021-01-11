@@ -1,7 +1,9 @@
 ﻿using BookingBus.Models;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace BookingBus.Controllers
@@ -66,17 +68,28 @@ namespace BookingBus.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_utilisateur,nom_complet,mail,mdp,telephone,role")] Utilisateur utilisateur,string lieu)
+        public ActionResult Create([Bind(Include = "id_utilisateur,nom_complet,mail,mdp,telephone,role,image")] Utilisateur utilisateur,string lieu,HttpPostedFileBase imagefile)
         {
+
             var exist = db.Utilisateurs.Where(u => u.mail == utilisateur.mail).FirstOrDefault();
             if (utilisateur.role == null) { return RedirectToAction("Index", "Home"); }
             if (exist != null) { ViewBag.exist = "mail already exsit please select a new one"; return View(utilisateur); }
             else { 
+
             if (ModelState.IsValid)
             {
-                
+                    if (imagefile != null) { 
+                string namePic = Path.GetFileNameWithoutExtension(imagefile.FileName);
+                string ext = Path.GetExtension(imagefile.FileName);
+                namePic += System.DateTime.Now.ToString("yymmssfff") + ext;
+                string path = Path.Combine(Server.MapPath("~/Content/UserPic/"), namePic);
+                utilisateur.image = namePic;
+                imagefile.SaveAs(path);}
+                    else
+                    {
+                        utilisateur.image = "default.jpg";
+                    }
                 db.Utilisateurs.Add(utilisateur);
-                
                 if (utilisateur.role == "client") { db.Clients.Add(new Client { id_utilisateur=utilisateur.id_utilisateur}); }
                 else if (utilisateur.role == "admin") { db.Admins.Add(new Admin { id_utilisateur = utilisateur.id_utilisateur }); }
                 else if (utilisateur.role == "societe") { db.Societes.Add(new Societe { id_utilisateur = utilisateur.id_utilisateur ,lieu=lieu}); }

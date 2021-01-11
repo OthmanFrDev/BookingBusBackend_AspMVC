@@ -7,34 +7,35 @@
 
 
 
-@Html.ActionLink("create new bus", "create", new { id = ViewBag.id }, "")
 
-<div class="container">
-    <div class="row">
-
-        @foreach (var item in Model)
-        {<div class="col-lg-4 col-md-4 col-sm-4">
-                <div class="card">
-                    <div class="image" style="  text-align:center">
-                        <img style="height:200px;" src="~/Content/@item.image"/>
-                    </div>
-                    <div class="card-inner">
-                        <div class="header">
-                            <h2>@item.nom</h2>
-                            <h3>@item.Navette.lieu_arriver-@item.Navette.lieu_depart</h3>
+    <div class="container">
+        <div class="col m-3" style="text-align:center">
+            <a class="btn" style="background-color: #F59A2E" href="@Url.Action("Create",new { id = ViewBag.id })"><i class="fas fa-plus"></i>Ajouter un Bus</a>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {<div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="card">
+                        <div class="image" style="  text-align:center">
+                            <img style="height:200px;" src="~/Content/@item.image" />
                         </div>
-                        <div class="content">
-                            
-                            @Html.ActionLink("Edit", "Edit", new { id = item.id_bus }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.id_bus }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.id_bus })
+                        <div class="card-inner">
+                            <div class="header">
+                                <h2>@item.nom</h2>
+                                <h3>@item.Navette.lieu_arriver-@item.Navette.lieu_depart</h3>
+                            </div>
+                            <div class="content">
+
+                                @Html.ActionLink("Edit", "Edit", new { id = item.id_bus }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.id_bus }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.id_bus })
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
 
-        }
+            }
+        </div>
     </div>
-</div>

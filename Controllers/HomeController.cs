@@ -58,6 +58,8 @@ namespace BookingBus.Controllers
                         Session["mail"] = obj.mail.ToString();
                         Session["telephone"] = obj.telephone.ToString();
                         Session["role"] = obj.role.ToString();
+                        if (obj.image != null) {Session["img"] = obj.image.ToString(); }
+                        else { Session["img"] = "default.jpg"; }
 
                         //Session["user"] = objUser;
                         return RedirectToAction("UserDashBoard");

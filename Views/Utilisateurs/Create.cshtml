@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","Utilisateurs",FormMethod.Post,new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -24,11 +24,16 @@
                 <input type="password" id="login" class="fadeIn second" name="mdp" placeholder="Mot de passe">
                 <input type="password" id="password" class="fadeIn third" placeholder="Mot de passe">
                 <input type="text" id="login" class="fadeIn second" name="telephone" placeholder="06-XX-XX-XX-XX">
-                @if (ViewBag.role=="societe")
-                {
+             @if (ViewBag.role != null)
+             { 
+               if (ViewBag.role=="societe")
+              {
                     <input type="text" id="login" class="fadeIn second" name="lieu" placeholder="Lieu">
-                }
-               
+              }
+             }
+
+                <input type="file" name="imagefile" class="fadeIn second" />
+
                 <input hidden name="role" value="@ViewBag.role" />
                 <input type="submit" class="fadeIn fourth" value="S'inscrire" style="background-color: #F59A2E">
 

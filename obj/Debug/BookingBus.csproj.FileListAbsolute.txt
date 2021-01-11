@@ -153,7 +153,7 @@ C:\Users\MSI\source\repos\BookingBusBackend\bin\fr\System.Web.Webpages.Deploymen
 C:\Users\MSI\source\repos\BookingBusBackend\bin\fr\System.Web.Webpages.Razor.resources.dll
 C:\Users\MSI\source\repos\BookingBusBackend\bin\fr\System.Web.Helpers.resources.dll
 C:\Users\MSI\source\repos\BookingBusBackend\bin\fr\System.Web.Mvc.resources.dll
+C:\Users\MSI\source\repos\BookingBusBackend\obj\Debug\BookingBus.csprojAssemblyReference.cache
 C:\Users\MSI\source\repos\BookingBusBackend\obj\Debug\BookingBus.csproj.CopyComplete
 C:\Users\MSI\source\repos\BookingBusBackend\obj\Debug\BookingBus.dll
 C:\Users\MSI\source\repos\BookingBusBackend\obj\Debug\BookingBus.pdb
-C:\Users\MSI\source\repos\BookingBusBackend\obj\Debug\BookingBus.csprojAssemblyReference.cache

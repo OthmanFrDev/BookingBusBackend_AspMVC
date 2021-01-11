@@ -4,71 +4,39 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Abonnement</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id_abonnement)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.date_debut, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.date_debut, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.date_debut, "", new { @class = "text-danger" })
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="col" style="text-align:center">
+                <h1 style="color: #F59A2E"> Modifier un Abonnement</h1>
             </div>
-        </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger fadeIn second" })
+            @Html.HiddenFor(model => model.id_abonnement)
+            @Html.LabelFor(model => model.date_debut, htmlAttributes: new { @class = "fadeIn second" })<br />
+            @Html.EditorFor(model => model.date_debut, new { htmlAttributes = new { Type = "date", @class = "fadeIn second" } })
+            <br />
+            @Html.ValidationMessageFor(model => model.date_debut, "", new { @class = "text-danger fadeIn second" })
+            <br />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.date_fin, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.date_fin, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.date_fin, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            @Html.LabelFor(model => model.date_fin, htmlAttributes: new { @class = "fadeIn second" })<br />
+            @Html.EditorFor(model => model.date_fin, new { htmlAttributes = new { Type = "date", @class = "fadeIn second" } })<br />
+            @Html.ValidationMessageFor(model => model.date_fin, "", new { @class = "text-danger fadeIn second" })<br />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_navette, "id_navette", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("id_navette", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.id_navette, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            @Html.LabelFor(model => model.Navette.lieu_depart, "Trajet", htmlAttributes: new { @class = "fadeIn second" })<br />
+            @Html.DropDownList("id_navette", null, htmlAttributes: new { @class = "fadeIn second" })
+            @Html.ValidationMessageFor(model => model.id_navette, "", new { @class = "text-danger fadeIn second" })<br />
+            <input name="id_societe" type="hidden" value="@ViewBag.id" /><br />
+            @Html.ValidationMessageFor(model => model.id_societe, "", new { @class = "text-danger fadeIn second" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_societe, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.id_societe, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.id_societe, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.prix, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prix, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prix, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            @Html.LabelFor(model => model.prix, htmlAttributes: new { @class = "fadeIn second" })<br />
+            @Html.EditorFor(model => model.prix, new { htmlAttributes = new { @class = "fadeIn second" } })<br />
+            @Html.ValidationMessageFor(model => model.prix, "", new { @class = "text-danger fadeIn second" })
+            <input type="submit" class="fadeIn fourth" value="Modifier" style="background-color: #F59A2E" />
+            @Html.ActionLink("Retour", "Index")
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

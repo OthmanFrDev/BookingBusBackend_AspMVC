@@ -4,65 +4,29 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
+    <div class="container">
+        <h3 class="text-danger text-center">@ViewBag.exist</h3>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="card">
+                        <div class="image">
+                            <img src="~/Content/UserPic/@item.Abonnement.Societe1.Utilisateur.image" style="width:320px;height:150px;" />
+                        </div>
+                        <div class="card-inner">
+                            <div class="header" style="text-align:center">
+                                <h2 style="color:black">Duree : @item.duree</h2>
+                                <h4>@item.Abonnement.Navette.lieu_depart -@item.Abonnement.Navette.lieu_arriver</h4>
 
-<h3 class="text-danger text-center">@ViewBag.exist</h3>
-    
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Abonnement.image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Abonnement.nom_abonnement)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Client.Utilisateur.nom_complet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.duree)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Abonnement.Navette.lieu_depart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Abonnement.Navette.lieu_arriver)
-        </th>
+                            </div>
+                            <div class="content" style="text-align:center">
+                                <a href="@Url.Action("Delete", "Effectuers", new {  id1=item.id_client,id2=item.id_abonnement})" class="btn fadeIn fourth" style="background-color: #F59A2E">Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 
-        <th></th>
-    </tr>
-        
-    @foreach (var item in Model)
-    {   var duree = item.Abonnement.date_fin.Subtract(System.DateTime.Now).Days;
-        if (duree>0) { 
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Abonnement.image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Abonnement.nom_abonnement)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Client.Utilisateur.nom_complet)
-        </td>
-        <td>
-
-            @Html.DisplayFor(modelItem => duree)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Abonnement.Navette.lieu_depart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Abonnement.Navette.lieu_arriver)
-        </td>
-
-        <td>
-
-
-            @Html.ActionLink("Delete", "Delete", new { id1 = item.id_client, id2 = item.id_abonnement })
-        </td>
-    </tr>
-        }
-    }
-
-</table>
-  
