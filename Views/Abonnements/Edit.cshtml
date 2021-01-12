@@ -35,7 +35,7 @@
             @Html.EditorFor(model => model.prix, new { htmlAttributes = new { @class = "fadeIn second" } })<br />
             @Html.ValidationMessageFor(model => model.prix, "", new { @class = "text-danger fadeIn second" })
             <input type="submit" class="fadeIn fourth" value="Modifier" style="background-color: #F59A2E" />
-            @Html.ActionLink("Retour", "Index")
+            @Html.ActionLink("Retour", "Index", new { ids = Session["UserID"].ToString() })
         </div>
     </div>
 }

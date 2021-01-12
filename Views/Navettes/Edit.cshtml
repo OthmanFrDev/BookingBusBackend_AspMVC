@@ -42,9 +42,10 @@
                 <br />
                 @Html.ValidationMessageFor(model => model.date_arriver, "", new { @class = "fadeIn second" })
             </div>
-            <input type="submit" value="Create" style="background-color: #F59A2E" class="fadeIn fourt" />
+            <input type="submit" value="modifier" style="background-color: #F59A2E" class="fadeIn fourt" />
         </form>
     </div>
+    @Html.ActionLink("Retour", "Index")
 </div>
 }
 <script src="~/Scripts/jquery-3.5.1.min.js"></script>

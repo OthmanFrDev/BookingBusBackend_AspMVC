@@ -41,7 +41,7 @@
             <dd>
                 @Html.DisplayFor(model => model.Navette.lieu_depart)
             </dd>
-            @Html.ActionLink("Retour", "Index")
+            @Html.ActionLink("Retour", "Index", new { ids = Session["UserID"].ToString() })
         </dl>
     </div>
 </div>

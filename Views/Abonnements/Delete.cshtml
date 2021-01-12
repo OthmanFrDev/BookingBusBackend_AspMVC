@@ -52,7 +52,7 @@
 
                 <div class="form-actions no-color">
                     <input type="submit" value="Supprimer" class="fadeIn fourth" style="background-color: #F59A2E" /> |
-                    @Html.ActionLink("Retour", "Index")
+                    @Html.ActionLink("Retour", "Index",new { ids=Session["UserID"].ToString()})
                 </div>
         }
     </div>
