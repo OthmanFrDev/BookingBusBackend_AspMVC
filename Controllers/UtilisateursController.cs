@@ -27,8 +27,20 @@ namespace BookingBus.Controllers
             if (Session["UserID"] != null && Session["role"].ToString() == "admin") 
             { 
                 ViewBag.role = role;
-                 if (role == "client") { var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Client); return View(utilisateurs.ToList()); }
-                 else if (role == "societe") { var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Societe); return View(utilisateurs.ToList()); }
+                 if (role == "client")
+                { 
+                    var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Client); 
+                    int i = utilisateurs.Select(a => a.id_utilisateur).FirstOrDefault();
+                    if (i == 0) { ViewBag.msg = "no client to be found!"; }
+                    return View(utilisateurs.ToList()); 
+                }
+                 else if (role == "societe") 
+                {
+                    var utilisateurs = db.Utilisateurs.Where(u => u.role == role).Include(u => u.Societe);
+                    int i = utilisateurs.Select(a => a.id_utilisateur).FirstOrDefault();
+                    if (i == 0) { ViewBag.msg = "no societe to be found!"; }
+                    return View(utilisateurs.ToList()); 
+                }
                  return View("Index", "Admins");
             }
         

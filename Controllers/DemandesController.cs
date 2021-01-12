@@ -17,10 +17,14 @@ namespace BookingBus.Controllers
         {
             if (id != null) { ViewBag.id = id;
             var demandes = db.Demandes.Include(d => d.Client).Where(d => d.id_client == id);
-            return View(demandes.ToList()); }
+                int i = demandes.Select(a => a.id_demande).FirstOrDefault();
+                if (i == 0) { ViewBag.messaged = "no demande to be found!"; }
+                return View(demandes.ToList()); }
             else {
                 if (msg != null) { ViewBag.msg = msg; }
                 var demandes = db.Demandes.Include(d => d.Client);
+                int i = demandes.Select(a => a.id_demande).FirstOrDefault();
+                if (i == 0) { ViewBag.messaged = "no demande to be found!"; }
                 return View(demandes.ToList());
             }
         }

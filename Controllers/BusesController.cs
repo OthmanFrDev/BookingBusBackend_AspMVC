@@ -21,8 +21,9 @@ namespace BookingBus.Controllers
                 int ids = int.Parse((Session["UserID"].ToString()));
             ViewBag.id = ids;
             var buses = db.Buses.Include(b => b.Navette).Include(b => b.Societe).Where(b=>b.id_societe==id);
-            
-            return View(buses.ToList()); 
+                int i = buses.Select(a => a.id_bus).FirstOrDefault();
+                if (i == 0) { ViewBag.msg = "buses not found !"; }
+                return View(buses.ToList()); 
             }
             else if (Session["UserID"] == null) { return RedirectToAction("login", "Home"); }
             return RedirectToAction("Index", "Home");

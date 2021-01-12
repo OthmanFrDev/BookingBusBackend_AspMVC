@@ -24,7 +24,8 @@ namespace BookingBus.Controllers
                 var query = (from e in effectuers join b in db.Buses on e.Abonnement.id_navette equals b.id_navette select b).ToList();
                 ViewBag.bus = query;
                 ViewBag.exist = message;
-
+                int i = effectuers.Select(a => a.id_abonnement).FirstOrDefault();
+                if (i == 0) { ViewBag.msg = "no abonnement reserved"; }
                 return View(effectuers.ToList());
             }else if(Session["UserID"] == null) { return RedirectToAction("login", "home"); }
             return RedirectToAction("login", "home");
@@ -66,7 +67,7 @@ namespace BookingBus.Controllers
                 {
                     db.Effectuers.Add(effectuer);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index",new { id=effectuer.id_client});
                 }
 
                 ViewBag.id_abonnement = new SelectList(db.Abonnements, "id_abonnement", "id_abonnement", effectuer.id_abonnement);

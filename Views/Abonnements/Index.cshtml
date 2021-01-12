@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<h2 class="text-danger">@ViewBag.msg</h2>
     <div class="container">
         <div class="col m-3" style="text-align:center">
             <a class="btn" style="background-color: #F59A2E" href="@Url.Action("Create",new { id = Session["UserID"].ToString() })"><i class="fas fa-plus"></i>Ajouter un Abonnement</a>

@@ -33,6 +33,8 @@ namespace BookingBus.Controllers
         {
             var abonnement = db.Abonnements;
             var query = from a in db.Abonnements join n in db.Navettes on a.id_navette equals n.id_navette where n.lieu_depart == ld && n.lieu_arriver == la select a;
+            int i = query.Select(a => a.id_abonnement).FirstOrDefault();
+            if (i==0) { ViewBag.msg = "abonnement not found !"; }
             return View(query.ToList());
 
         }

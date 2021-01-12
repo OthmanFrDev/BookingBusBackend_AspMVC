@@ -4,30 +4,32 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
-    <div class="container">
-        <h3 class="text-danger text-center">@ViewBag.exist</h3>
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="card">
-                        <div class="image">
-                            <img src="~/Content/UserPic/@item.Abonnement.Societe1.Utilisateur.image" style="width:320px;height:150px;" />
-                        </div>
-                        <div class="card-inner">
-                            <div class="header" style="text-align:center">
-                                <h2 style="color:black">Duree : @item.duree days</h2>
-                                <h2 style="color:black">Prix : @item.Abonnement.prix DH</h2>
-                                <h4> <p style="color: #F59A2E ;margin-bottom:unset">@item.Abonnement.Navette.lieu_depart</p>- <p style="color: #F59A2E;margin-bottom: unset">@item.Abonnement.Navette.lieu_arriver</p></h4>
 
-                            </div>  
-                            <div class="content" style="text-align:center">
-                                <a href="@Url.Action("Delete", "Effectuers", new {  id1=item.id_client,id2=item.id_abonnement})" class="btn fadeIn fourth" style="background-color: #F59A2E">Supprimer</a>
-                            </div>
+<div class="container">
+    <h2 class="text-danger">@ViewBag.msg</h2>
+    <h3 class="text-danger text-center">@ViewBag.exist</h3>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="card">
+                    <div class="image">
+                        <img src="~/Content/UserPic/@item.Abonnement.Societe1.Utilisateur.image" style="width:320px;height:150px;" />
+                    </div>
+                    <div class="card-inner">
+                        <div class="header" style="text-align:center">
+                            <h2 style="color:black">Duree : @item.duree days</h2>
+                            <h2 style="color:black">Prix : @item.Abonnement.prix DH</h2>
+                            <h4> <p style="color: #F59A2E ;margin-bottom:unset">@item.Abonnement.Navette.lieu_depart</p>- <p style="color: #F59A2E;margin-bottom: unset">@item.Abonnement.Navette.lieu_arriver</p></h4>
+
+                        </div>
+                        <div class="content" style="text-align:center">
+                            <a href="@Url.Action("Delete", "Effectuers", new {  id1=item.id_client,id2=item.id_abonnement})" class="btn fadeIn fourth" style="background-color: #F59A2E">Supprimer</a>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
+</div>
 

@@ -18,7 +18,9 @@ namespace BookingBus.Models
         public int id_demande { get; set; }
         public string depart { get; set; }
         public string arriver { get; set; }
+        [Display(Name = "Heure d'edpart")]
         public System.DateTime date_depart { get; set; }
+        [Display(Name = "Heure d'arrivée")]
         public System.DateTime date_arriver { get; set; }
         public int id_client { get; set; }
         public Nullable<int> number { get; set; }

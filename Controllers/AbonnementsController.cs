@@ -22,8 +22,10 @@ namespace BookingBus.Controllers
                 ViewBag.img = db.Societes.Find(id).Utilisateur.image;
 
             var abonnements = db.Abonnements.Include(a => a.Navette).Include(a => a.Societe1).Where(a=>a.id_societe==ids).ToList();
-              
-            return View(abonnements.ToList()); }
+                int i = abonnements.Select(a => a.id_abonnement).FirstOrDefault();
+                if (i == 0) { ViewBag.msg = "abonnement not found !"; }
+
+                return View(abonnements.ToList());}
             else if(Session["UserID"] == null) { return RedirectToAction("Login", "Home"); }
             return RedirectToAction("Login", "Home");
 
