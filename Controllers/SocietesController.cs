@@ -9,40 +9,46 @@ namespace BookingBus.Controllers
 {
     public class SocietesController : Controller
     {
-        
+
         private BookingBusEntities db = new BookingBusEntities();
 
         // GET: Societes
-        
+
         public ActionResult Index()
         {
 
             // new url().Urlsup(role);
-            if (Session["UserID"].ToString() != null) 
+            if (Session["UserID"].ToString() != null)
             {
-                if (Session["UserID"] != null && Session["role"].ToString() == "societe") { 
-                int id = int.Parse((Session["UserID"].ToString()));
-            ViewBag.id = id;
-             var societes = db.Abonnements.Where(s=>s.id_societe==id);
-            return View(societes.ToList());  }
-            else { return RedirectToAction("Index", "Home"); }
+                if (Session["UserID"] != null && Session["role"].ToString() == "societe")
+                {
+                    int id = int.Parse((Session["UserID"].ToString()));
+                    ViewBag.id = id;
+                    var societes = db.Abonnements.Where(s => s.id_societe == id);
+                    return View(societes.ToList());
+                }
+                else { return RedirectToAction("Index", "Home"); }
             }
             else { return RedirectToAction("login", "Home"); }
         }
         public ActionResult lister(string role)
         {
-            if (Session["UserID"].ToString() != null) { 
-            int id = int.Parse((Session["UserID"].ToString()));
-            if (Session["UserID"] != null && Session["role"].ToString() == "societe") {    if (role == "abonnement") { return RedirectToAction("Index", "Abonnements",new { ids=id}); }
-            else if (role == "bus") { return RedirectToAction("Index", "Buses", new { id = id }); }
-            return View();}
-            else { return RedirectToAction("Index", "Home"); }
+            if (Session["UserID"].ToString() != null)
+            {
+                int id = int.Parse((Session["UserID"].ToString()));
+                if (Session["UserID"] != null && Session["role"].ToString() == "societe")
+                {
+                    if (role == "abonnement") { return RedirectToAction("Index", "Abonnements", new { ids = id }); }
+                    else if (role == "bus") { return RedirectToAction("Index", "Buses", new { id = id }); }
+                    return View();
+                }
+                else { return RedirectToAction("Index", "Home"); }
             }
             else { return RedirectToAction("login", "Home"); }
         }
-        public ActionResult consulter() 
+        public ActionResult consulter()
         {
-            if (Session["UserID"] != null && Session["role"].ToString() == "societe") {  return RedirectToAction("Index", "Demandes");}
+            if (Session["UserID"] != null && Session["role"].ToString() == "societe") { return RedirectToAction("Index", "Demandes"); }
             else { return RedirectToAction("Index", "Home"); }
         }
         public ActionResult createbus(int id)
@@ -67,17 +73,19 @@ namespace BookingBus.Controllers
         // GET: Societes/Details/5
         public ActionResult Details(int? id)
         {
-            if (Session["UserID"] != null && Session["role"].ToString() == "societe") {
+            if (Session["UserID"] != null && Session["role"].ToString() == "societe")
+            {
                 if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Societe societe = db.Societes.Find(id);
+                if (societe == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(societe);
             }
-            Societe societe = db.Societes.Find(id);
-            if (societe == null)
-            {
-                return HttpNotFound();
-            }
-            return View(societe); }
             else { return RedirectToAction("Index", "Home"); }
         }
 
@@ -111,20 +119,21 @@ namespace BookingBus.Controllers
         // GET: Societes/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (Session["UserID"] != null && Session["role"].ToString() == "societe") { 
+            if (Session["UserID"] != null && Session["role"].ToString() == "societe")
+            {
                 if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Societe societe = db.Societes.Find(id);
+                if (societe == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.id_utilisateur = new SelectList(db.Abonnements, "id_abonnement", "id_abonnement", societe.id_utilisateur);
+                ViewBag.id_utilisateur = new SelectList(db.Utilisateurs, "id_utilisateur", "nom_complet", societe.id_utilisateur);
+                return View(societe);
             }
-            Societe societe = db.Societes.Find(id);
-            if (societe == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.id_utilisateur = new SelectList(db.Abonnements, "id_abonnement", "id_abonnement", societe.id_utilisateur);
-            ViewBag.id_utilisateur = new SelectList(db.Utilisateurs, "id_utilisateur", "nom_complet", societe.id_utilisateur);
-            return View(societe);
-        }
             else { return RedirectToAction("Index", "Home"); }
         }
 

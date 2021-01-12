@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BookingBus.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BookingBus.Models;
 
 namespace BookingBus.Controllers
 {
@@ -27,7 +24,8 @@ namespace BookingBus.Controllers
                 int i = effectuers.Select(a => a.id_abonnement).FirstOrDefault();
                 if (i == 0) { ViewBag.msg = "no abonnement reserved"; }
                 return View(effectuers.ToList());
-            }else if(Session["UserID"] == null) { return RedirectToAction("login", "home"); }
+            }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "home"); }
             return RedirectToAction("login", "home");
         }
 
@@ -121,7 +119,7 @@ namespace BookingBus.Controllers
         }
 
         // GET: Effectuers/Delete/5
-        public ActionResult Delete(int? id1,int? id2)
+        public ActionResult Delete(int? id1, int? id2)
         {
             if (Session["UserID"] != null && Session["role"].ToString() == "client")
             {
@@ -142,7 +140,7 @@ namespace BookingBus.Controllers
         // POST: Effectuers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id1,int id2)
+        public ActionResult DeleteConfirmed(int id1, int id2)
         {
             if (Session["UserID"] != null && Session["role"].ToString() == "client")
             {

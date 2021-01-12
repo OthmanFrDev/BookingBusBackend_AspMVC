@@ -48,7 +48,7 @@ namespace BookingBus.Controllers
                 return View();
             }
             return RedirectToAction("index", "home");
-            
+
         }
 
         // POST: Navettes/Create
@@ -68,29 +68,30 @@ namespace BookingBus.Controllers
                 }
 
                 return View(navette);
-            }return RedirectToAction("index", "home");
+            }
+            return RedirectToAction("index", "home");
         }
 
         // GET: Navettes/Edit/5
         public ActionResult Edit(int? id)
         {
-                if (Session["UserID"] != null && Session["role"].ToString() == "admin")
+            if (Session["UserID"] != null && Session["role"].ToString() == "admin")
+            {
+                if (id == null)
                 {
-                    if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Navette navette = db.Navettes.Find(id);
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Navette navette = db.Navettes.Find(id);
 
-            if (navette == null)
-            {
-                return HttpNotFound();
-            }
-            else
-            {
-                ViewBag.nav = navette;
-                return View(navette);
-            }
+                if (navette == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    ViewBag.nav = navette;
+                    return View(navette);
+                }
             }
             return RedirectToAction("index", "home");
         }
@@ -103,15 +104,15 @@ namespace BookingBus.Controllers
         public ActionResult Edit([Bind(Include = "id_navette,lieu_depart,lieu_arriver,date_depart,date_arriver")] Navette navette)
         {
 
-                    if (Session["UserID"] != null && Session["role"].ToString() == "admin")
-                    {
-                        if (ModelState.IsValid)
+            if (Session["UserID"] != null && Session["role"].ToString() == "admin")
             {
-                db.Entry(navette).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(navette);
+                if (ModelState.IsValid)
+                {
+                    db.Entry(navette).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(navette);
             }
             return RedirectToAction("index", "home");
         }
@@ -119,18 +120,18 @@ namespace BookingBus.Controllers
         // GET: Navettes/Delete/5
         public ActionResult Delete(int? id)
         {
-                        if (Session["UserID"] != null && Session["role"].ToString() == "admin")
-                        {
-                            if (id == null)
+            if (Session["UserID"] != null && Session["role"].ToString() == "admin")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Navette navette = db.Navettes.Find(id);
-            if (navette == null)
-            {
-                return HttpNotFound();
-            }
-            return View(navette);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Navette navette = db.Navettes.Find(id);
+                if (navette == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(navette);
             }
             return RedirectToAction("index", "home");
         }
@@ -140,12 +141,12 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-                            if (Session["UserID"] != null && Session["role"].ToString() == "admin")
-                            {
-                                Navette navette = db.Navettes.Find(id);
-            db.Navettes.Remove(navette);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["UserID"] != null && Session["role"].ToString() == "admin")
+            {
+                Navette navette = db.Navettes.Find(id);
+                db.Navettes.Remove(navette);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return RedirectToAction("index", "home");
         }

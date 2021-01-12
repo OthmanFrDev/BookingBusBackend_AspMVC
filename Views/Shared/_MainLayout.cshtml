@@ -8,8 +8,13 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <style>
+        main{
+            min-height:calc(100vh-76px-147px);
+        }
+    </style>
 </head>
-<body style="font-family:fantasy">
+<body style="font-family:fantasy;position:relative;padding-bottom:147px;min-height:100vh;">
     <!-- NavBar-->
     <nav class="navbar navbar-expand-lg" style="background-color: #fff">
         <a class="navbar-brand" href="https://localhost:44357/Home"><img src="~/Content/BookingBus (2).png" style="margin-top:0px;margin-bottom:0px;" /></a>
@@ -36,15 +41,15 @@
                     }
 
                 }
-                <a class="nav-item nav-link" href="#"><i class="fas fa-info-circle"></i>A propos</a>
+                <a class="nav-item nav-link" href="@Url.Action("Apropos","Home")"><i class="fas fa-info-circle"></i>A propos</a>
             </ul>
             <!---->
             @Html.Partial("_LoginInfo")
         </div>
     </nav>
-    @RenderBody()
+        @RenderBody()
     <!-- NavBar--><!-- Site footer -->
-    <footer class="navbar-fixed-bottom mb-0">
+    <footer class="navbar-fixed-bottom mb-0 " style="bottom:0;position:absolute;width:100%">
         <div class="box">
             <span>
                 <ul>
