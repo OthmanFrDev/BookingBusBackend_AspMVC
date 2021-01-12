@@ -16,10 +16,11 @@
                         </div>
                         <div class="card-inner">
                             <div class="header" style="text-align:center">
-                                <h2 style="color:black">Duree : @item.duree</h2>
-                                <h4>@item.Abonnement.Navette.lieu_depart -@item.Abonnement.Navette.lieu_arriver</h4>
+                                <h2 style="color:black">Duree : @item.duree days</h2>
+                                <h2 style="color:black">Prix : @item.Abonnement.prix DH</h2>
+                                <h4> <p style="color: #F59A2E ;margin-bottom:unset">@item.Abonnement.Navette.lieu_depart</p>- <p style="color: #F59A2E;margin-bottom: unset">@item.Abonnement.Navette.lieu_arriver</p></h4>
 
-                            </div>
+                            </div>  
                             <div class="content" style="text-align:center">
                                 <a href="@Url.Action("Delete", "Effectuers", new {  id1=item.id_client,id2=item.id_abonnement})" class="btn fadeIn fourth" style="background-color: #F59A2E">Supprimer</a>
                             </div>

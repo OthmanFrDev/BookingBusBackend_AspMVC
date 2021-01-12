@@ -20,7 +20,7 @@ namespace BookingBus.Models
         [Display(Name ="Nom Complet")]
         public string nom_complet { get; set; }
         [Display(Name = "E-mail")]
-        [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "E-mail non valide ")]
+        [Required]
         public string mail { get; set; }
         [Display(Name = "Mot de passe")]
         [Required(ErrorMessage = "Mot de passe est obligatoire")]

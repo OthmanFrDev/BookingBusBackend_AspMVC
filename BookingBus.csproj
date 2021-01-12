@@ -526,6 +526,7 @@
     <Content Include="Views\Effectuers\Edit.cshtml" />
     <Content Include="Views\Effectuers\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Apropos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

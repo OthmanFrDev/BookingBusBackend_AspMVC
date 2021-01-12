@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BookingBus.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BookingBus.Models;
 
 namespace BookingBus.Controllers
 {
@@ -16,13 +13,19 @@ namespace BookingBus.Controllers
 
         // GET: Effectuers
         public ActionResult Index(int id, string? message)
-        { 
-            var effectuers = db.Effectuers.Include(e => e.Abonnement).Include(e => e.Client).Where(e=>e.id_client==id);
-            var query = (from e in effectuers join b in db.Buses on e.Abonnement.id_navette equals b.id_navette  select b).ToList();
-            ViewBag.bus = query;
-            ViewBag.exist = message;
-           
-            return View(effectuers.ToList());
+        {
+
+            if (Session["UserID"] != null && Session["role"].ToString() == "client")
+            {
+                var effectuers = db.Effectuers.Include(e => e.Abonnement).Include(e => e.Client).Where(e => e.id_client == id);
+                var query = (from e in effectuers join b in db.Buses on e.Abonnement.id_navette equals b.id_navette select b).ToList();
+                ViewBag.bus = query;
+                ViewBag.exist = message;
+
+                return View(effectuers.ToList());
+            }
+            else if (Session["UserID"] == null) { return RedirectToAction("login", "home"); }
+            return RedirectToAction("login", "home");
         }
 
         // GET: Effectuers/Details/5
@@ -55,33 +58,41 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_client,id_abonnement,duree")] Effectuer effectuer)
         {
-            if (ModelState.IsValid)
+            if (Session["UserID"] != null && Session["role"].ToString() == "client")
             {
-                db.Effectuers.Add(effectuer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.Effectuers.Add(effectuer);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.id_abonnement = new SelectList(db.Abonnements, "id_abonnement", "id_abonnement", effectuer.id_abonnement);
-            ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", effectuer.id_client);
-            return View(effectuer);
+                ViewBag.id_abonnement = new SelectList(db.Abonnements, "id_abonnement", "id_abonnement", effectuer.id_abonnement);
+                ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", effectuer.id_client);
+                return View(effectuer);
+            }
+            return RedirectToAction("login", "home");
         }
 
         // GET: Effectuers/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null && Session["role"].ToString() == "client")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Effectuer effectuer = db.Effectuers.Find(id);
+                if (effectuer == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.id_abonnement = new SelectList(db.Abonnements, "id_abonnement", "id_abonnement", effectuer.id_abonnement);
+                ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", effectuer.id_client);
+                return View(effectuer);
             }
-            Effectuer effectuer = db.Effectuers.Find(id);
-            if (effectuer == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.id_abonnement = new SelectList(db.Abonnements, "id_abonnement", "id_abonnement", effectuer.id_abonnement);
-            ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", effectuer.id_client);
-            return View(effectuer);
+            return RedirectToAction("login", "home");
         }
 
         // POST: Effectuers/Edit/5
@@ -91,41 +102,53 @@ namespace BookingBus.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id_client,id_abonnement,duree")] Effectuer effectuer)
         {
-            if (ModelState.IsValid)
+            if (Session["UserID"] != null && Session["role"].ToString() == "client")
             {
-                db.Entry(effectuer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(effectuer).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.id_abonnement = new SelectList(db.Abonnements, "id_abonnement", "id_abonnement", effectuer.id_abonnement);
+                ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", effectuer.id_client);
+                return View(effectuer);
             }
-            ViewBag.id_abonnement = new SelectList(db.Abonnements, "id_abonnement", "id_abonnement", effectuer.id_abonnement);
-            ViewBag.id_client = new SelectList(db.Clients, "id_utilisateur", "id_utilisateur", effectuer.id_client);
-            return View(effectuer);
+            return RedirectToAction("login", "home");
         }
 
         // GET: Effectuers/Delete/5
-        public ActionResult Delete(int? id1,int? id2)
+        public ActionResult Delete(int? id1, int? id2)
         {
-            if (id1 == null||id2==null)
+            if (Session["UserID"] != null && Session["role"].ToString() == "client")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id1 == null || id2 == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Effectuer effectuer = db.Effectuers.Find(id1, id2);
+                if (effectuer == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(effectuer);
             }
-            Effectuer effectuer = db.Effectuers.Find(id1,id2);
-            if (effectuer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(effectuer);
+            return RedirectToAction("login", "home");
         }
 
         // POST: Effectuers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id1,int id2)
+        public ActionResult DeleteConfirmed(int id1, int id2)
         {
-            Effectuer effectuer = db.Effectuers.Find(id1,id2);
-            db.Effectuers.Remove(effectuer);
-            db.SaveChanges();
-            return RedirectToAction("Index",new { id=id1});
+            if (Session["UserID"] != null && Session["role"].ToString() == "client")
+            {
+                Effectuer effectuer = db.Effectuers.Find(id1, id2);
+                db.Effectuers.Remove(effectuer);
+                db.SaveChanges();
+                return RedirectToAction("Index", new { id = id1 });
+            }
+            return RedirectToAction("login", "home");
         }
 
         protected override void Dispose(bool disposing)
