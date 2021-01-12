@@ -14,9 +14,9 @@
             <img src="~/Content/BookingBus.png" style="margin-top:0px;margin-bottom:0px; width:auto;" />
         </div>
         <form class="form-inline" style="position:absolute;top:20%;z-index:1" action="@Url.Action("rechercher")">
-            <div class="col-sm-4 col-md-4 col-lg-4 m-0">
+            <div class="col-sm-4 col-md-4 col-lg-4 m-3">
                 <div class="form-group mr-2">
-                    <select class="form-control" id="exampleFormControlSelect1" style="opacity:0.5;" name="ld">
+                    <select class="form-control " id="exampleFormControlSelect1" style="opacity:0.5;" name="ld">
                         <option> Ville Départ</option>
                         @foreach (var item in Model)
                         {
@@ -26,7 +26,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-4 col-md-4 col-lg-4 m-0">
+            <div class="col-sm-4 col-md-4 col-lg-4 m-3">
                 <div class="form-group mr-2">
                     <select class="form-control" id="exampleFormControlSelect2" style="opacity:0.5;" name="la">
                         <option> Ville Arrivée</option>
@@ -39,8 +39,8 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-4 col-md-4 col-lg-4">
-                <div class="form-group mr-2" style="text-align:center">
+            <div class="col-sm-4 col-md-4 col-lg-2 m-0">
+                <div class="form-group" style="text-align:center">
                     <button type="submit" class="btn " style="background-color: #F59A2E" id="chercher">Chercher</button>
                 </div>
             </div>
